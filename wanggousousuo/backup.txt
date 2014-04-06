@@ -1,0 +1,72 @@
+border: 1px solid red;
+
+ 绿 #ccebcf;
+ 青 #84AC30;
+ 
+ <span style="color:red;"><%=accountMoney %></span>
+ 
+ opacity: 0.4;
+	filter:alpha(opacity=40);
+	<script src="js/taobaoref.js"></script>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 		<%
+			for(int i=0; i<drawmoneyRecords.size();i++){
+				Map curRecord = drawmoneyRecords.get(i);
+				if(curRecord==null){continue;}
+				
+				%>
+				<tr> <td><%=curRecord.get("date") %></td><td><%=curRecord.get("bankid") %></td><td>￥<%=curRecord.get("money") %></td><td><%=curRecord.get("comment") %></td><td><%=curRecord.get("status") %></td> </tr>
+						
+				<%
+				
+			}
+		%>
+ 		<%
+			for(int i=0; i<fanliRecords.size();i++){
+				Map curRecord = fanliRecords.get(i);
+				if(curRecord==null){continue;}
+				
+				%>
+				<tr> <td><%=curRecord.get("shopname") %></td><td><%=curRecord.get("orderid") %></td><td>￥<%=curRecord.get("ordermoney") %></td><td><%=curRecord.get("comment") %></td><td><%=curRecord.get("status") %></td> </tr>
+						
+				<%
+				
+			}
+		%>
+		<%
+			if(session.getAttribute(C.userId)==null){//not login
+		%>
+			$(this).parent().parent().height(400);//隐藏返利window
+			$('#msg-error').text('您还未登录');
+			$('#msg-error').show();
+			
+			return;
+		<%
+			}
+		%>
+		
+		
+		
+		<div  id="share-fee-next" class="common-box-002">
+		<div style="width: 100%;height: 20px;"></div>
+		<div class="cb002-buttons">
+			<input type="button" id="share-fee-next-ok" class="cb002-button common-button-ok" value="完成分享，申请返利"/>
+			<input type="button" id="share-fee-next-cancel" class="cb002-button common-button-cancel" value="暂不申请"/>
+		</div>
+</div>

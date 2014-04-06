@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+<ShortName>网购搜索网</ShortName>
+<Description>网购搜索网，一键搜索 淘宝 天猫 京东 当当 亚马逊等数十家网购，</Description>
+<Image>favicon.ico</Image>
+<Url type="text/html" template="http://www.wanggousousuo.com/search.jsp?keyword={searchTerms}"/>
+</OpenSearchDescription>

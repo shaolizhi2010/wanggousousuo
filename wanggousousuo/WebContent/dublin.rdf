@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+ <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc= "http://purl.org/dc/elements/1.1/">
+ <rdf:Description rdf:about="http://www.wanggousousuo.com/">
+ <dc:contributor>shao</dc:contributor>
+ <dc:date>2013-04-01</dc:date>
+ <dc:description>网购搜索网可以同时搜索淘宝京东亚马逊当当等多家商城，帮你找到要网购的商品，</dc:description>
+ <dc:language>CN</dc:language>
+ <dc:publisher>Company</dc:publisher>
+ <dc:source>http://www.wanggousousuo.com/</dc:source>
+ </rdf:Description>
+ </rdf:RDF>

@@ -1,0 +1,5 @@
+	<%
+			UUID.randomUUID();
+		%>
+		
+		<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="100484692" data-redirecturi="http://bijia365.gotoip1.com/qqcallback.jsp" charset="utf-8"></script>
