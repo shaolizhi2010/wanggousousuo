@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.bean.logic.Cache;
 import com.digger.CommonCommodityDigger;
 import com.digger.Digger;
 import com.digger.JingdongDigger;
@@ -74,10 +73,7 @@ public class CommonProductBuilder {
 		//cache is not in use or no data in cache
 		
 		resultJson =  this.buildFromDigger(shopname, keyword,pageNum,realpath);
-		if(C.useCache){
-//			new Cache().save(keyword, shopname, resultJson, realpath);
-			new Cache().save(keyword, shopname, resultJson);
-		}
+		
 		return resultJson;
 	}
 }

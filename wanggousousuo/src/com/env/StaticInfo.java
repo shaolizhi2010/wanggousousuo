@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.mutiServer.Server;
 import com.shop.ShopInfo;
 import com.utils.C;
 import com.utils.ShopNames;
@@ -19,17 +18,6 @@ public class StaticInfo {
 	 * 每一个商城信息，作为map中的一个 elment。
 	 * */
 	private static Map<String, ShopInfo> shops = new HashMap<String, ShopInfo>();
-	
-	/*
-	 * 这个map中，存放的是可用的 work server 的列表
-	 * 每个work server， 都是一个digger server，也可能是一个cache server，
-	 * 用户的请求，会分派到不同的server 执行，
-	 * 以分摊服务器的压力，提高响应速度。
-	 * work server 有三种状态，1可用 2暂不可用 3销毁，销毁的服务器的url会被从server map中删去 
-	 * work server 的url 作为map 的key,server 的具体信息类，作为map 的value
-	*/
-	public static Map<String, Server> servers = new HashMap<String, Server>();
-	
 	
 	public static void init(){
 		if(shops.size()==0){

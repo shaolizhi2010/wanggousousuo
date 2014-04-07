@@ -2,6 +2,8 @@ package com.mail;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Flags.Flag;
@@ -11,7 +13,11 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeUtility;
 
+import com.digger.AdvertisementDigger;
+import com.entity.AdvertisementEntity;
+import com.file.FileUtil;
 import com.sun.mail.imap.IMAPMessage;
+import com.utils.U;
 
 /**
  * <b>使用IMAP协议接收邮件</b><br/>
@@ -61,8 +67,17 @@ public class IMAPReceiveMailTest {
 			StringBuffer content = new StringBuffer();
 			MailUtils.getMailTextContent(msg, content);
 			
+			FileUtil.saveFile(content.toString(), "d:/mmm/"+msg.getSubject());
 			System.out.println(msg.getSubject() + "--------------");
-			System.out.println(content);
+			System.out.println(msg.getContentType());
+			//System.out.println(msg.get);
+			//System.out.println(content);
+			//MailUtils.saveAttachment(msg, "d:/mmm/");
+			List<AdvertisementEntity> list = new ArrayList<AdvertisementEntity>();
+			AdvertisementDigger.dig(  content.toString(), list);
+			//System.out.println("list size : "+list.size());
+			U.printList(list);
+			
 			//MailUtils.parseMessage(msg);	// 解析邮件
 			// 第二个参数如果设置为true，则将修改反馈给服务器。false则不反馈给服务器
 			msg.setFlag(Flag.SEEN, true);	//设置已读标志

@@ -1,8 +1,5 @@
 package com.seeker.commodity.analyzer.vo;
 
-import com.base.vo.ScoreVO;
-
-
 public class Price extends ScoreVO {
 	
 	Double price = 0.0;

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -29,11 +30,22 @@ public class FileUtil {
 	public static String All = "all";
 	public static String Forder = "forder";
 	
+	public static void createFile(String path){
+		File f = new File(path);
+		
+		try {
+			f.getParentFile().mkdirs();
+			f.createNewFile();
+		} catch (IOException e) {
+			L.exception("FileUtil", e.getMessage());
+		}
+	}
+	
 	//返回某文件夹中的文件和文件夹
 	//type = file, 只返回文件
 	//type = forder, 只返回forder
 	//type = all , 返回 文件和文件夹
-	public List<FileSummarize> getFilesAndDirs(String path, String type){
+	public static List<FileSummarize> getFilesAndDirs(String path, String type){
 		List<FileSummarize> list = new LinkedList<FileSummarize>();
 		File rootFolder = new File(path);
 		if(rootFolder.listFiles() != null){	//遍历根目录
@@ -108,27 +120,35 @@ public class FileUtil {
 	
 	*/
 	
-	public String getFilesJson(String path, String type){
+	public  static String getFilesJson(String path, String type){
 		return new Gson().toJson(getFilesAndDirs(path,type));	//返回list 的 json
 		
 	}
 	
-	public String getFileContent(String path){
+	public static String getFileContent(String path){
 		String fileContent = "";
 		try {
 			fileContent = IOUtils.toString(new FileInputStream(path),"UTF-8");
 		} catch (Exception e) {
-			L.exception(this, e.getMessage());
+			L.exception("FileUtil", e.getMessage());
 			return "";
 		} 
 		return fileContent;
 	}
 	
-	public void saveFile(String content, String path){
+	public static void saveFile(String content, String path){
 		try {
 			IOUtils.write(content, new FileOutputStream(new File(path)));
 		} catch ( Exception e) {
-			L.exception(this, e.getMessage());
+			L.exception("FileUtil", e.getMessage());
+		}  
+	}
+	
+	public static void saveFile(InputStream inputstream, String path){
+		try {
+			IOUtils.write( IOUtils.toString(inputstream) , new FileOutputStream(new File(path)));
+		} catch ( Exception e) {
+			L.exception("FileUtil", e.getMessage());
 		}  
 	}
 	

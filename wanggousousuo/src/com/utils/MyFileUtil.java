@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 
 public class MyFileUtil {
 
-	 
 
 	public static void mkdir(String path) {
 		File dir = new File(path);

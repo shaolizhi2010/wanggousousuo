@@ -23,6 +23,13 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
+import com.file.FileUtil;
+import com.utils.MyFileUtil;
+
+
 public class MailUtils {
 
 	/**
@@ -229,19 +236,38 @@ public class MailUtils {
 	 * @throws IOException
 	 */
 	public static void getMailTextContent(Part part, StringBuffer content) throws MessagingException, IOException {
+		//FileUtil.createFile("d:/mmm/"+part.getSize());
+		//new FileUtil().saveFile(part.getInputStream(), "d:/mmm/"+part.getSize());
 		//如果是文本类型的附件，通过getContent方法可以取到文本内容，但这不是我们需要的结果，所以在这里要做判断
 		boolean isContainTextAttach = part.getContentType().indexOf("name") > 0;	
-		if (part.isMimeType("text/*") && !isContainTextAttach) {
+		if (part.isMimeType("text/plain") && !isContainTextAttach) {
+			
+			//content.append(part.getContent().toString());
+		}
+		if (part.isMimeType("text/html") && !isContainTextAttach) {
+			
 			content.append(part.getContent().toString());
-		} else if (part.isMimeType("message/rfc822")) {	
+		} 
+		if (part.isMimeType("message/rfc822")) {	
 			getMailTextContent((Part)part.getContent(),content);
-		} else if (part.isMimeType("multipart/*")) {
+		} 
+		if (part.isMimeType("multipart/*")) {
 			Multipart multipart = (Multipart) part.getContent();
 			int partCount = multipart.getCount();
 			for (int i = 0; i < partCount; i++) {
 				BodyPart bodyPart = multipart.getBodyPart(i);
 				getMailTextContent(bodyPart,content);
+				
 			}
+		}
+		if (part.isMimeType("multipart/mixed")) {//附件
+			
+		}
+		if (part.isMimeType("multipart/related")) {//内嵌资源
+			
+		}
+		if (part.isMimeType("multipart/alternative")) {////纯文本与超文本共存。
+			
 		}
 	}
 	

@@ -20,7 +20,7 @@ String path = "";//"http://wgsousou.gotoip3.com/";
 <html>
 
 <head>
- <jsp:include page="part/head-meta.jsp" />
+<jsp:include page="part/head-meta.jsp" />
 
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />

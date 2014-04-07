@@ -2,7 +2,6 @@
 <%@page import="com.shop.ShopInfo"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.env.StaticInfo"%>
-<%@page import="com.mutiServer.MutiServerUtil"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
 <script>
@@ -36,7 +35,7 @@ function searchAll(keywordVar) {
 	//initialize end
 	
 	//get fastest server from server list
-	var urlSouSou = '<%=new MutiServerUtil().getServerByDelayTime().getUrl() %>';
+	var urlSouSou = '';
 	
 	//Use local server for these shop
 	//searchOneShop('taobao',keywordVar ,1,'');

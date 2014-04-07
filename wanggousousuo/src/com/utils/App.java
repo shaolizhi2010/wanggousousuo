@@ -11,8 +11,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -26,7 +24,6 @@ public class App {
 	
 	private HttpClient httpClient = null;
 	private WebApplicationContext ctx = null;
-	private SessionFactory sessionFactory = null;
 	
 	public static App getInstance(){
 		return app;
@@ -59,11 +56,4 @@ public class App {
 		return ctx;
 	}
 	
-	public SessionFactory getSessionFactory(){
-		
-		if(sessionFactory == null){
-			sessionFactory = getWebApplicationContext().getBean(SessionFactory.class);
-		}
-		return sessionFactory;
-	}
 }
