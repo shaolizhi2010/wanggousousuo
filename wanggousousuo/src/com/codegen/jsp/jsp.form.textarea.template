@@ -1,0 +1,4 @@
+				<div class="form-group">
+					 <label for="$propertyName$">$propertyName$</label>
+					 <textarea class="form-control" name="$propertyName$" id="$propertyName$" rows="3"></textarea>
+				</div>

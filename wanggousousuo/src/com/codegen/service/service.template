@@ -1,0 +1,47 @@
+package com.service;
+
+import java.util.List;
+
+import org.hibernate.HibernateException;
+
+import com.dao.$daoName$;
+import com.entity.Entity;
+import com.entity.$entityName$;
+
+public class $serviceName$ {
+	$daoName$ $moduleName$Dao = new $daoName$();
+
+	public Entity add(Entity entity) {
+		return $moduleName$Dao.add(entity);
+	}
+
+	public void delete(String id) throws HibernateException {
+		$moduleName$Dao.delete(id);
+	}
+
+	public void delete($entityName$ entity) {
+		$moduleName$Dao.delete(entity);
+	}
+
+	public List<$entityName$> list() {
+		return $moduleName$Dao.list();
+	}
+
+	public List<$entityName$> list(int start, int end) {
+		return $moduleName$Dao.list(start, end);
+	}
+
+	public List<$entityName$> list($entityName$ entity) throws Exception {
+		return $moduleName$Dao.list(entity);
+	}
+
+	public $entityName$ get(String id) {
+		return $moduleName$Dao.get(id);
+	}
+	
+	public void close(){
+		$moduleName$Dao.close();
+	}
+	
+	
+}

@@ -1,0 +1,131 @@
+package com.dao;
+
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.entity.Entity;
+import com.utils.App;
+import com.utils.L;
+
+$import$
+
+public class $daoName$ {
+
+	protected static SessionFactory sessionFactory = App.getInstance().getSessionFactory();
+	private Session session = sessionFactory.openSession();
+	
+	public Entity add(Entity entity) {
+		try {
+			
+			Transaction tx = session.beginTransaction();
+
+			session.save(entity);
+			tx.commit();
+		
+
+			return entity;
+		} catch (Exception e) {
+			L.exception(this, e.getMessage());
+			return null;
+		}
+	}
+	
+    public void delete(String id) throws HibernateException {  
+    	try {
+	    	Transaction tx = session.beginTransaction();  
+	    	$entityName$ entity = ($entityName$) session.load($entityName$.class, id);  
+	        session.delete(entity);  
+	        tx.commit();
+			
+    	} catch (Exception e) {
+			L.exception(this, e.getMessage());
+		}
+    }  
+    
+	public void delete($entityName$ entity) {
+		try {
+			Transaction tx = session.beginTransaction();
+			session.delete(entity);
+			tx.commit();
+			
+		} catch (Exception e) {
+			L.exception(this, e.getMessage());
+		}
+	}
+    
+    public List<$entityName$> list(){
+		
+		String queryString = "from $entityName$"; 
+        Query query = session.createQuery(queryString);  
+        List<$entityName$> list = query.list();  
+        return list;  
+	}
+	
+    //分页
+    public List<$entityName$> list(int start, int end){
+		
+    	if(start == 0){
+    		return list();
+    	}
+    	
+		String queryString = "select * from $tableName$ limit :start, :end"; 
+        SQLQuery query = session.createSQLQuery(queryString);  
+        
+		query.setInteger("start", start);
+		query.setInteger("end", end);
+		query.addEntity($entityName$.class);
+        
+        List<$entityName$> list = query.list();  
+        return list;  
+	}
+	
+	 public List<$entityName$> list($entityName$ entity) throws Exception{
+		
+		if(entity == null){
+			return list();
+		}	
+    	
+		String queryString = "select * from $tableName$ where 1=1 ";
+		
+$condition$
+		
+		SQLQuery query = session.createSQLQuery(queryString); 
+		
+$setCondition$
+		
+		//query.setString("name", entity.getName());
+		query.addEntity($entityName$.class);
+        
+        List<$entityName$> list = query.list();
+        return list;  
+	}
+	
+	public $entityName$ get(String id){
+		try {
+			int idInt = Integer.parseInt(id);
+	    	$entityName$ entity = ($entityName$) session.get($entityName$.class, idInt);  
+			return entity;
+    	} catch (Exception e) {
+			L.exception(this, e.getMessage());
+			return new $entityName$();
+		}
+	}
+	
+	//TODO 考虑用其他方式管理session,提高效率
+	public void close(){
+		session.close();
+	}
+    
+    @Override
+	protected void finalize() throws Throwable {
+		//close();
+		super.finalize();
+	}
+}

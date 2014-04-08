@@ -1,0 +1,66 @@
+package com.web;
+
+import com.web.base.BaseAction;
+
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.ServletActionContext;
+import com.utils.L;
+
+import com.service.$serviceName$;
+import com.entity.$entityName$;
+
+public class $actionName$Action extends BaseAction {
+
+	$propertyAndMethod$
+
+	public String create() {
+		
+		$entityName$ entity = new $entityName$();
+
+		$entityInit$
+		 
+		$serviceName$ service = new $serviceName$();
+		service.add(entity);
+		
+		return "list";
+	}
+	
+	public String list() {
+		$entityName$ entity = new $entityName$();
+
+		$entityInit$
+
+		$serviceName$ service = new $serviceName$();
+		try {
+			List<$entityName$> list = service.list(entity);
+			HttpServletRequest request = ServletActionContext.getRequest ();
+			request.setAttribute("list", list);
+		} catch (Exception e) {
+			L.exception(this, e.getMessage());
+		}
+		return "listPage";
+	}
+	
+	public String view(){
+
+		$serviceName$ service = new $serviceName$();
+		$entityName$ entity = service.get(id+"");
+		HttpServletRequest request = ServletActionContext.getRequest ();
+		request.setAttribute("entity", entity);
+	
+		return "view";
+	}
+ 	
+ 	public String delete(){
+		$serviceName$ service = new $serviceName$();
+		try{
+			service.delete(id+"");
+		}catch(Exception e){
+			L.exception(this, e.getMessage());
+		}
+		
+		return "list";
+	}
+
+}
