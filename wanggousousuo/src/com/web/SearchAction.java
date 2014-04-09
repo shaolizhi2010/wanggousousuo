@@ -90,7 +90,7 @@ public class SearchAction extends BaseAction {
 			// ClientAbortException:  java.net.SocketException: Connection reset by peer: socket write error
 			//catch this and do nothing, this is because the client do not receive from server any more
 		}
-		return "success";
+		return null;
 	}
 	
 	public String testMethod() {

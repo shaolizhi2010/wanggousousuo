@@ -14,9 +14,11 @@
 			</result>
 		</action>
 		
-		<action name="login" class="com.web.LoginAction">
-			<result>index.jsp</result>
-		</action>
-
-	</package>
+	<action name="advertisement" class="com.web.AdvertisementAction">
+		<result name="create">advertisement.create.jsp</result>
+		<result name="list" type="redirect">advertisement!list.action</result>
+		<result name="listPage">advertisement.list.jsp</result>
+		<result name="view">advertisement.view.jsp</result>
+	</action>
+</package>
 </struts>

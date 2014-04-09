@@ -1,4 +1,0 @@
-		if(StringUtils.isNotBlank(entity.get$propertyNameInMethod$())){ 
-			queryString +=  " AND $propertyName$ = :$propertyName$";
-		}
-		

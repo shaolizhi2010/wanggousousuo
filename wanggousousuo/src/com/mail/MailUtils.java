@@ -1,12 +1,6 @@
 package com.mail;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,11 +17,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-
-import com.file.FileUtil;
-import com.utils.MyFileUtil;
+import com.utils.L;
 
 
 public class MailUtils {
@@ -235,100 +225,49 @@ public class MailUtils {
 	 * @throws MessagingException
 	 * @throws IOException
 	 */
-	public static void getMailTextContent(Part part, StringBuffer content) throws MessagingException, IOException {
+	public static void getMailTextContent(Part part, StringBuffer content)  {
 		//FileUtil.createFile("d:/mmm/"+part.getSize());
 		//new FileUtil().saveFile(part.getInputStream(), "d:/mmm/"+part.getSize());
 		//如果是文本类型的附件，通过getContent方法可以取到文本内容，但这不是我们需要的结果，所以在这里要做判断
-		boolean isContainTextAttach = part.getContentType().indexOf("name") > 0;	
-		if (part.isMimeType("text/plain") && !isContainTextAttach) {
+		boolean isContainTextAttach;
+		try {
+			isContainTextAttach = part.getContentType().indexOf("name") > 0;
 			
-			//content.append(part.getContent().toString());
-		}
-		if (part.isMimeType("text/html") && !isContainTextAttach) {
-			
-			content.append(part.getContent().toString());
-		} 
-		if (part.isMimeType("message/rfc822")) {	
-			getMailTextContent((Part)part.getContent(),content);
-		} 
-		if (part.isMimeType("multipart/*")) {
-			Multipart multipart = (Multipart) part.getContent();
-			int partCount = multipart.getCount();
-			for (int i = 0; i < partCount; i++) {
-				BodyPart bodyPart = multipart.getBodyPart(i);
-				getMailTextContent(bodyPart,content);
-				
+			if (part.isMimeType("text/plain") && !isContainTextAttach) {
+				//纯文本 不处理
 			}
-		}
-		if (part.isMimeType("multipart/mixed")) {//附件
-			
-		}
-		if (part.isMimeType("multipart/related")) {//内嵌资源
-			
-		}
-		if (part.isMimeType("multipart/alternative")) {////纯文本与超文本共存。
-			
-		}
-	}
-	
-	/**
-	 * 保存附件
-	 * @param part 邮件中多个组合体中的其中一个组合体
-	 * @param destDir  附件保存目录
-	 * @throws UnsupportedEncodingException
-	 * @throws MessagingException
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-	public static void saveAttachment(Part part, String destDir) throws UnsupportedEncodingException, MessagingException,
-			FileNotFoundException, IOException {
-		if (part.isMimeType("multipart/*")) {
-			Multipart multipart = (Multipart) part.getContent();	//复杂体邮件
-			//复杂体邮件包含多个邮件体
-			int partCount = multipart.getCount();
-			for (int i = 0; i < partCount; i++) {
-				//获得复杂体邮件中其中一个邮件体
-				BodyPart bodyPart = multipart.getBodyPart(i);
-				//某一个邮件体也有可能是由多个邮件体组成的复杂体
-				String disp = bodyPart.getDisposition();
-				if (disp != null && (disp.equalsIgnoreCase(Part.ATTACHMENT) || disp.equalsIgnoreCase(Part.INLINE))) {
-					InputStream is = bodyPart.getInputStream();
-					saveFile(is, destDir, decodeText(bodyPart.getFileName()));
-				} else if (bodyPart.isMimeType("multipart/*")) {
-					saveAttachment(bodyPart,destDir);
-				} else {
-					String contentType = bodyPart.getContentType();
-					if (contentType.indexOf("name") != -1 || contentType.indexOf("application") != -1) {
-						saveFile(bodyPart.getInputStream(), destDir, decodeText(bodyPart.getFileName()));
-					}
+			if (part.isMimeType("text/html") && !isContainTextAttach) {
+				content.append(part.getContent().toString());
+			} 
+			if (part.isMimeType("message/rfc822")) {	
+				getMailTextContent((Part)part.getContent(),content);
+			} 
+			if (part.isMimeType("multipart/*")) {
+				Multipart multipart = (Multipart) part.getContent();
+				int partCount = multipart.getCount();
+				for (int i = 0; i < partCount; i++) {
+					BodyPart bodyPart = multipart.getBodyPart(i);
+					getMailTextContent(bodyPart,content);
+					
 				}
 			}
-		} else if (part.isMimeType("message/rfc822")) {
-			saveAttachment((Part) part.getContent(),destDir);
+			/* TODO 按具体类型详细处理，待完善
+			if (part.isMimeType("multipart/mixed")) {//附件
+				
+			}
+			if (part.isMimeType("multipart/related")) {//内嵌资源
+				
+			}
+			if (part.isMimeType("multipart/alternative")) {////纯文本与超文本共存。
+				
+			}
+			*/
+		} catch (Exception e) {
+			L.exception("MailUtil", e.getMessage());
 		}
 	}
 	
-	/**
-	 * 读取输入流中的数据保存至指定目录
-	 * @param is 输入流
-	 * @param fileName 文件名
-	 * @param destDir 文件存储目录
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-	private static void saveFile(InputStream is, String destDir, String fileName)
-			throws FileNotFoundException, IOException {
-		BufferedInputStream bis = new BufferedInputStream(is);
-		BufferedOutputStream bos = new BufferedOutputStream(
-				new FileOutputStream(new File(destDir + fileName)));
-		int len = -1;
-		while ((len = bis.read()) != -1) {
-			bos.write(len);
-			bos.flush();
-		}
-		bos.close();
-		bis.close();
-	}
+	  
 	
 	/**
 	 * 文本解码

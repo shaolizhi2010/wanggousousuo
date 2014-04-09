@@ -4,17 +4,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
- 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-import org.jdom2.xpath.XPathFactory;
 import org.jdom2.xpath.XPathExpression;
+import org.jdom2.xpath.XPathFactory;
 
 import com.env.Env;
 
@@ -80,7 +78,8 @@ public class X {
 		return value;
 	}
 	
-	public static String getAttrValue(Element xml, String key){
+	//key 要带 @, 如 @src，查询到的节点是一个属性节点
+	public static String getAttrValue(Object xml, String key){
 		if(key == null || key.trim().length()==0 || key.contains("null")){
 			L.trace("XmlUtil", "getAttr() : key is null, method return");
 			return "";

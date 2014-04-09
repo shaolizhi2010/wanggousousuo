@@ -3,6 +3,7 @@ package com.seeker.commodity.analyzer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.connect.Connecter;
+import com.connect.URLUtils;
 import com.seeker.util.XpathMap;
 import com.utils.L;
 
@@ -34,7 +35,9 @@ public class CharsetAnalyzer {
 		
 		XpathMap cm = new XpathMap();
 		for(String charset : charsetArray){
-			String responseString = Connecter.connect(url,keyword,charset);
+			
+			String buildedUrl = URLUtils.buildUrl(url, keyword, charset);
+			String responseString = Connecter.getPageSource(buildedUrl);
 			int matchCount = StringUtils.countMatches(responseString, keyword);
 //			L.always(this, "use charsert --- "+ charset +" --- contains keyword count --- " + matchCount);
 			cm.put(charset, charset, matchCount);

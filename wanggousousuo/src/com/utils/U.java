@@ -18,6 +18,15 @@ public class U {
 //		
 //	}
 	
+	public static String toString(Object o){
+		if(o == null){
+			return "";
+		}
+		else{
+			return o.toString();
+		}
+	}
+	
 	public static boolean isMoney(String money){
 		if(StringUtils.isBlank(money)){
 			return false;
@@ -80,6 +89,16 @@ public class U {
 	
 	public static String clean(String str){
 		str = str.replaceAll("lang=\"zh-cn\"", "");
+		
+		//排除大小写干扰
+		str = str.replaceAll("Head", "head");
+		str = str.replaceAll("HEAD", "head");
+		str = str.replaceAll("Description", "description");
+		str = str.replaceAll("DESCRIPTION", "description");
+		str = str.replaceAll("Keyword", "keyword");
+		str = str.replaceAll("KEYWORD", "keyword");
+		str = str.replaceAll("Content-Type", "content-type");
+		
 		return str;
 	}
 	

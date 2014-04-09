@@ -20,7 +20,7 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
 				    <ul class="nav navbar-nav" >
 				        
-				        <li><a href="#">关于 网购搜索网</a></li>
+				        <li><a href="#">关于 </a></li>
 				        <li><a>Copyright © 2013-2014  网购搜索网, All Rights Reserved, 辽ICP备1300820号</a></li>
 			      	</ul>
 

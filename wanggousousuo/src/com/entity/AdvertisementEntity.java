@@ -4,11 +4,18 @@ import com.google.gson.GsonBuilder;
 
 public class AdvertisementEntity {
 	
+	String id;
 	String url;
 	String imgUrl;
 	String name;
 	String description;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getUrl() {
 		return url;
 	}

@@ -52,7 +52,7 @@ $( document ).ready(function() {
 
 		$.ajax({
 			type:'get',
-			 url:'searchBean',	
+			 url:'search',	
 			 dataType:'jsonp',
 			 jsonp:"callback",
 			 data:{"method":'getHistory',"userId": userId},
@@ -72,7 +72,7 @@ $( document ).ready(function() {
 		$('#search_filter').hide();
 		$.ajax({
 			type:'get',
-			 url:'searchBean',	
+			 url:'search',	
 			 dataType:'jsonp',
 			 jsonp:"callback",
 			 data:{"method":'getHistory',"userId": userId},
@@ -242,7 +242,7 @@ $( document ).ready(function() {
 		
 		$.ajax({
 			type:'post',
-			 url:'searchBean',
+			 url:'search',
 			 dataType:'jsonp',
 			 jsonp:"callback",
 			 data:{"data":JSON.stringify(viewedProducts), "method":'addHistory',"userId": userId},

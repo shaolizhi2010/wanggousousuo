@@ -11,6 +11,7 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 
 import com.connect.Connecter;
+import com.connect.URLUtils;
 import com.env.StaticInfo;
 import com.seeker.commodity.analyzer.CharsetAnalyzer;
 import com.seeker.commodity.analyzer.CommentAnalyzer;
@@ -30,17 +31,19 @@ import com.utils.X;
 
 public class CommonRuleGenerator {
  
- 
 	public void generateRule(String shopName,String keyword,String keywordPinyin,String basePath) {
 		try {
 			//L.level = LogLevel.debug;
 			L.debug("CommonRuleGenerator", "generateRule begin, shopname - " + shopName + " - keyword - " + keyword);
-			String url = StaticInfo.getShopbyName(shopName).getSearchUrl();
+			String preSearchUrl = StaticInfo.getShopbyName(shopName).getSearchUrl();
 			
-			String requestEncodeCharset = new CharsetAnalyzer().analyzeCharset(url, keyword);
+			String requestEncodeCharset = new CharsetAnalyzer().analyzeCharset(preSearchUrl, keyword);
 			L.debug("CommonRuleGenerator", "requestEncodeCharset --- " + requestEncodeCharset);
 			
-			String responseString = Connecter.connect(url,keyword,requestEncodeCharset);
+			
+			String url = URLUtils.buildUrl(preSearchUrl, keyword, requestEncodeCharset);
+			String responseString = Connecter.getPageSource(url);
+			
 			//L.debug("CommonRuleGenerator","CommonRuleGenerator", "responseString size --- " + responseString.length());
 			
 			Document doc = new org.jdom2.input.SAXBuilder().build(new StringReader(responseString));

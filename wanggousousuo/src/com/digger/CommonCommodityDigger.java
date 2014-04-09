@@ -24,6 +24,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 
 import com.connect.Connecter;
+import com.connect.URLUtils;
 import com.digger.util.DiggerUtil;
 import com.digger.vo.Product;
 import com.env.StaticInfo;
@@ -97,7 +98,8 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 			String pricePath = rule.getPricePath();
 			String commentPath = rule.getCommentPath();
 			
-			String responseString = Connecter.connect(preSearchUrl, keyword, charset);
+			String url = URLUtils.buildUrl(preSearchUrl, keyword, charset);
+			String responseString = Connecter.getPageSource(url);
 			
 			Document doc  = new org.jdom2.input.SAXBuilder().build(new StringReader(responseString));
 			List itemList = X.selectNodes(doc, itemPath);
@@ -201,7 +203,7 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 	
 			String keyword = "新款";
 			List<Product> plist = new CommonCommodityDigger(
-					ShopNames.yintai.toString(),  "C:/workspace/wanggousousuo/WebContent/").digAll(keyword);
+					ShopNames.yintai.toString(),  "D:/git/db/wanggousousuo/wanggousousuo/WebContent/").digAll(keyword);
 			
 			System.out.println("plist.size() " + plist.size());
 			for(Product p: plist){
