@@ -1,0 +1,4 @@
+			
+			if(U.toString(entity.get$propertyNameInMethod$()).length()>0){
+				dbo.put("$propertyName$", entity.get$propertyNameInMethod$());
+			}

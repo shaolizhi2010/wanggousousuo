@@ -1,0 +1,12 @@
+	@Column(name = "$columnName$")
+	private $propertyType$ $propertyName$;
+	
+	public $propertyType$ get$propertyNameInMethod$() {
+		return $propertyName$;
+	}
+	
+	public void set$propertyNameInMethod$($propertyType$ $propertyName$) {
+		this.$propertyName$ = $propertyName$;
+	}
+	
+	

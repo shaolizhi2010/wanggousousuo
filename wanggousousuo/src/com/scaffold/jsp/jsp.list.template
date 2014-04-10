@@ -1,0 +1,62 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.entity.$entityName$"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<jsp:include page="part/head.jsp" />
+</head>
+
+
+<body>
+
+    <jsp:include page="part/hat.jsp" />
+
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+				<table class="table">
+				<thead>
+					<tr>
+						 $thead$
+						 <th>修改</th>
+						 <th>删除</th>
+					</tr>
+				</thead>
+				<tbody>
+			<%
+				$entityName$ entity = new $entityName$();
+				
+				List<$entityName$> list = (List<$entityName$>)request.getAttribute("list");
+				if(list==null){
+					list = new ArrayList<$entityName$>();
+				}
+				
+				for($entityName$ e : list){
+					
+			%>
+				<tr>
+					$row$
+					<td><a href='$moduleName$!update.action?id=<%=e.getId()%>'>修改</a></td>
+					<td><a href='$moduleName$!delete.action?id=<%=e.getId()%>'>删除</a></td>
+					
+				</tr>
+			<%		
+					
+				}
+				
+			%>
+
+				</tbody>
+
+	</table>
+            </div>
+
+ 
+        </div>
+    </div>
+    <jsp:include page="part/footer.jsp" />
+</body>
+</html>

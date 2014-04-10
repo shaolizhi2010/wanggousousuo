@@ -1,0 +1,7 @@
+
+	<action name="$path$" class="com.web.$actionName$Action">
+		<result name="create">$moduleName$.create.jsp</result>
+		<result name="list" type="redirect">$moduleName$!list.action</result>
+		<result name="listPage">$moduleName$.list.jsp</result>
+		<result name="view">$moduleName$.view.jsp</result>
+	</action>

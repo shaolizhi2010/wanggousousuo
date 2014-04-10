@@ -1,0 +1,3 @@
+		if(StringUtils.isNotBlank(entity.get$propertyNameInMethod$())){ 
+			query.setString("$propertyName$", entity.get$propertyNameInMethod$());
+		}

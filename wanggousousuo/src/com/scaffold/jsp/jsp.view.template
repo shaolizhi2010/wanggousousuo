@@ -1,0 +1,39 @@
+﻿<%@ page language="java" pageEncoding="UTF-8"%>
+<%@page import="com.entity.$entityName$"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<jsp:include page="part/head.jsp" />
+</head>
+
+
+<body>
+
+    <jsp:include page="part/hat.jsp" />
+
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+				<%
+					if(request.getAttribute("entity") == null){
+						
+					}
+					else{
+						$entityName$ entity = ($entityName$)request.getAttribute("entity");;
+					
+				%>
+				
+					$row$
+				<%
+					}
+				%>
+				
+            </div>
+
+ 
+        </div>
+    </div>
+    <jsp:include page="part/footer.jsp" />
+</body>
+</html>

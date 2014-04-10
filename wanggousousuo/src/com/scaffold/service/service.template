@@ -1,0 +1,41 @@
+package com.service;
+
+import java.util.List;
+
+import com.dao.$daoName$;
+import com.entity.$entityName$;
+
+public class $serviceName$ {
+	$daoName$ $moduleName$Dao = new $daoName$();
+
+	public void add($entityName$ entity) {
+		$moduleName$Dao.add(entity);
+	}
+
+	public void delete(String id)  {
+		$moduleName$Dao.delete(id);
+	}
+
+	public void delete($entityName$ entity) {
+		$moduleName$Dao.delete(entity);
+	}
+
+	public List<$entityName$> list() {
+		return $moduleName$Dao.list();
+	}
+
+	public List<$entityName$> list(int start, int end) {
+		return $moduleName$Dao.list(start, end);
+	}
+
+	public List<$entityName$> list($entityName$ entity) throws Exception {
+		return $moduleName$Dao.list(entity);
+	}
+
+	public $entityName$ get(String id) {
+		return $moduleName$Dao.get(id);
+	}
+ 
+	
+	
+}

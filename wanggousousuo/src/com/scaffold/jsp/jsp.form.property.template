@@ -1,0 +1,4 @@
+				<div class="form-group">
+					 <label for="$propertyName$">$propertyName$</label>
+					 <input class="form-control" name="$propertyName$" id="$propertyName$" type="text" />
+				</div>
