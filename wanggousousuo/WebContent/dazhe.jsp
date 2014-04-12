@@ -59,8 +59,7 @@ $(function(){
 										</h3>
 										 <p><%=entity.getDescription() %></p>
 										<p>
-											<a class="btn btn-primary" href="#">详细信息</a> 
-											<a class="btn pull-right" href="#">4月12日</a>
+											<a class="btn btn-success" target="_blank" href="<%=entity.getUrl()%>">详细信息</a> 
 										</p>
 									</div>
 								</div>							
@@ -84,11 +83,11 @@ $(function(){
 									<img alt="300x200" src="<%=entity.getImgUrl() %>" />
 									<div class="caption">
 										<h3>
-											thhumb nail<%=entity.getName() %>
+											<%=entity.getName() %>
 										</h3>
-										 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam<%=entity.getDescription() %></p>
+										 <p><%=entity.getDescription() %></p>
 										<p>
-											<a class="btn btn-primary" href="#">标记</a> <a class="btn" href="#">标记</a>
+											<a class="btn btn-success" target="_blank" href="<%=entity.getUrl()%>">详细信息</a> 
 										</p>
 									</div>
 								</div>							
@@ -110,11 +109,11 @@ $(function(){
 									<img alt="300x200" src="<%=entity.getImgUrl() %>" />
 									<div class="caption">
 										<h3>
-											thhumb nail<%=entity.getName() %>
+											<%=entity.getName() %>
 										</h3>
-										 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam<%=entity.getDescription() %></p>
+										 <p><%=entity.getDescription() %></p>
 										<p>
-											<a class="btn btn-primary" href="#">标记</a> <a class="btn" href="#">标记</a>
+											<a class="btn btn-success" target="_blank" href="<%=entity.getUrl()%>">详细信息</a> 
 										</p>
 									</div>
 								</div>							

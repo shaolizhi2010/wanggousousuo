@@ -68,6 +68,17 @@
 							<%=entity.getDescription() %>
 						</p>
 					</div>
+				</div>	            <div class="row clearfix">
+					<div class="col-md-6 column">
+						<p>
+							updateDate
+						</p>
+					</div>
+					<div class="col-md-6 column">
+						<p>
+							<%=entity.getUpdateDate() %>
+						</p>
+					</div>
 				</div>
 				<%
 					}

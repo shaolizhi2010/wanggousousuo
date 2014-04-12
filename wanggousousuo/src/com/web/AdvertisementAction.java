@@ -57,6 +57,15 @@ public class AdvertisementAction extends BaseAction {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+ 	private String updateDate;
+	
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
  
 
 	public String create() {
@@ -68,6 +77,7 @@ entity.setUrl(url);
 entity.setImgUrl(imgUrl);
 entity.setName(name);
 entity.setDescription(description);
+entity.setUpdateDate(updateDate);
 
 		 
 		AdvertisementService service = new AdvertisementService();
@@ -84,6 +94,7 @@ entity.setUrl(url);
 entity.setImgUrl(imgUrl);
 entity.setName(name);
 entity.setDescription(description);
+entity.setUpdateDate(updateDate);
 
 
 		AdvertisementService service = new AdvertisementService();

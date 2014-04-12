@@ -28,24 +28,7 @@ public class AdvertisementDao {
 		try {
 			
 			DBCollection collection = db.getCollection("advertisement");
-			DBObject dbo = new BasicDBObject();
-			
-if(U.toString(entity.getId()).length()>0){dbo.put("_id", new ObjectId(entity.getId()));}
-			
-			
-
-			if(U.toString(entity.getUrl()).length()>0){
-				dbo.put("url", entity.getUrl());
-			}			
-			if(U.toString(entity.getImgUrl()).length()>0){
-				dbo.put("imgUrl", entity.getImgUrl());
-			}			
-			if(U.toString(entity.getName()).length()>0){
-				dbo.put("name", entity.getName());
-			}			
-			if(U.toString(entity.getDescription()).length()>0){
-				dbo.put("description", entity.getDescription());
-			}
+			DBObject dbo = U.toDBObject(entity);
 			
 			collection.insert(dbo);
 
@@ -90,37 +73,16 @@ if(U.toString(entity.getId()).length()>0){dbo.put("_id", new ObjectId(entity.get
 	 public List<AdvertisementEntity> list(AdvertisementEntity entity) {
 			
 			List<AdvertisementEntity> entityList = new ArrayList<AdvertisementEntity>();
-			DBObject dbo = new BasicDBObject();
-if(U.toString(entity.getId()).length()>0){dbo.put("_id", new ObjectId(entity.getId()));}
-			
-			if(U.toString(entity.getUrl()).length()>0){
-				dbo.put("url", entity.getUrl());
-			}			
-			if(U.toString(entity.getImgUrl()).length()>0){
-				dbo.put("imgUrl", entity.getImgUrl());
-			}			
-			if(U.toString(entity.getName()).length()>0){
-				dbo.put("name", entity.getName());
-			}			
-			if(U.toString(entity.getDescription()).length()>0){
-				dbo.put("description", entity.getDescription());
-			}
-			
+			DBObject dbo = U.toDBObject(entity);;
+	
 			DBObject sortObj = new BasicDBObject();
 			sortObj.put("_id", -1);
 			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).iterator();
 			
 			while(list.hasNext()){
 				
-				AdvertisementEntity e = new AdvertisementEntity();
 				DBObject dbo1 = list.next();
-				
-e.setId(dbo1.get("_id").toString());
-				e.setUrl(  U.toString( dbo1.get("url") ) );
-				e.setImgUrl(  U.toString( dbo1.get("imgUrl") ) );
-				e.setName(  U.toString( dbo1.get("name") ) );
-				e.setDescription(  U.toString( dbo1.get("description") ) );
-
+				AdvertisementEntity e = U.toEntity(dbo1, AdvertisementEntity.class);
 				entityList.add(e);
 			}
 			return entityList;
@@ -129,18 +91,13 @@ e.setId(dbo1.get("_id").toString());
 	
 	public AdvertisementEntity get(String id){
 		try {
-		 	AdvertisementEntity e = new AdvertisementEntity();
+		 	
 			DBObject o = new BasicDBObject();
 			o.put("_id", new ObjectId(id));
 			
 			DBObject dbo1 = collection.findOne(o);
 			
-			e.setId(dbo1.get("_id").toString());
-				e.setUrl(  U.toString( dbo1.get("url") ) );
-				e.setImgUrl(  U.toString( dbo1.get("imgUrl") ) );
-				e.setName(  U.toString( dbo1.get("name") ) );
-				e.setDescription(  U.toString( dbo1.get("description") ) );
-
+			AdvertisementEntity e = U.toEntity(dbo1, AdvertisementEntity.class);
 			
 			return e;
     	} catch (Exception e) {

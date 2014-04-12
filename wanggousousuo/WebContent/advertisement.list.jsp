@@ -28,6 +28,8 @@
 							name
 						</th>						<th>
 							description
+						</th>						<th>
+							updateDate
 						</th>
 						 <th>修改</th>
 						 <th>删除</th>
@@ -60,6 +62,10 @@
 						</td>
 						<td>
 							<a href='advertisement!view.action?id=<%=e.getId()%>'><%=e.getDescription() %></a>
+							
+						</td>
+						<td>
+							<a href='advertisement!view.action?id=<%=e.getId()%>'><%=e.getUpdateDate() %></a>
 							
 						</td>
 
