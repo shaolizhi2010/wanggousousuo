@@ -1,1 +1,63 @@
 body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family:  Arial, Helvetica, "\5b8b\4f53", sans-serif;}
+
+.c-head{
+	background-color: #fff;
+}
+
+.c-personal{
+	font-size: 12px;
+}
+.c-personal nav{
+	border: none;
+}
+
+.c-personal .navbar-nav > li > a{
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.c-imgbar{
+	margin-top: -30px;
+}
+
+.c-search{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#logo{
+	
+	width: 180px;
+	height: 45px; 
+}
+
+#keyword-input{
+	margin-left:100px;
+	width: 300px;
+}
+#search-btn{
+	width: 100px;
+	background-color:#22b14c;
+	font-size : 16px;
+	font-weight:bold;
+	color:#ffffff;
+}
+
+.c-menu{
+	
+	font-size: 14px;
+	font-weight: bold;
+	
+}
+
+.c-menu nav{
+	background-color:#22b14c;
+}
+
+.c-white{
+	color:white;
+}
+
+
+<!-- bootstrap custom -->
+  
+ 

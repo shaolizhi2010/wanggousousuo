@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import com.env.StaticInfo;
 import com.shop.ShopInfo;
 import com.utils.C;
+import com.utils.U;
 
 /* 循环为每个网站生成rule */
 public class AllRulesGenerator {
@@ -41,7 +42,9 @@ public class AllRulesGenerator {
 	}
 	
 	public static void main(String[] args) {
-		new AllRulesGenerator().generateRules("C:/workspace/wanggousousuo/WebContent/");
+		String basePath = new U().getRulePath()+"src/"; 
+		new AllRulesGenerator().generateRules(basePath);
+		System.out.println("end..");
 	}
 	
 	

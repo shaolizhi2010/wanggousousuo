@@ -54,12 +54,13 @@ $(function(){
 								<div class="thumbnail">
 									<img alt="300x200" src="<%=entity.getImgUrl() %>" />
 									<div class="caption">
-										<h5>
-											<%=entity.getDescription() %>
-										</h5>
-										 
+										<h3>
+											<%=entity.getName() %>
+										</h3>
+										 <p><%=entity.getDescription() %></p>
 										<p>
-											<a class="btn btn-primary" href="#">标记</a> <a class="btn" href="#">标记</a>
+											<a class="btn btn-primary" href="#">详细信息</a> 
+											<a class="btn pull-right" href="#">4月12日</a>
 										</p>
 									</div>
 								</div>							
@@ -82,10 +83,10 @@ $(function(){
 								<div class="thumbnail">
 									<img alt="300x200" src="<%=entity.getImgUrl() %>" />
 									<div class="caption">
-										<h5>
-											<%=entity.getDescription() %> 
-										</h5>
- 
+										<h3>
+											thhumb nail<%=entity.getName() %>
+										</h3>
+										 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam<%=entity.getDescription() %></p>
 										<p>
 											<a class="btn btn-primary" href="#">标记</a> <a class="btn" href="#">标记</a>
 										</p>
@@ -108,11 +109,11 @@ $(function(){
 								<div class="thumbnail">
 									<img alt="300x200" src="<%=entity.getImgUrl() %>" />
 									<div class="caption">
-										<h5>
-											<%=entity.getDescription() %>
-										</h5>
- 
-										<p> 
+										<h3>
+											thhumb nail<%=entity.getName() %>
+										</h3>
+										 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam<%=entity.getDescription() %></p>
+										<p>
 											<a class="btn btn-primary" href="#">标记</a> <a class="btn" href="#">标记</a>
 										</p>
 									</div>

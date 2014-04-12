@@ -75,7 +75,9 @@ public class $daoName$ {
 			List<$entityName$> entityList = new ArrayList<$entityName$>();
 			DBObject dbo = U.toDBObject(entity);;
 	
-			Iterator<DBObject> list = collection.find(dbo).iterator();
+			DBObject sortObj = new BasicDBObject();
+			sortObj.put("_id", -1);
+			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).iterator();
 			
 			while(list.hasNext()){
 				

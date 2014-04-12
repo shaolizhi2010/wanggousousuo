@@ -7,18 +7,8 @@
 <html>
 
 <head>
-<jsp:include page="part/head-meta.jsp" />
-
-
-<!-- script src="<%=path%>js/jquery-1.9.1.png"></script> -->
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" href="<%=path%>css/common.css" type="text/css" />
-<link rel="stylesheet" href="<%=path%>css/index.css" type="text/css" />
-
-
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+ <jsp:include page="part/head-meta.jsp" />
+<jsp:include page="part/head.jsp" />
 
 <script>
 $( document ).ready(function() {

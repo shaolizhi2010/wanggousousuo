@@ -105,10 +105,10 @@ if(U.toString(entity.getId()).length()>0){dbo.put("_id", new ObjectId(entity.get
 			if(U.toString(entity.getDescription()).length()>0){
 				dbo.put("description", entity.getDescription());
 			}
-	
-			Iterator<DBObject> list = collection.find(dbo).iterator();
 			
-			
+			DBObject sortObj = new BasicDBObject();
+			sortObj.put("_id", -1);
+			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).iterator();
 			
 			while(list.hasNext()){
 				

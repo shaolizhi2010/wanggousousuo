@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="part/head-meta.jsp" />
 <jsp:include page="part/head.jsp" />
+
 </head>
 
 

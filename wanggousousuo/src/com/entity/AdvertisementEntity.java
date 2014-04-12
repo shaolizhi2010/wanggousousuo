@@ -10,6 +10,7 @@ public class AdvertisementEntity {
 	String name;
 	String description;
 	
+	
 	public String getId() {
 		return id;
 	}

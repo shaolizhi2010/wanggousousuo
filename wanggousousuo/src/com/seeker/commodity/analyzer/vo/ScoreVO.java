@@ -29,6 +29,7 @@ public class ScoreVO extends BaseVO implements Comparable{
 		
 		ScoreVO p2 = (ScoreVO)o2;
 		
+		
 		if(this.score > p2.score){
 			return 1;
 		}
