@@ -32,6 +32,8 @@ public class AdvertisementDao {
 			
 if(U.toString(entity.getId()).length()>0){dbo.put("_id", new ObjectId(entity.getId()));}
 			
+			
+
 			if(U.toString(entity.getUrl()).length()>0){
 				dbo.put("url", entity.getUrl());
 			}			

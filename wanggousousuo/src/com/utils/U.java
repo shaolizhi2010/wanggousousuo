@@ -1,5 +1,7 @@
 package com.utils;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,9 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bson.types.ObjectId;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 
 public class U {
 	
@@ -120,4 +125,88 @@ public class U {
 		}
 		L.trace("U.printMap : ", "print map end");
 	}
+	public String getRulePath(){
+		String path = this.getClass().getClassLoader().getResource("").getPath();
+		path = StringUtils.substringBeforeLast(path, "target");
+		return path;
+	}
+	
+	public static DBObject toDBObject(Object o){
+		Class clz = o.getClass();
+		DBObject dbo = new BasicDBObject();
+		
+		Method[] methods = clz.getDeclaredMethods();
+		for(Method m : methods){
+			String methodName = m.getName();
+			if(methodName.startsWith("get")){
+				try {
+					String fieldName = U.getFieldNameFromMethod(methodName,"get");
+					String value = U.toString(m.invoke(o));
+					if(value.length()>0){	//do not save empty value
+						
+						if(fieldName.equalsIgnoreCase("id")){
+							dbo.put(fieldName, new ObjectId(value));
+						}
+						else{
+							dbo.put(fieldName, value);
+						}
+						
+						
+					}
+					
+				} catch (IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException e) {
+					//do nothing
+					e.printStackTrace();
+				}
+			}
+		}
+		return dbo;
+	}
+	
+	public static <T>T toEntity(DBObject dbo, Class<T> clz){
+		//this.name = U.toString(dbo.get("name"));
+		T obj = null;
+		try {
+			obj = clz.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+			Method[] methods = clz.getDeclaredMethods();
+			for(Method m : methods){
+				String methodName = m.getName();
+				if(methodName.startsWith("set")){
+					String fieldName = U.getFieldNameFromMethod(methodName,"set");
+					String value = null;
+					
+					try {
+						if(fieldName.equalsIgnoreCase("id")){
+							value = U.toString(dbo.get("_id"));
+							m.invoke(obj, value);
+						}
+						else{
+							value = U.toString(dbo.get(fieldName));
+							m.invoke(obj, value);
+						}
+						
+					} catch (IllegalAccessException | IllegalArgumentException
+							| InvocationTargetException e) {
+						// do nothing
+						e.printStackTrace();
+					}
+				}
+			}
+
+		return obj;
+	}
+	
+	public static String getFieldNameFromMethod(String methodName, String sub){
+		String fieldName = null;
+		if(StringUtils.isNotBlank(methodName)){
+			fieldName = StringUtils.substringAfter(methodName, sub);
+			fieldName = StringUtils.uncapitalize(fieldName);
+		}
+		return fieldName;
+	}
+ 
 }

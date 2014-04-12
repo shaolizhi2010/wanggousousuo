@@ -1,18 +1,12 @@
 package com.seeker.gen;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.connect.Connecter;
-import com.digger.vo.Product;
 import com.env.StaticInfo;
 import com.shop.ShopInfo;
 import com.utils.C;
-import com.utils.L;
-import com.utils.ShopNames;
 
 /* 循环为每个网站生成rule */
 public class AllRulesGenerator {

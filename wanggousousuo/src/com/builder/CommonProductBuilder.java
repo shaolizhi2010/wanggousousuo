@@ -7,9 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.digger.CommonCommodityDigger;
 import com.digger.Digger;
 import com.digger.JingdongDigger;
-import com.digger.vo.Product;
+import com.entity.CommodityEntity;
 import com.google.gson.Gson;
-import com.utils.C;
 import com.utils.L;
 import com.utils.ShopNames;
 
@@ -32,13 +31,13 @@ public class CommonProductBuilder {
 	
 			if(ShopNames.jingdong.toString().equalsIgnoreCase(shopStr)){
 				digger = new JingdongDigger(shopStr,realpath);
-				List<Product> products = digger.digAll(keyword);
+				List<CommodityEntity> products = digger.digAll(keyword);
 				return new Gson().toJson(products);		
 			}
 			else{
 				//TODO build url
 				digger = new CommonCommodityDigger(shopStr,realpath);
-				List<Product> products = digger.digAll(keyword);
+				List<CommodityEntity> products = digger.digAll(keyword);
 				new UrlBuilder().buildUrlsForPage(shopStr, products);
 				return new Gson().toJson(products);		
 			}

@@ -1,16 +1,8 @@
 package com.digger;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-import org.apache.commons.io.FileUtils;
 import org.jdom2.Element;
 
-
-import com.connect.Connecter;
-import com.digger.vo.Product;
-import com.utils.L;
+import com.entity.CommodityEntity;
 
 public abstract class WebBaseDigger {
 	
@@ -42,7 +34,7 @@ public abstract class WebBaseDigger {
 	public WebBaseDigger(){
 	}
 	
-	public abstract void customPick(Product product,Element xml);
+	public abstract void customPick(CommodityEntity product,Element xml);
 	
 	
 }

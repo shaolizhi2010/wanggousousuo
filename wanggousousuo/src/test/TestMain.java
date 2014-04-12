@@ -1,9 +1,7 @@
 package test;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import com.digger.CommodityDigerThread;
+import com.utils.ShopNames;
 
 public class TestMain {
 
@@ -14,13 +12,12 @@ public class TestMain {
 
         try {
         
-    		HttpClient httpclient = new DefaultHttpClient();  
-            // 利用HTTP GET向服务器发起请求  
-            HttpGet get = new HttpGet("http://www.jd.com");
             try {
-    			HttpResponse response = httpclient.execute(get);
-    			String s = response.getFirstHeader("title").toString();
-    			System.out.println(s);
+            	 Thread t1 = new Thread(
+            			 new CommodityDigerThread(
+            					 ShopNames.lefeng
+            					 .toString(), "经典"));
+            	 t1.start();
     		} catch ( Exception e1) {
     			// TODO Auto-generated catch block
     			e1.printStackTrace();

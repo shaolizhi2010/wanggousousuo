@@ -42,6 +42,7 @@ public class DaoGenerator extends AbstractGenerator{
 			daoTemplate = StringUtils.replace(daoTemplate, "$entityName$", entityName);
 			daoTemplate = StringUtils.replace(daoTemplate, "$moduleName$", moduleName);
 			
+			/*
 			String generatedCodeForSetDbo = "";
 			String generatedCodeForSetentity = "";
 			
@@ -76,7 +77,7 @@ public class DaoGenerator extends AbstractGenerator{
 			
 			daoTemplate = StringUtils.replace(daoTemplate, "$setentity$",
 					generatedCodeForSetentity);
-			
+			*/
 			
 			
 			code.append(daoTemplate);

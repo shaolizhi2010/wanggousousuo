@@ -28,9 +28,7 @@ public class $daoName$ {
 		try {
 			
 			DBCollection collection = db.getCollection("$moduleName$");
-			DBObject dbo = new BasicDBObject();
-			
-$setdbo$
+			DBObject dbo = U.toDBObject(entity);
 			
 			collection.insert(dbo);
 
@@ -75,19 +73,14 @@ $setdbo$
 	 public List<$entityName$> list($entityName$ entity) {
 			
 			List<$entityName$> entityList = new ArrayList<$entityName$>();
-			DBObject dbo = new BasicDBObject();
-$setdbo$
+			DBObject dbo = U.toDBObject(entity);;
 	
 			Iterator<DBObject> list = collection.find(dbo).iterator();
 			
-			
-			
 			while(list.hasNext()){
 				
-				$entityName$ e = new $entityName$();
 				DBObject dbo1 = list.next();
-				
-$setentity$
+				$entityName$ e = U.toEntity(dbo1, $entityName$.class);
 				entityList.add(e);
 			}
 			return entityList;
@@ -96,13 +89,13 @@ $setentity$
 	
 	public $entityName$ get(String id){
 		try {
-		 	$entityName$ e = new $entityName$();
+		 	
 			DBObject o = new BasicDBObject();
 			o.put("_id", new ObjectId(id));
 			
 			DBObject dbo1 = collection.findOne(o);
 			
-			$setentity$
+			$entityName$ e = U.toEntity(dbo1, $entityName$.class);
 			
 			return e;
     	} catch (Exception e) {

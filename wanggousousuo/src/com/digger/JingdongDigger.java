@@ -1,25 +1,15 @@
 package com.digger;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.jdom2.Document;
 import org.jdom2.Element;
 
-import com.connect.Connecter;
 import com.connect.SimpleConnecter;
-import com.digger.vo.Product;
-import com.exception.BaseException;
+import com.entity.CommodityEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import com.utils.L;
-import com.utils.LogLevel;
 import com.utils.X;
 
 public class JingdongDigger extends CommonCommodityDigger{
@@ -55,9 +45,9 @@ public class JingdongDigger extends CommonCommodityDigger{
 		String preUrl = "http://search.jd.com/Search?keyword=";
 		String keyword = "T恤";
 		
-		List<Product> plist = new JingdongDigger("jingdong", "").digAll(keyword);
+		List<CommodityEntity> plist = new JingdongDigger("jingdong", "").digAll(keyword);
 		System.out.println(plist.size());
-		for(Product p: plist){
+		for(CommodityEntity p: plist){
 			
 			System.out.println(p.toString());
 		}

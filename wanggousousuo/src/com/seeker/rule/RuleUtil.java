@@ -2,22 +2,11 @@ package com.seeker.rule;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
 
-import com.digger.WebBaseDigger;
-import com.digger.vo.Product;
 import com.utils.C;
-import com.utils.DefaultStringUtils;
 import com.utils.L;
-import com.utils.X;
 
 /**
  * 
@@ -28,7 +17,9 @@ public class RuleUtil {
 	public static File[] getRuleFiles(String basePath){
 		File rules = new File(basePath + C.rulesDir);
 		if(rules.listFiles()==null){
-			L.exception("RuleUtil getRuleFiles ", "path have no rule file, path is --- " + basePath + C.rulesDir);
+			
+			L.log("RuleUtil getRuleFiles ", "path have no rule file, path is --- " + basePath + C.rulesDir+" create new one");
+			rules.mkdirs();
 		}
 		File[] ruleFiles = rules.listFiles();
 		return ruleFiles;

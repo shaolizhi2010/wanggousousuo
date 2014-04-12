@@ -12,7 +12,7 @@ public class Scaffold {
 	public static void main(String[] args) {
 
 		try {
-			String moduleName = "advertisement";
+			String moduleName = "commodity";
 			
 			//new EntityGenerator().gen(moduleName);
 			new DaoGenerator().gen(moduleName);

@@ -7,6 +7,7 @@ import java.io.StringReader;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
@@ -27,6 +28,7 @@ import com.utils.C;
 import com.utils.L;
 import com.utils.LogLevel;
 import com.utils.ShopNames;
+import com.utils.U;
 import com.utils.X;
 
 public class CommonRuleGenerator {
@@ -127,7 +129,9 @@ public class CommonRuleGenerator {
 					String path = basePath + C.rulesDir + shopName+"-"+keywordPinyin+".rule" ;
 					L.log("CommonRuleGenerator","New Rule generated, save rule to path "+ path);
 					PrintWriter out = new PrintWriter(new FileWriter(new File(path)));  
-//		            out.print(newRule.toString());
+					System.out.println("path = "+ path);
+					
+//					out.print(newRule.toString());
 					out.print(newRule.toJson());
 		            out.flush();
 		            out.close();
@@ -151,11 +155,11 @@ public class CommonRuleGenerator {
 	}
 	
 	public static void main(String[] args) {
-		String keyword = "新款";
+		String keyword = "iphone";
 //		L.level = LogLevel.debug;
 		L.level = LogLevel.trace;
-		
-		new CommonRuleGenerator().generateRule(ShopNames.lefeng.toString(), keyword,keyword, "C:/workspace/wanggousousuo/WebContent/");
+		String basePath = new U().getRulePath(); 
+		new CommonRuleGenerator().generateRule(ShopNames.lefeng.toString(), keyword,keyword, basePath);
 		System.out.println("end");
 	}
 

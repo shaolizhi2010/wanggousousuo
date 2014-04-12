@@ -1,93 +1,101 @@
 package com.digger;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
 
 import com.connect.Connecter;
 import com.connect.URLUtils;
 import com.digger.util.DiggerUtil;
-import com.digger.vo.Product;
+import com.entity.CommodityEntity;
 import com.env.StaticInfo;
-import com.exception.BaseException;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import com.seeker.commodity.analyzer.CommentAnalyzer;
-import com.seeker.commodity.analyzer.ImgAnalyzer;
 import com.seeker.commodity.analyzer.TitleAnalyzer;
 import com.seeker.commodity.analyzer.price.util.PriceUtil;
 import com.seeker.rule.Rule;
 import com.shop.ShopInfo;
+import com.utils.App;
 import com.utils.C;
 import com.utils.L;
 import com.utils.LogLevel;
 import com.utils.ShopNames;
+import com.utils.U;
 import com.utils.X;
 
 public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 	String basePath; //rule 文件夹位置
 	String shopName;
+	String keyword;
 	
-	public CommonCommodityDigger(String shopName,  String basePath) {
+	public CommonCommodityDigger(String shopName,  String keyword) {
 		this.shopName = shopName;
-		this.basePath = basePath;
+		this.keyword = keyword;
 	}
 	
-	public void customPick(Product p, Element xml) { // 商铺特有的提取信息规则
+	public void customPick(CommodityEntity p, Element xml) { // 商铺特有的提取信息规则
 		
 	}
 	
-	public List<Product> digAll(String keyword){
+	@Deprecated
+	public List<CommodityEntity> digAll(String keyword){
+		return null;
+	}
+	
+	public List<CommodityEntity> digAll(){
 		
+		basePath = new U().getRulePath(); ; 
+		System.out.println("basePath = " + basePath);
 		File rules = new File(basePath + C.rulesDir);
 		if(rules.listFiles()==null){
 			L.exception(this, "path have no rule file, path is --- " + basePath + C.rulesDir);
-			return new ArrayList<Product>() ;
+			return new ArrayList<CommodityEntity>() ;
 		}
+		DB db = App.getInstance().getDBContext();
+		DBCollection commoditys = db.getCollection("commodity");
+		
 		File[] ruleFiles = rules.listFiles();
 		for(File ruleFile : ruleFiles){//遍历rule file 知道找到结果
 			if(ruleFile.getName().contains(shopName)){//如果找到商城的rule文件
-				List<Product> productList = dig(keyword, ruleFile);
+				List<CommodityEntity> productList = new ArrayList<CommodityEntity>(); 
+				dig(keyword, ruleFile, productList, commoditys);
+				
 				if(productList !=null && productList.size()>0){
 					L.debug(this, "match ruleFile --- " + ruleFile.getName());
-					return productList;
+					
+				 
 				}
 			}
 		}
-		return new ArrayList<Product>();
+		return new ArrayList<CommodityEntity>();
 	}
 	
-	public List<Product> dig(String keyword,File ruleFile){
+	public void dig(String keyword,File ruleFile, List<CommodityEntity> listDeprecated, DBCollection commoditys){
+		
+		
+		listDeprecated = null;//@Deprecated
 		
 		ShopInfo shopinfo = StaticInfo.getShopbyName(shopName);
 		if(shopinfo == null){
 			L.exception(this, "can not find shop --- " + shopName);
-			return new ArrayList<Product>();
+			return ;
 		}
 		String preSearchUrl = shopinfo.getSearchUrl();
 		if(preSearchUrl==null || preSearchUrl.length()==0){
-			return new ArrayList<Product>();
+			return  ;
 		}
 		String domainStr = shopinfo.getDomainName();
 		
-		try {	
+		try {
 			Rule rule = new Rule();
 			rule.fromFile(ruleFile);
 			
@@ -105,15 +113,14 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 			List itemList = X.selectNodes(doc, itemPath);
 			//System.out.println("itemList size "+itemList.size());
 			
-			List<Product> productList = new ArrayList<Product>();
 			
 			if(itemList == null || itemList.size()==0) {
-			    return productList;
+			    return ;
 			}
 			
 			for (Object o :   itemList) {
 				Element e = (Element)o;
-				Product p = new Product();
+				CommodityEntity p = new CommodityEntity();
 				
 				L.trace(this, X.toString(e));
 				
@@ -166,23 +173,38 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 				
 				String source = StaticInfo.getShopbyName(shopName).getCnName();
 				
-				p.setName(name).setUrl(productHref).setImgUrl(imgUrl).setPrice(price).setCommentCount(comment).setCommentUrl(commentHref).setSource(source);
+				p.setName(name).setUrl(productHref)
+					.setImgUrl(imgUrl).setPrice(price)
+						.setCommentCount(comment).setCommentUrl(commentHref)
+							.setSource(source).setKeyword(keyword);
 				if(p.useful()){
-					productList.add(p);
+					//listDeprecated.add(p);
+					DBObject commodityItem = U.toDBObject(p);
+					
+//					commodityItem.put("name", name);
+//					commodityItem.put("productHref", productHref);
+//					commodityItem.put("imgUrl", imgUrl);
+//					commodityItem.put("comment", comment);
+//					commodityItem.put("source", source);
+//					commodityItem.put("commentHref", commentHref);
+//					commodityItem.put("keyword", keyword);
+					
+					//TODO
+					commoditys.insert(commodityItem);
+					
 				}
 				
 			} //end for 
-			return productList;
 		
 		} catch (Exception e) {
 			L.exception(this, "Digger Failed, url is " + preSearchUrl);
 			e.printStackTrace();
 		} 
-		return new ArrayList<Product>();
 		
 	}
 	
 	protected String getPrice(Element e, String pricePath){
+		
 		L.trace(this, "getPrice() element xml content: ");
 		L.trace(this, X.toString(e));
 		
@@ -201,12 +223,12 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 		try {
 			L.level = LogLevel.trace;
 	
-			String keyword = "新款";
-			List<Product> plist = new CommonCommodityDigger(
+			String keyword = "iphone";
+			List<CommodityEntity> plist = new CommonCommodityDigger(
 					ShopNames.yintai.toString(),  "D:/git/db/wanggousousuo/wanggousousuo/WebContent/").digAll(keyword);
 			
 			System.out.println("plist.size() " + plist.size());
-			for(Product p: plist){
+			for(CommodityEntity p: plist){
 				System.out.println(p.toString());
 			}
 			
@@ -217,5 +239,4 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 		}
 
 	}
- 
 }

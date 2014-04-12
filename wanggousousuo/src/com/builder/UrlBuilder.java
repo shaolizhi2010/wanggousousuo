@@ -1,29 +1,23 @@
 package com.builder;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.digger.vo.Product;
-import com.env.StaticInfo;
-import com.shop.ShopInfo;
-import com.utils.C;
+import com.entity.CommodityEntity;
 import com.utils.L;
 import com.utils.ShopNames;
 
 public class UrlBuilder {
 	
-	public void buildUrlsForPage(String shopStr, List<Product> products){
+	public void buildUrlsForPage(String shopStr, List<CommodityEntity> products){
 		
 		if(StringUtils.isBlank(shopStr)){
 			L.exception(UrlBuilder.class, "shop name is null ");
 			return ;
 		}
 		
-		for( Product p :  products ){
+		for( CommodityEntity p :  products ){
 			String rawProductUrl = p.getUrl();
 			String cookedProductUrl = p.getUrl();
 			String rawCommentUrl = p.getCommentUrl();
