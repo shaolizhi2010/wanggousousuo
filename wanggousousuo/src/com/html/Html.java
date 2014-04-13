@@ -49,8 +49,14 @@ public class Html {
 	
 	public void init(){
 		try {
+			long starttime = System.currentTimeMillis();
 			cleanedHtml = clean();
+			L.trace(this, "Html Cleaned, time is " + (System.currentTimeMillis()-starttime));
+			
+			starttime = System.currentTimeMillis();
 			doc = new SAXBuilder().build(new StringReader(cleanedHtml));
+			L.trace(this, "Html finished build xml doc, time is " + (System.currentTimeMillis()-starttime));
+			
 			this.isRaw = false;//init 过了 israw 就是false
 		} catch (Exception e) {
 			L.exception("HtmlUtils", e.getMessage());
@@ -122,14 +128,7 @@ public class Html {
 		props.setNamespacesAware(false);
 		PrettyXmlSerializer serializer = new PrettyXmlSerializer(props);
 		String cleanedHtml = "";
-		try {
 			cleanedHtml = serializer.getAsString(node,"UTF-8");
-			//cleanedHtml = cleanedHtml.replaceAll("H", "h");
-			//cleanedHtml = cleanedHtml.replaceAll("D", "d");
-			//cleanedHtml = StringUtils.lowerCase(cleanedHtml,Locale.CHINESE);
-		} catch (IOException e) {
-			L.exception(this, e.getMessage());
-		}
 		this.cleanedHtml = U.clean(cleanedHtml);
 		return this.cleanedHtml;
 	}
@@ -173,11 +172,11 @@ public class Html {
 			Html html = Connecter.getHtmlInfo("http://jr.jd.com/?erpad_source=erpad");//getPageSource("z.cn").get("pageSource");
 			FileUtil.saveFile(html.getPageSource(), "d:/test.txt");
 			
-			//System.out.println(html);
-			System.out.println(html.head("charset"));
-			System.out.println(html.head("title"));
-			System.out.println(html.head("description"));
-			System.out.println(html.head("keywords"));
+			////System.out.println(html);
+			//System.out.println(html.head("charset"));
+			//System.out.println(html.head("title"));
+			//System.out.println(html.head("description"));
+			//System.out.println(html.head("keywords"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

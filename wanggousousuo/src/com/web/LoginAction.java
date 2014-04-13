@@ -29,7 +29,7 @@ public class LoginAction extends ActionSupport {
 	
 	public String testMethod() {
 		 
-		System.out.println("in test method");
+		//System.out.println("in test method");
 		return "success";
 	}
 

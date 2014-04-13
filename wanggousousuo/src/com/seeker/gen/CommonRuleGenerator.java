@@ -7,7 +7,6 @@ import java.io.StringReader;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
@@ -36,11 +35,11 @@ public class CommonRuleGenerator {
 	public void generateRule(String shopName,String keyword,String keywordPinyin,String basePath) {
 		try {
 			//L.level = LogLevel.debug;
-			L.debug("CommonRuleGenerator", "generateRule begin, shopname - " + shopName + " - keyword - " + keyword);
+			L.trace("CommonRuleGenerator", "generateRule begin, shopname - " + shopName + " - keyword - " + keyword);
 			String preSearchUrl = StaticInfo.getShopbyName(shopName).getSearchUrl();
 			
 			String requestEncodeCharset = new CharsetAnalyzer().analyzeCharset(preSearchUrl, keyword);
-			L.debug("CommonRuleGenerator", "requestEncodeCharset --- " + requestEncodeCharset);
+			L.trace("CommonRuleGenerator", "requestEncodeCharset --- " + requestEncodeCharset);
 			
 			
 			String url = URLUtils.buildUrl(preSearchUrl, keyword, requestEncodeCharset);
@@ -69,7 +68,7 @@ public class CommonRuleGenerator {
 				int matchedResultCount = 0 ;
 				
 				for (Element t : elist) {
-					L.trace(this, X.getPath(t));
+					////L.trace(this, X.getPath(t));
 					
 					if(X.toString(t).length()<200){		/*节点长度太小，不会是商品信息element*/
 						continue;
@@ -79,7 +78,7 @@ public class CommonRuleGenerator {
 					boolean imgFinded = new ImgAnalyzer().analyze(t, imgCountMap);
 					boolean priceFinded = new PriceAnalyzer().analyze(t, priceCountMap);
 					
-					L.trace(this, priceCountMap.toString());
+					////L.trace(this, priceCountMap.toString());
 					
 			        new CommentAnalyzer().analyze(t, commentCountMap);
 			        
@@ -98,7 +97,7 @@ public class CommonRuleGenerator {
 				//String itemPath = (String)listItemMap.getResultWithMaxScore().getXpath();
 				
 				if(matchedResultCount>5){	/* 找到匹配的xpath */
-				//	L.trace(this, X.getPath(t));
+				//	//L.trace(this, X.getPath(t));
 					String titlePath = (String)tilteCountMap.getResultWithMaxScore().getXpath();
 					String imgPath =  (String)imgCountMap.getResultWithMaxScore().getXpath();
 					String pricePath =  (String)priceCountMap.getResultWithMaxScore().getXpath();
@@ -112,11 +111,11 @@ public class CommonRuleGenerator {
 					newRule.setPricePath(pricePath);
 					newRule.setCommentPath(commentPath);
 					
-					L.debug(this, newRule.toString());
+					L.trace(this, newRule.toString());
 					
 					/*检查rule是否存在 避免重复*/
 					if(RuleUtil.checkRuleFileExist(newRule, basePath, shopName)){
-						L.debug("CommonRulGenerator", "rule already exist");
+						L.trace("CommonRulGenerator", "rule already exist");
 						return;	/*存在，不再继续尝试新的rule，否则可能产生不准的rule文件*/
 					}
 					
@@ -129,7 +128,7 @@ public class CommonRuleGenerator {
 					String path = basePath + C.rulesDir + shopName+"-"+keywordPinyin+".rule" ;
 					L.log("CommonRuleGenerator","New Rule generated, save rule to path "+ path);
 					PrintWriter out = new PrintWriter(new FileWriter(new File(path)));  
-					System.out.println("path = "+ path);
+					//System.out.println("path = "+ path);
 					
 //					out.print(newRule.toString());
 					out.print(newRule.toJson());
@@ -159,8 +158,8 @@ public class CommonRuleGenerator {
 //		L.level = LogLevel.debug;
 		L.level = LogLevel.trace;
 		String basePath = new U().getRulePath(); 
-		new CommonRuleGenerator().generateRule(ShopNames.lefeng.toString(), keyword,keyword, basePath);
-		System.out.println("end");
+		new CommonRuleGenerator().generateRule(ShopNames.taobao.toString(), keyword,keyword, basePath);
+		//System.out.println("end");
 	}
 
 	

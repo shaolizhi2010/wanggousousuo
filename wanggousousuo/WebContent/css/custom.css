@@ -16,6 +16,11 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family:  Aria
 	padding-bottom: 8px;
 }
 
+.c-personal .navbar-nav > li > ul > li> a{
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
 .c-imgbar{
 	margin-top: -30px;
 }
@@ -30,7 +35,7 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family:  Aria
 	height: 45px; 
 }
 
-#keyword-input{
+#keyword{
 	margin-left:100px;
 	width: 300px;
 }
@@ -57,7 +62,33 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family:  Aria
 	color:white;
 }
 
+<!-- search page -->
 
+.c-title{
+	color: #666;
+	font-size : 12px;
+}
+.c-title a{
+	color: #666;
+}
+.c-title :link{
+	color: #666;
+}
+.c-comment{
+	color: #6699CC;
+	font-size:12px;
+}
+.c-price{
+	font-size : 12px;
+	font-weight : bold;
+	color:red;
+}
+.c-source{
+	font-size:13px;	
+	font-weight:500;
+	
+	color:green;
+}
 
 <!-- bootstrap custom -->
  

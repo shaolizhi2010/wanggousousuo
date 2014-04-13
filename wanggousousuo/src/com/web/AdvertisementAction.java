@@ -57,6 +57,7 @@ public class AdvertisementAction extends BaseAction {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+ 
 
 	public String create() {
 		

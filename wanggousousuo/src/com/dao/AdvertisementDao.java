@@ -27,7 +27,7 @@ public class AdvertisementDao {
 	public void add(AdvertisementEntity entity) {
 		try {
 			
-			DBCollection collection = db.getCollection("advertisement");
+			collection = db.getCollection("advertisement");
 			DBObject dbo = U.toDBObject(entity);
 			
 			collection.insert(dbo);

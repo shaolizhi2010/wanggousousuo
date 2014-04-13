@@ -27,11 +27,13 @@
 				</thead>
 				<tbody>
 			<%
+				List<$entityName$> list = new ArrayList<$entityName$>();
+				if(request.getAttribute("list")!=null){
+					 list = (List<$entityName$>)request.getAttribute("list");
+				}
 				$entityName$ entity = new $entityName$();
-				
-				List<$entityName$> list = (List<$entityName$>)request.getAttribute("list");
-				if(list==null){
-					list = new ArrayList<$entityName$>();
+				if( request.getAttribute("entity")!=null ){
+					 entity = ($entityName$)request.getAttribute("entity");
 				}
 				
 				for($entityName$ e : list){

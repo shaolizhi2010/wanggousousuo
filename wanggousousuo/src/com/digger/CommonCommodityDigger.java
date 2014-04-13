@@ -54,7 +54,7 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 	public List<CommodityEntity> digAll(){
 		
 		basePath = new U().getRulePath(); ; 
-		System.out.println("basePath = " + basePath);
+		//System.out.println("basePath = " + basePath);
 		File rules = new File(basePath + C.rulesDir);
 		if(rules.listFiles()==null){
 			L.exception(this, "path have no rule file, path is --- " + basePath + C.rulesDir);
@@ -70,8 +70,8 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 				dig(keyword, ruleFile, productList, commoditys);
 				
 				if(productList !=null && productList.size()>0){
-					L.debug(this, "match ruleFile --- " + ruleFile.getName());
-					
+					L.trace(this, "match ruleFile --- " + ruleFile.getName());
+					return productList;
 				 
 				}
 			}
@@ -82,7 +82,7 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 	public void dig(String keyword,File ruleFile, List<CommodityEntity> listDeprecated, DBCollection commoditys){
 		
 		
-		listDeprecated = null;//@Deprecated
+		//listDeprecated = null;//@Deprecated
 		
 		ShopInfo shopinfo = StaticInfo.getShopbyName(shopName);
 		if(shopinfo == null){
@@ -111,7 +111,7 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 			
 			Document doc  = new org.jdom2.input.SAXBuilder().build(new StringReader(responseString));
 			List itemList = X.selectNodes(doc, itemPath);
-			//System.out.println("itemList size "+itemList.size());
+			////System.out.println("itemList size "+itemList.size());
 			
 			
 			if(itemList == null || itemList.size()==0) {
@@ -122,7 +122,7 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 				Element e = (Element)o;
 				CommodityEntity p = new CommodityEntity();
 				
-				L.trace(this, X.toString(e));
+				////L.trace(this, X.toString(e));
 				
 				String name = X.getValue(e, titlePath);
 				name = StringUtils.normalizeSpace(name);
@@ -156,8 +156,8 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 						price = new DecimalFormat("######.00").format(new BigDecimal(price));
 					}
 				} catch (Exception e2) {
-					L.debug(this, e2.getMessage());
-					L.debug(this, "格式化 price 出错 - " + price);
+					L.exception(this, e2.getMessage());
+					L.exception(this, "格式化 price 出错 - " + price);
 				}
 				
 				String comment = "0";//默认0
@@ -177,6 +177,8 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 					.setImgUrl(imgUrl).setPrice(price)
 						.setCommentCount(comment).setCommentUrl(commentHref)
 							.setSource(source).setKeyword(keyword);
+				listDeprecated.add(p);
+				
 				if(p.useful()){
 					//listDeprecated.add(p);
 					DBObject commodityItem = U.toDBObject(p);
@@ -190,6 +192,7 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 //					commodityItem.put("keyword", keyword);
 					
 					//TODO
+					////System.out.println("shop name is "+ shopName + "inserting : " + U.toJson(p));
 					commoditys.insert(commodityItem);
 					
 				}
@@ -205,8 +208,8 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 	
 	protected String getPrice(Element e, String pricePath){
 		
-		L.trace(this, "getPrice() element xml content: ");
-		L.trace(this, X.toString(e));
+		////L.trace(this, "getPrice() element xml content: ");
+		////L.trace(this, X.toString(e));
 		
 		String price = X.getValue(e, pricePath);
 		price = PriceUtil.getPrice(price);
@@ -218,7 +221,7 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 	 */
 	public static void main(String[] args) {
 
-		System.out.println("begin");
+		//System.out.println("begin");
 		
 		try {
 			L.level = LogLevel.trace;
@@ -227,12 +230,12 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 			List<CommodityEntity> plist = new CommonCommodityDigger(
 					ShopNames.yintai.toString(),  "D:/git/db/wanggousousuo/wanggousousuo/WebContent/").digAll(keyword);
 			
-			System.out.println("plist.size() " + plist.size());
+			//System.out.println("plist.size() " + plist.size());
 			for(CommodityEntity p: plist){
-				System.out.println(p.toString());
+				//System.out.println(p.toString());
 			}
 			
-			System.out.println("end");
+			//System.out.println("end");
 
 		} catch (Exception e) {
 			e.printStackTrace();

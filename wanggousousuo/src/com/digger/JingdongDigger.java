@@ -28,13 +28,13 @@ public class JingdongDigger extends CommonCommodityDigger{
 			priceJson = SimpleConnecter.connect(url);
 			List<Map> list = new Gson().fromJson(priceJson, new TypeToken<List<Map>>(){}.getType() );
 
-//			System.out.println("price url "+ url);
+//			//System.out.println("price url "+ url);
 			
 			if(list.get(0).get("p") !=null){
 				price = list.get(0).get("p").toString();
 			}
 		} catch (Exception e2) {
-			L.debug(this, "取京东 price 出错 priceJson - " +priceJson );
+			L.exception(this, "取京东 price 出错 priceJson - " +priceJson );
 		}
 
 		return price;
@@ -46,13 +46,13 @@ public class JingdongDigger extends CommonCommodityDigger{
 		String keyword = "T恤";
 		
 		List<CommodityEntity> plist = new JingdongDigger("jingdong", "").digAll(keyword);
-		System.out.println(plist.size());
+		//System.out.println(plist.size());
 		for(CommodityEntity p: plist){
 			
-			System.out.println(p.toString());
+			//System.out.println(p.toString());
 		}
 		
-		System.out.println("end");
+		//System.out.println("end");
 	}
 
 	

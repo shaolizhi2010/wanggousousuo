@@ -27,7 +27,7 @@ public class CommodityDao {
 	public void add(CommodityEntity entity) {
 		try {
 			
-			DBCollection collection = db.getCollection("commodity");
+			collection = db.getCollection("commodity");
 			DBObject dbo = U.toDBObject(entity);
 			
 			collection.insert(dbo);
@@ -76,7 +76,9 @@ public class CommodityDao {
 			DBObject dbo = U.toDBObject(entity);;
 
 	
-			Iterator<DBObject> list = collection.find(dbo).iterator();
+			DBObject sortObj = new BasicDBObject();
+			sortObj.put("_id", -1);
+			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).limit(200).iterator();
 			
 			
 			while(list.hasNext()){

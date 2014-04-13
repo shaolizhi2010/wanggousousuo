@@ -64,9 +64,9 @@
 			<div class="row">
 				 <img id="logo" class="img-responsive col-md-5 col-sm-6" src="img/logo-wg.png">
 				
-				<form class="navbar-form navbar-left col-md-7 col-sm-6" role="search">
+				<form class="navbar-form navbar-left col-md-7 col-sm-6" role="search" action="commodity!search.action">
 			        <div class="form-group">
-			          <input type="search" class="form-control"   id="keyword-input" placeholder="宝贝名称">
+			          <input type="search" class="form-control" name="keyword" id="keyword" placeholder="商品名称">
 			        </div>
 		        	<button   type="submit" id="search-btn" class="btn btn-default">搜索</button>
 		      	</form>
@@ -100,21 +100,13 @@
 
 							
 							<li class="divider" style="color: #fff;"></li>
-							<li><a href="history.view.jsp" style="color: #fff;">手机</a></li>
-							<li><a href="history.mark.jsp" style="color: #fff;">衣服</a></li>
-							<li><a href="account" style="color: #fff;">家居</a></li>
-							<li><a href="account" style="color: #fff;">图书</a></li>
+							<li><a href="commodity!search.action?keyword=新款" style="color: #fff;">新款</a></li>
+							<li><a href="commodity!search.action?keyword=手机"  style="color: #fff;">手机</a></li>
+							<li><a href="commodity!search.action?keyword=衣服"  style="color: #fff;">衣服</a></li>
+							<li><a href="commodity!search.action?keyword=家居"  style="color: #fff;">家居</a></li>
+							<li><a href="commodity!search.action?keyword=图书"  style="color: #fff;">图书</a></li>
 							<li><a href="login.jsp" style="color: #fff;">商品分类</a></li>
-
-							<li class="dropdown" style="color: green;"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown" style="color: #fff;">编辑打折信息 <b class="caret"></b></a>
-								<ul class="dropdown-menu"  style="color: green;">
-									<li><a href="advertisement.create.jsp" style="color: green;">发布打折信息</a></li>
-									<li><a href="advertisement!list.action" style="color: green;">全部打折信息</a></li>
-									<li><a href="#" style="color: green;">Something else here</a></li>
-									<li class="divider" style="color: green;"></li>
-								</ul></li>
-
+							<li><a href="login.jsp" style="color: #fff;">商城链接</a></li>
 
 						</ul>
 

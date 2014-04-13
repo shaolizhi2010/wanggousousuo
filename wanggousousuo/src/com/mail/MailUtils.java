@@ -160,21 +160,21 @@ public class MailUtils {
 		// 解析所有邮件
 		for (int i = 0, count = messages.length; i < count; i++) {
 			MimeMessage msg = (MimeMessage) messages[i];
-			System.out.println("------------------解析第" + msg.getMessageNumber() + "封邮件-------------------- ");
-			System.out.println("主题: " + getSubject(msg));
-			System.out.println("发件人: " + getFrom(msg));
-			System.out.println("收件人：" + getReceiveAddress(msg, null));
-			System.out.println("发送时间：" + getSentDate(msg, null));
-			System.out.println("是否已读：" + isSeen(msg));
-			System.out.println("邮件优先级：" + getPriority(msg));
-			System.out.println("是否需要回执：" + isReplySign(msg));
-			System.out.println("邮件大小：" + msg.getSize() * 1024 + "kb");
+			//System.out.println("------------------解析第" + msg.getMessageNumber() + "封邮件-------------------- ");
+			//System.out.println("主题: " + getSubject(msg));
+			//System.out.println("发件人: " + getFrom(msg));
+			//System.out.println("收件人：" + getReceiveAddress(msg, null));
+			//System.out.println("发送时间：" + getSentDate(msg, null));
+			//System.out.println("是否已读：" + isSeen(msg));
+			//System.out.println("邮件优先级：" + getPriority(msg));
+			//System.out.println("是否需要回执：" + isReplySign(msg));
+			//System.out.println("邮件大小：" + msg.getSize() * 1024 + "kb");
 			 
 			StringBuffer content = new StringBuffer(30);
 			getMailTextContent(msg, content);
-			System.out.println("邮件正文：" + content);
-			System.out.println("------------------第" + msg.getMessageNumber() + "封邮件解析结束-------------------- ");
-			System.out.println();
+			//System.out.println("邮件正文：" + content);
+			//System.out.println("------------------第" + msg.getMessageNumber() + "封邮件解析结束-------------------- ");
+			//System.out.println();
 		}
 	}
 	

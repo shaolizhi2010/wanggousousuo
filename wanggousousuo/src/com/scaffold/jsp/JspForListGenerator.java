@@ -69,7 +69,11 @@ public class JspForListGenerator extends AbstractGenerator{
 			jspTemplateCode = StringUtils.replace(jspTemplateCode,
 					"$moduleName$", moduleName);
 			
-			saveFile(jspTemplateCode, webPath + fileName + ".jsp");
+			String targetPath = webPath + fileName + ".jsp";
+			
+			if( checkBeforeSave(targetPath, jspTemplateCode) ){
+				saveFile(jspTemplateCode,  targetPath);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

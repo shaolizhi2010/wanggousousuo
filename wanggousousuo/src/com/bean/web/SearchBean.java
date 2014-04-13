@@ -74,13 +74,13 @@ public class SearchBean extends BaseBean {
 			int pageNumInt = U.parseInt(pageNumStr);
 			
 
-			L.debug(this, "begin search from --- " + shopname +" --- keyword ---" + keyword );
+			//L.trace(this, "begin search from --- " + shopname +" --- keyword ---" + keyword );
 
 			freshJson = new CommonProductBuilder().build(shopname, keyword,pageNumInt,
 					realpath,false);
 			
 			if(freshJson.length()<20){//没找到商品，可能是因为缺少rule,生成keyword 和 shop 的rule
-				L.log(this, "Try gen rule for shope - " + shopname + " - keyword - " + keyword);
+				L.debug(this, "Try gen rule for shope - " + shopname + " - keyword - " + keyword);
 				new CommonRuleGenerator().generateRule(shopname, keyword,keyword, realpath);
 				//重新抓取页面 提取数据
 				freshJson = new CommonProductBuilder().build(shopname, keyword,pageNumInt,
@@ -93,7 +93,7 @@ public class SearchBean extends BaseBean {
 		}
 		
 		String callback = request.getParameter("callback");  
-		//System.out.println("callback --- "+callback);
+		////System.out.println("callback --- "+callback);
 		
 		//for jsonp
 		freshJson = callback+ "(" + freshJson + ")";	//for jsonp

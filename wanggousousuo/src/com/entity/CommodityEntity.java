@@ -83,6 +83,7 @@ public class CommodityEntity {
 		return this;
 	}
 	
+	
 	public boolean useful(){
 		
 		//缺少 商品标题 链接 或价格任意一项，即为无用信息
@@ -91,7 +92,6 @@ public class CommodityEntity {
 		}
 		return true;
 	}
-	
 
 	
 }

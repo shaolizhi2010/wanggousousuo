@@ -92,9 +92,13 @@ public class ActionGenerator extends AbstractGenerator{
 //			generatedCode = StringUtils.replace(generatedCode, "$import$",
 //					newImport);		
 			
+			String targetPath = srcPath + packagePath + fileName
+					+ ".java";
 			
-			saveFile(generatedCode,  srcPath + packagePath + fileName
-					+ ".java");
+			if( checkBeforeSave(targetPath, generatedCode) ){
+				saveFile(generatedCode, targetPath);
+			}
+			
 			
 			//auto change struts.xml
 			String strutsConfigFile = getFileContent( srcPath+"struts.xml");

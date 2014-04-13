@@ -50,17 +50,17 @@ public class TitleAnalyzer {
 				/*去掉所有空格，防止干扰 （这样keyword中不能含有空格了）*/
 				title = title.replaceAll(" ", "");
 				
-//				System.out.println("pre title "+ title);
+//				//System.out.println("pre title "+ title);
 				if( StringUtils.containsIgnoreCase(title, keyword) ){
 					String path =  X.getSubPath(X.getPath(titleElement), X.getPath(t)) ;
-//					System.out.println("title "+title);
+//					//System.out.println("title "+title);
 					scoreMap.put(path, path,10);/*包含关键字 10分*/
 					targetFinded = true;
 					break;
 				}
 				else if(  title.length()>10 ){
 					String path =  X.getSubPath(X.getPath(titleElement), X.getPath(t)) ;
-//					System.out.println("title "+title);
+//					//System.out.println("title "+title);
 					scoreMap.put(path, path,1);	//不包含关键字 10分
 					targetFinded = true;
 				}

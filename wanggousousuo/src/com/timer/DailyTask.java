@@ -16,7 +16,7 @@ public class DailyTask extends java.util.TimerTask {
 
 	@Override
 	public void run() {
-		L.log(this, " is running");
+		L.trace(this, " is running");
 		
 	}// end run
 

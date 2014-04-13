@@ -18,7 +18,7 @@ public class RuleUtil {
 		File rules = new File(basePath + C.rulesDir);
 		if(rules.listFiles()==null){
 			
-			L.log("RuleUtil getRuleFiles ", "path have no rule file, path is --- " + basePath + C.rulesDir+" create new one");
+			L.debug("RuleUtil getRuleFiles ", "path have no rule file, path is --- " + basePath + C.rulesDir+" create new one");
 			rules.mkdirs();
 		}
 		File[] ruleFiles = rules.listFiles();

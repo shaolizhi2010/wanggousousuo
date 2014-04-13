@@ -62,7 +62,7 @@ public class CommentAnalyzer {
 				String commentStr = StringUtils.normalizeSpace(commentElement.getValue());
 				
 				if( containComment(commentStr) ){  
-//					System.out.println("commentStr "+ commentStr);
+//					//System.out.println("commentStr "+ commentStr);
 					String path =  X.getSubPath(X.getPath(commentElement), X.getPath(t)) ;
 					countmap.put(path, path,1);
 					break;

@@ -54,7 +54,7 @@ public class SearchAction extends BaseAction {
 
 			int pageNumInt = U.parseInt(pageNum);
 
-			L.debug(this, "begin search from --- " + shopname
+			L.trace(this, "begin search from --- " + shopname
 					+ " --- keyword ---" + keyword);
 
 			freshJson = commonProductBuilder.build(shopname, keyword,
@@ -62,7 +62,7 @@ public class SearchAction extends BaseAction {
 
 			if (freshJson.length() < 20) {// 没找到商品，可能是因为缺少rule,生成keyword 和 shop
 											// 的rule
-				L.log(this, "Try gen rule for shope - " + shopname
+				L.debug(this, "Try gen rule for shope - " + shopname
 						+ " - keyword - " + keyword);
 				new CommonRuleGenerator().generateRule(shopname, keyword,
 						keyword, realpath);
@@ -95,7 +95,7 @@ public class SearchAction extends BaseAction {
 	
 	public String testMethod() {
 		 
-		System.out.println("in test method");
+		//System.out.println("in test method");
 		return "success";
 	}
 

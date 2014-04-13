@@ -157,7 +157,7 @@ public class FileUtil {
 	 */
 	public static void main(String[] args) {
 		Env.basePath = "C:/workspace/wanggousousuo/WebContent/";
-		System.out.println(new FileUtil().getFilesJson(Env.basePath+"blog/",FileUtil.All));
+		//System.out.println(new FileUtil().getFilesJson(Env.basePath+"blog/",FileUtil.All));
 	}
 
 }

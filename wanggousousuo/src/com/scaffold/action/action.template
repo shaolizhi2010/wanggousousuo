@@ -35,6 +35,7 @@ public class $actionName$Action extends BaseAction {
 		try {
 			List<$entityName$> list = service.list(entity);
 			HttpServletRequest request = ServletActionContext.getRequest ();
+			request.setAttribute("entity", entity);
 			request.setAttribute("list", list);
 		} catch (Exception e) {
 			L.exception(this, e.getMessage());

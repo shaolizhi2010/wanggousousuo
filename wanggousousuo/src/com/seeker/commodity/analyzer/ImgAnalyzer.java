@@ -79,18 +79,18 @@ public class ImgAnalyzer {
 							continue;//url不合法 跳过
 						}
 				        
-				       // System.out.println(buff.getWidth() + " - " + buff.getHeight());
+				       // //System.out.println(buff.getWidth() + " - " + buff.getHeight());
 				        if(buff.getWidth()>100 && buff.getHeight()>100){
 							//图片合法
 				        	String attrName = a.getName();//图片的合法属性
 				        	//图片xpath 加上属性后缀，因为最好要找到是这个属性的xpath
 				        	path = path+"/@"+attrName;
 				        	//TODO 的path可能重复，需要加索引
-//				        	System.out.println("img path "+path);
-//				        	System.out.println("img src "+ attr);
+//				        	//System.out.println("img path "+path);
+//				        	//System.out.println("img src "+ attr);
 				        	if(path.startsWith("./ul/li")){
-				        		L.trace(this, rootPath);
-				        		L.trace(this, X.getPath(imgElement));
+				        		////L.trace(this, rootPath);
+				        		////L.trace(this, X.getPath(imgElement));
 				        	}
 				        	countmap.put(path, path,1);
 				        	targetFinded = true;

@@ -44,7 +44,7 @@ public class AllRulesGenerator {
 	public static void main(String[] args) {
 		String basePath = new U().getRulePath()+"src/"; 
 		new AllRulesGenerator().generateRules(basePath);
-		System.out.println("end..");
+		//System.out.println("end..");
 	}
 	
 	

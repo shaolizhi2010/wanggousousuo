@@ -30,11 +30,11 @@ public class MyFileUtil {
 			L.level = LogLevel.debug;
 			return IOUtils.toString(new FileReader("/kuaidi.json")); 
 		} catch (FileNotFoundException e) {
-			L.debug(MyFileUtil.class, e.getMessage());
-			L.debug(MyFileUtil.class, "can not get kuaidi json");
+			L.exception(MyFileUtil.class, e.getMessage());
+			L.exception(MyFileUtil.class, "can not get kuaidi json");
 		} catch (IOException e) {
-			L.debug(MyFileUtil.class, e.getMessage());
-			L.debug(MyFileUtil.class, "can not get kuaidi json");
+			L.exception(MyFileUtil.class, e.getMessage());
+			L.exception(MyFileUtil.class, "can not get kuaidi json");
 		}
 		return "";
 	}

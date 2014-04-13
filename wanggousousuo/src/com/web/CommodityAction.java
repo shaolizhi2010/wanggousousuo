@@ -2,11 +2,14 @@ package com.web;
 
 import com.web.base.BaseAction;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts2.ServletActionContext;
-import com.utils.L;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.utils.L;
 import com.service.CommodityService;
 import com.entity.CommodityEntity;
 
@@ -139,6 +142,42 @@ entity.setKeyword(keyword);
 			L.exception(this, e.getMessage());
 		}
 		return "listPage";
+	}
+	
+	public String search() {
+		CommodityEntity entity = new CommodityEntity();
+
+		entity.setId(id);
+entity.setName(name);
+entity.setUrl(url);
+entity.setPrice(price);
+entity.setImgUrl(imgUrl);
+entity.setCommentCount(commentCount);
+entity.setCommentUrl(commentUrl);
+entity.setSource(source);
+
+try {
+	if(keyword!=null){
+		keyword = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
+	}
+	
+} catch (UnsupportedEncodingException e) {
+	L.exception(this, e.getMessage());
+}
+
+entity.setKeyword(keyword);
+
+
+		CommodityService service = new CommodityService();
+		try {
+			List<CommodityEntity> list = service.search(entity);
+			HttpServletRequest request = ServletActionContext.getRequest ();
+			request.setAttribute("entity", entity);
+			request.setAttribute("list", list);
+		} catch (Exception e) {
+			L.exception(this, e.getMessage());
+		}
+		return "searchPage";
 	}
 	
 	public String view(){

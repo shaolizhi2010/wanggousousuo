@@ -8,30 +8,13 @@ import java.net.URL;
 import com.utils.L;
 
 public class SimpleConnecter {
-	public static String connect(String url){
-		
-	       String result = "";  
-	        try {  
-	            URL httpurl = new URL(url);  
-	            HttpURLConnection httpConn = (HttpURLConnection) httpurl  
-	                    .openConnection();  
-	            httpConn.setDoInput(true);  
-	            BufferedReader in = new BufferedReader(new InputStreamReader(  
-	                    httpConn.getInputStream()));  
-	            String line;  
-	            while ((line = in.readLine()) != null) {  
-	                result += line;  
-	            }  
-	            in.close();  
-	        } catch (Exception e) {  
-	             L.exception("SimpleConnecter", e.getMessage());
-	        }  
-	        return result;  
+	public static String connect(String url){//default utf-8
+		return connect(url,"utf-8");
 	}
 	
 	public static String connect(String url,String charset){
 		
-	       String result = "";  
+		StringBuffer result = new StringBuffer();  
 	        try {  
 	            URL httpurl = new URL(url);  
 	            HttpURLConnection httpConn = (HttpURLConnection) httpurl  
@@ -41,12 +24,12 @@ public class SimpleConnecter {
 	                    httpConn.getInputStream(),charset));  
 	            String line;  
 	            while ((line = in.readLine()) != null) {  
-	                result += line;  
+	            	result.append(line) ;  
 	            }  
 	            in.close();  
 	        } catch (Exception e) {  
 	             L.exception("SimpleConnecter", e.getMessage());
 	        }  
-	        return result;  
+	        return result.toString();  
 	}
 }

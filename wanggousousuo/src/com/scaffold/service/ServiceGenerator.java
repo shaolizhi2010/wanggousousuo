@@ -57,17 +57,12 @@ public class ServiceGenerator extends AbstractGenerator{
 			String targetPath = srcPath + packagePath + fileName
 					+ ".java";
 			
-			String targetFileContent = FileUtil.getFileContent(targetPath);
-			
-			//如果目标文件已存在，并且比生成的文件大，说明之后添加过内容，那么不要覆盖
-			//防止丢失代码
-			if(targetFileContent!=null && targetFileContent.length() > generatedCode.length()){
-				L.exception(this, "文件已存在 且添加过代码，覆盖终止");
-				return;
+			if( checkBeforeSave(targetPath, generatedCode) ){
+				saveFile(generatedCode, srcPath + packagePath + fileName
+						+ ".java");
 			}
 			
-			saveFile(generatedCode, srcPath + packagePath + fileName
-					+ ".java");
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();

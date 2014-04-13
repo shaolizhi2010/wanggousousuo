@@ -73,7 +73,7 @@ public class App {
 			}
 			
 		} catch (UnknownHostException e) {
-			L.log(this, "找不到Mongo数据库");
+			L.debug(this, "找不到Mongo数据库");
 		}
 		return db;
 	}

@@ -43,7 +43,6 @@
 				</thead>
 				<tbody>
 			<%
-				CommodityEntity entity = new CommodityEntity();
 				
 				List<CommodityEntity> list = (List<CommodityEntity>)request.getAttribute("list");
 				if(list==null){

@@ -81,8 +81,17 @@ public class DaoGenerator extends AbstractGenerator{
 			
 			
 			code.append(daoTemplate);
-			saveFile(code.toString(), srcPath + packagePath + fileName
-					+ ".java");
+			
+			
+			String targetPath = srcPath + packagePath + fileName
+					+ ".java";
+			
+			if( checkBeforeSave(targetPath, code.toString()) ){
+				saveFile(code.toString(), srcPath + packagePath + fileName
+						+ ".java");
+			}
+			
+			
 
 		} catch (Exception e) { 
 			e.printStackTrace();
@@ -94,7 +103,7 @@ public class DaoGenerator extends AbstractGenerator{
 
 		try {
 			String moduleName = "resume";
-			//System.out.println( new DaoGenerator().getBasePath() ); 
+			////System.out.println( new DaoGenerator().getBasePath() ); 
 			new DaoGenerator().gen(moduleName);
 
 		} catch (Exception e) {

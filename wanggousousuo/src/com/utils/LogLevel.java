@@ -3,7 +3,7 @@ package com.utils;
 public enum LogLevel {
 	trace,debug,log,exception,error,always,off;  
 	
-	private LogLevel level ;
+	private LogLevel level ; 
 
 	public LogLevel getLevel() {
 		return level;

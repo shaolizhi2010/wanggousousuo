@@ -22,7 +22,7 @@ public class Connecter {
 	@Deprecated
 	public static Html getRawHtmlInfo(String url) {
 		
-		L.trace("Connect getPageSource() ", "Url is " + url);
+		//L.trace("Connect getPageSource() ", "Url is " + url);
 		
 		url = URLUtils.standard(url);
 		
@@ -34,7 +34,7 @@ public class Connecter {
 		Html html = null;
 		
 		try{
-			L.debug(Connecter.class.getName(), "connecting --- " + url);
+			L.trace(Connecter.class.getName(), "connecting --- " + url);
 			
 			String baseUrl = URLUtils.getdomain(url);
 	        httpget = new HttpGet(url);
@@ -43,12 +43,17 @@ public class Connecter {
 	        httpget.setHeader("Accept-Charset","UTF-8,GBK;q=0.7"); 
 	        httpget.setHeader("Referer",baseUrl); //模拟浏览器//TODO
 	        
+	        long starttime = System.currentTimeMillis();
+	        //L.trace(null,"Connecter start download page, time is " + starttime  );
 	        HttpResponse response = httpclient.execute(httpget);
+	        //L.trace(null,"Connecter finshed download page, time is " + (System.currentTimeMillis()-starttime) + "+url is " + url );
+	        
 	        HttpEntity entity = response.getEntity();
 	        //EntityUtils.toString(entity);
 	        InputStream entityContent = entity.getContent();
 	        
 	        /* 自动设置字符集 begin */
+	        //L.trace(null,"Connecter start analys charset, time is " + starttime  );
 	        Charset charset = ContentType.getOrDefault(entity).getCharset();
 	        if(charset != null){	/* response 设置了charset */
 	        	charsetStr = charset.toString();
@@ -62,24 +67,43 @@ public class Connecter {
 	        	    		charsetStr = StringUtils.substringBetween(line, "charset=","\"");
 	        	    		break;
 	        	    }
+	        	    if(StringUtils.lowerCase(line).contains("gbk")){
+	        	    	charsetStr = "gbk";
+	        	    	break;
+	        	    }
+	        	    if(StringUtils.lowerCase(line).contains("utf-8")){
+	        	    	charsetStr = "utf-8";
+	        	    	break;
+	        	    }
+	        	    if(StringUtils.lowerCase(line).contains("gb2312")){
+	        	    	charsetStr = "gb2312";
+	        	    	break;
+	        	    }
 	        	    if(line.indexOf("/head")>0){	//html head部分已经结束，不用再找了
 	        	    	break;
 	        	    }
 	        	}
 	        }
+ 
 	        if(StringUtils.isBlank(charsetStr)){	//未找到字符集
 	        	L.exception("Connecter", url + " --- " + "无法确定字符集，设置为默认字符集 utf-8");
 	        	charsetStr = "UTF-8";	//default
 	        }
+	        //L.trace(null,"Connecter finshed analyze charset, time is " + (System.currentTimeMillis()-starttime) + "+url is " + url );
 	        //自动设置字符集 end	        
 	        
+	        starttime = System.currentTimeMillis();
 	        pageSource = IOUtils.toString(entityContent,charsetStr);
+	        L.trace(null,"Connecter finshed convert entityContent to string , time is " + (System.currentTimeMillis()-starttime)) ;
 	        
 	        //raw html 没进行clean等处理
-	        html = new Html();
-	        html.setRawPageSource(pageSource);
-	        html.charset(charsetStr);
 	        
+	        html = new Html();
+	        
+	        
+	        html.setRawPageSource(pageSource);
+	        
+	        html.charset(charsetStr);
 		}catch (Exception e) {
 			L.exception("Connecter", e.getMessage());
 			L.exception("Connecter getPageSource() ", " url is " + url);

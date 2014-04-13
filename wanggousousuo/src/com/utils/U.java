@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -30,6 +31,16 @@ public class U {
 		else{
 			return o.toString();
 		}
+	}
+	
+	public static String toJson(Object o){
+		if(o == null){
+			return "";
+		}
+		
+		return new GsonBuilder().setPrettyPrinting()
+				.disableHtmlEscaping()
+				.create().toJson(o);
 	}
 	
 	public static boolean isMoney(String money){
@@ -109,21 +120,21 @@ public class U {
 	
 	public static void printList(List list){
 		for(Object o : list){
-			System.out.println(o.toString());
+			//System.out.println(new Gson().toJson(o));
 		}
 	}
 	public static void printArray(Object[] arr){
 		for(Object o : arr){
-			System.out.println(o.toString());
+			//System.out.println(o.toString());
 		}
 	}
 	public static void printMap(Map map){
-		L.trace("U.printMap : ", "print map begin");
+		////L.trace("U.printMap : ", "print map begin");
 		for(Object o:  map.entrySet()){
 			Map.Entry entry = (Map.Entry) o;
-			System.out.println(entry.getKey() +" - "+entry.getValue());
+			//System.out.println(entry.getKey() +" - "+entry.getValue());
 		}
-		L.trace("U.printMap : ", "print map end");
+		////L.trace("U.printMap : ", "print map end");
 	}
 	public String getRulePath(){
 		String path = this.getClass().getClassLoader().getResource("").getPath();

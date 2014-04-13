@@ -41,8 +41,8 @@ public class CharsetAnalyzer {
 			int matchCount = StringUtils.countMatches(responseString, keyword);
 //			L.always(this, "use charsert --- "+ charset +" --- contains keyword count --- " + matchCount);
 			cm.put(charset, charset, matchCount);
-//			System.out.println(charset + " - " + responseString.length());
-//			System.out.println("responseString " + responseString);
+//			//System.out.println(charset + " - " + responseString.length());
+//			//System.out.println("responseString " + responseString);
 		}
 		return (String)cm.getResultWithMaxScore().getXpath();
 	}

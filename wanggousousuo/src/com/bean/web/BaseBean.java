@@ -21,7 +21,6 @@ public abstract class BaseBean extends  HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		L.debug(this, "start");	//begin
 		
 		try {
 			Map<String, List<String>> map = parseParameters(req);
@@ -32,7 +31,6 @@ public abstract class BaseBean extends  HttpServlet{
 			L.exception(this, e.getMessage());
 		}
 		
-		L.debug(this, "end");	//end
 	}
 
 	

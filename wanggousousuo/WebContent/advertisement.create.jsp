@@ -34,10 +34,6 @@
 					 <label for="description">description</label>
 					 <textarea class="form-control" name="description" id="description" rows="3"></textarea>
 				</div>
-				<div class="form-group">
-					 <label for="updateDate">updateDate</label>
-					 <input class="form-control" name="updateDate" id="updateDate" type="text" />
-				</div>
 
 				
 				<button type="submit" class="btn btn-default">完成</button>

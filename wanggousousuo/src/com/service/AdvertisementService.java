@@ -24,7 +24,7 @@ public class AdvertisementService {
 		query.put("imgUrl", imgUrl);
 		List<AdvertisementEntity> list = advertisementDao.list(entity);
 		if(list !=null && list.size()>0){ //已经存在
-			L.log(this, "img url : " + imgUrl + " is already exsit");
+			L.debug(this, "img url : " + imgUrl + " is already exsit");
 			return;
 		}
 		

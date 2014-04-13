@@ -27,7 +27,7 @@ public class $daoName$ {
 	public void add($entityName$ entity) {
 		try {
 			
-			DBCollection collection = db.getCollection("$moduleName$");
+			collection = db.getCollection("$moduleName$");
 			DBObject dbo = U.toDBObject(entity);
 			
 			collection.insert(dbo);

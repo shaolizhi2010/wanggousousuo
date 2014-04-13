@@ -61,6 +61,7 @@ public class URLUtils {
 	
 public static String buildUrl(String url, String keyword,String encodeCharset) {
 		
+		if(keyword == null) keyword="";
 		//init keyword
 		String encodedKeyword = keyword;
 		

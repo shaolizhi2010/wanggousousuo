@@ -1,9 +1,12 @@
 package com.digger;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.entity.CommodityEntity;
 
 public class CommodityDigerThread implements Runnable {
 	
@@ -20,13 +23,12 @@ public class CommodityDigerThread implements Runnable {
 	@Override
 	public void run() {
 		guid = UUID.randomUUID().toString();
-		System.out.println("Thread-"+ guid+" is start, time is "+ System.currentTimeMillis());
+		long starttime = System.currentTimeMillis();
+		//System.out.println("Thread-"+ guid+" is start, time is "+ System.currentTimeMillis());
 		
-		new CommonCommodityDigger(shopName, keyword).digAll();
+		List<CommodityEntity>  list = new CommonCommodityDigger(shopName, keyword).digAll();
 		//new CommonCommodityDigger(shopName, basePath).dig(keyword, ruleFile);
-		System.out.println("Thread-"+ guid+" is finished, time is "+ System.currentTimeMillis());
+		//System.out.println("Thread-"+ guid+" is finished, shop name is " + shopName +" time is "+ (System.currentTimeMillis()-starttime) + " fetch count : " + list.size());
 	}
-	
-
 
 }

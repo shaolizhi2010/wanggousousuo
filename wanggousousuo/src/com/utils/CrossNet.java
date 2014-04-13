@@ -26,7 +26,7 @@ public class CrossNet {
 	 */
 	public static void main(String[] args) {
 		String s = new CrossNet().getjson("common?method=getBlogsJson");
-		System.out.println(s);
+		//System.out.println(s);
 	}
 
 }

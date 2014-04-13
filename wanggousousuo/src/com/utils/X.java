@@ -20,9 +20,9 @@ import com.env.Env;
 public class X {
 	// get value from xml by key
 	public static String getValue(Object xml, String key) {
-//		L.trace("XmlUtil", "method --- getValue begin");
+//		//L.trace("XmlUtil", "method --- getValue begin");
 		if(key == null || key.trim().length()==0 || key.contains("null")){
-			L.trace("XmlUtil", "getValue() : key is null, method return " );
+			////L.trace("XmlUtil", "getValue() : key is null, method return " );
 			return "";
 		}
 
@@ -32,9 +32,9 @@ public class X {
 			Object oValue = X.selectSingleNode(xml, key);
 			if (oValue != null) { 
 				value = ((Element) oValue).getValue().trim();
-				L.trace("XmlUtil", "key = " + key + " --- value = " + value);
+				////L.trace("XmlUtil", "key = " + key + " --- value = " + value);
 			} else { 
-				L.trace("XmlUtil", "key = " + key + " --- value = null");
+				////L.trace("XmlUtil", "key = " + key + " --- value = null");
 			}
 
 		}  catch (java.lang.ClassCastException e) {
@@ -42,15 +42,15 @@ public class X {
 			L.exception("XmlUtil", "excetion detail --- parameter key = " + key);
 			printXml(xml);
 		}
-//		L.trace("XmlUtil", "method --- getValue end");
+//		//L.trace("XmlUtil", "method --- getValue end");
 		return value;
 	}
 
 	// get attribut value from xml by key and attribute name
 	public  static String getAttrValue(Object xml, String key, String attr) {
-//		L.trace("XmlUtil", "method --- getAttr begin");
+//		//L.trace("XmlUtil", "method --- getAttr begin");
 		if(key == null || key.trim().length()==0 || key.contains("null")){
-			L.trace("XmlUtil", "getAttr() : key is null, method return");
+			////L.trace("XmlUtil", "getAttr() : key is null, method return");
 			return "";
 		}
 		String value = "";
@@ -62,10 +62,10 @@ public class X {
 				if (value != null)
 					value = value.trim();
 
-				L.trace("XmlUtil", "key = " + key + " --- attr = " + attr
-						+ " --- value = " + value);
+//				//L.trace("XmlUtil", "key = " + key + " --- attr = " + attr
+//						+ " --- value = " + value);
 			} else {
-				L.trace("XmlUtil", "can not find value, key = " + key);
+				////L.trace("XmlUtil", "can not find value, key = " + key);
 			}
 
 		} catch (Exception e) {
@@ -74,14 +74,14 @@ public class X {
 					+ " --- attr = " + attr);
 			printXml(xml);
 		}
-//		L.trace("XmlUtil", "method --- getAttr end");
+//		//L.trace("XmlUtil", "method --- getAttr end");
 		return value;
 	}
 	
 	//key 要带 @, 如 @src，查询到的节点是一个属性节点
 	public static String getAttrValue(Object xml, String key){
 		if(key == null || key.trim().length()==0 || key.contains("null")){
-			L.trace("XmlUtil", "getAttr() : key is null, method return");
+			////L.trace("XmlUtil", "getAttr() : key is null, method return");
 			return "";
 		}
 		Object attrObject = selectSingleNode(xml, key);
@@ -96,7 +96,7 @@ public class X {
 	public  static void printXml(Object xml) { // print xml
 		 
 		try {
-			System.out.println( toString(xml));
+			//System.out.println( toString(xml));
 			 
 		} catch (Exception e) {
 			L.exception("XmlUtil",
@@ -106,7 +106,7 @@ public class X {
 	
 	//  xml to string
 	public  static String toString(Object xml) { // print xml
-		//L.trace("XmlUtil", "method --- toString begin");
+		////L.trace("XmlUtil", "method --- toString begin");
 		XMLOutputter xmlOut = new XMLOutputter();
 		xmlOut.setFormat(Format.getPrettyFormat().setEncoding("UTF-8")); // set
 																		// encoding
@@ -121,7 +121,7 @@ public class X {
 			L.exception("XmlUtil",
 					"xml can not toString, exception is --- " + e.getMessage());
 		}
-		L.trace("XmlUtil", "method --- toString return empty");
+		////L.trace("XmlUtil", "method --- toString return empty");
 		return "";
 	}
 	
@@ -134,8 +134,8 @@ public class X {
 			
 		
 		} catch (IOException e) {
-			L.trace("XmlUtil",
-					"xml can not be save, exception is --- " + e.getMessage());
+//			//L.trace("XmlUtil",
+//					"xml can not be save, exception is --- " + e.getMessage());
 		}
 	}
 	
@@ -220,9 +220,9 @@ public class X {
 		
 		String returnString = "."+StringUtils.substringAfter(path, parentPath);
 		
-//		System.out.println("path         "+ path);
-//		System.out.println("parentPath   "+ parentPath);
-//		System.out.println("returnString "+ returnString);
+//		//System.out.println("path         "+ path);
+//		//System.out.println("parentPath   "+ parentPath);
+//		//System.out.println("returnString "+ returnString);
 		
 		return returnString;
 	}

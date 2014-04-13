@@ -68,14 +68,14 @@ public class AdvertisementMailReceiver {
 
 				// FileUtil.saveFile(content.toString(),
 				// "d:/mmm/"+msg.getSubject());
-				// System.out.println(msg.get);
-				// System.out.println(content);
+				// //System.out.println(msg.get);
+				// //System.out.println(content);
 				// MailUtils.saveAttachment(msg, "d:/mmm/");
 
 				// 提取广告信息
 
 				AdvertisementDigger.dig(content.toString(), list);
-				// System.out.println("list size : "+list.size());
+				// //System.out.println("list size : "+list.size());
 				// U.printList(list);
 
 				// MailUtils.parseMessage(msg); // 解析邮件

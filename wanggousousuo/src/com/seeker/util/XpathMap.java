@@ -61,7 +61,7 @@ public class XpathMap {
 //		int count = 0;
 //		XpathItem resultContent =  new XpathItem();
 //		for(Entry<String, XpathItem> entry : xpathMap.entrySet()){
-//			//System.out.println(entry.getKey() + " - " + entry.getValue());
+//			////System.out.println(entry.getKey() + " - " + entry.getValue());
 //			if(entry.getValue().getCount() > count){//返回count最大的一个
 //				count = entry.getValue().getCount();
 //				resultContent = entry.getValue();
@@ -76,7 +76,7 @@ public class XpathMap {
 		Double score = 0.0;
 		XpathItem resultContent =  new XpathItem();
 		for(Entry<String, XpathItem> entry : xpathMap.entrySet()){
-			//System.out.println(entry.getKey() + " - " + entry.getValue());
+			////System.out.println(entry.getKey() + " - " + entry.getValue());
 			if(entry.getValue().getScore() > score){//返回score最大的一个
 				score = entry.getValue().getScore();
 				resultContent = entry.getValue();
@@ -90,7 +90,7 @@ public class XpathMap {
 //		int count = Integer.MAX_VALUE;
 //		XpathItem resultContent =  new XpathItem();
 //		for(Entry<String, XpathItem> entry : xpathMap.entrySet()){
-//			//System.out.println(entry.getKey() + " - " + entry.getValue());
+//			////System.out.println(entry.getKey() + " - " + entry.getValue());
 //			if(entry.getValue().getScore() < count){//返回count最大的一个
 //				count = entry.getValue().getScore();
 //				resultContent = entry.getValue();

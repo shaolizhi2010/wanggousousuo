@@ -40,7 +40,7 @@ public class GethotWordMain {
 			
 			List list = X.selectNodes(doc, "//a");
 			
-			System.out.println(list.size());
+			//System.out.println(list.size());
 	//		
 			StringBuffer sb = new StringBuffer();
 			for (Object o : list) {
@@ -51,12 +51,12 @@ public class GethotWordMain {
 				value = value.replaceAll("\r", "");
 				value = new String(value.getBytes(),"UTF-8");
 				if(StringUtils.isNotBlank(value)  && value.length()<4){
-				//	System.out.println( value );
+				//	//System.out.println( value );
 					sb.append(value).append("---");
 				}
 			}
 			
-			System.out.println(sb.toString());
+			//System.out.println(sb.toString());
 			 
 			
 		} catch (Exception e) {

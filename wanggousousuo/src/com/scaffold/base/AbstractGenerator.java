@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.file.FileUtil;
 import com.scaffold.common.ColumnVO;
 import com.utils.L;
 
@@ -21,6 +22,25 @@ public class AbstractGenerator {
 		String path = this.getClass().getClassLoader().getResource("").getPath();
 		path = StringUtils.substringBeforeLast(path, "target");
 		return path;
+	}
+	
+	/*
+	 * 可以覆盖 则返回true
+	 */
+	public boolean checkBeforeSave(String targetPath, String generatedCode){
+		
+		if(!new File(targetPath).exists()){
+			return true;
+		}
+		String targetFileContent = FileUtil.getFileContent(targetPath);
+		
+		//如果目标文件已存在，并且比生成的文件大，说明之后添加过内容，那么不要覆盖
+		//防止丢失代码
+		if(targetFileContent!=null && targetFileContent.length() > generatedCode.length()){
+			L.exception(this, "文件已存在 且添加过代码，覆盖终止");
+			return false;
+		}
+		return true;
 	}
 	
 	public void saveFile(String content, String path) {
