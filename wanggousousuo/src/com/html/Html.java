@@ -99,6 +99,14 @@ public class Html {
 		return value;
 	}
 	
+	public String title(){
+		return head("title");
+	}
+	
+	public String description(){
+		return head("description");
+	}
+	
 	public String charser(){
 		return charset;
 	}

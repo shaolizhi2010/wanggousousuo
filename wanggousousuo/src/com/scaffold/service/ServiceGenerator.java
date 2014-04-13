@@ -1,8 +1,13 @@
 package com.scaffold.service;
 
+import java.io.File;
+
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.file.FileUtil;
 import com.scaffold.base.AbstractGenerator;
+import com.utils.L;
 
 public class ServiceGenerator extends AbstractGenerator{
 
@@ -40,7 +45,7 @@ public class ServiceGenerator extends AbstractGenerator{
 			//替换 entity 名
 			generatedCode = StringUtils.replace(generatedCode, "$entityName$",
 					entityName);
-	
+			
 			generatedCode = StringUtils.replace(generatedCode, "$moduleName$",
 					moduleName);
 			
@@ -49,7 +54,17 @@ public class ServiceGenerator extends AbstractGenerator{
 //			//add import
 //			generatedCode = StringUtils.replace(generatedCode, "$import$",
 //					newImport);		
+			String targetPath = srcPath + packagePath + fileName
+					+ ".java";
 			
+			String targetFileContent = FileUtil.getFileContent(targetPath);
+			
+			//如果目标文件已存在，并且比生成的文件大，说明之后添加过内容，那么不要覆盖
+			//防止丢失代码
+			if(targetFileContent!=null && targetFileContent.length() > generatedCode.length()){
+				L.exception(this, "文件已存在 且添加过代码，覆盖终止");
+				return;
+			}
 			
 			saveFile(generatedCode, srcPath + packagePath + fileName
 					+ ".java");
@@ -63,7 +78,7 @@ public class ServiceGenerator extends AbstractGenerator{
 	public static void main(String[] args) {
 
 		try {
-			String moduleName = "drawmoney";
+			String moduleName = "advertisement";
 			
 			new ServiceGenerator().gen(moduleName);
 

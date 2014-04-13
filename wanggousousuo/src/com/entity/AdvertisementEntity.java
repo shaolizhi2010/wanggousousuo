@@ -9,14 +9,8 @@ public class AdvertisementEntity {
 	String imgUrl;
 	String name;
 	String description;
-	String updateDate;
 	
-	public String getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
-	}
+ 
 	public String getId() {
 		return id;
 	}
