@@ -38,12 +38,14 @@ public class CommonRuleGenerator {
 			L.trace("CommonRuleGenerator", "generateRule begin, shopname - " + shopName + " - keyword - " + keyword);
 			String preSearchUrl = StaticInfo.getShopbyName(shopName).getSearchUrl();
 			
-			String requestEncodeCharset = new CharsetAnalyzer().analyzeCharset(preSearchUrl, keyword);
+			Map<String, String> chasetMap = new CharsetAnalyzer().analyzeCharset(preSearchUrl, keyword);
+			String requestEncodeCharset = chasetMap.get("charsetForUrl");
+			String contentEncodeCharset = chasetMap.get("charsetForContent");
 			L.trace("CommonRuleGenerator", "requestEncodeCharset --- " + requestEncodeCharset);
 			
 			
 			String url = URLUtils.buildUrl(preSearchUrl, keyword, requestEncodeCharset);
-			String responseString = Connecter.getPageSource(url);
+			String responseString = Connecter.getPageSource(url,contentEncodeCharset);
 			
 			//L.debug("CommonRuleGenerator","CommonRuleGenerator", "responseString size --- " + responseString.length());
 			
@@ -105,6 +107,7 @@ public class CommonRuleGenerator {
 					
 					Rule newRule = new Rule();
 					newRule.setRequestEncodeCharset(requestEncodeCharset);
+					newRule.setContentEncodeCharset(contentEncodeCharset);
 					newRule.setItemPath(rootPath);
 					newRule.setTitlePath(titlePath);
 					newRule.setImgPath(imgPath);
@@ -157,9 +160,9 @@ public class CommonRuleGenerator {
 		String keyword = "iphone";
 //		L.level = LogLevel.debug;
 		L.level = LogLevel.trace;
-		String basePath = new U().getRulePath(); 
-		new CommonRuleGenerator().generateRule(ShopNames.taobao.toString(), keyword,keyword, basePath);
-		//System.out.println("end");
+		String basePath = new U().getRulePath()+"src/"; 
+		new CommonRuleGenerator().generateRule(ShopNames.jingdong.toString(), keyword,keyword, basePath);
+		System.out.println("end");
 	}
 
 	

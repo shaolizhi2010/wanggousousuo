@@ -4,9 +4,11 @@ import java.io.File;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.entity.ShopEntity;
 import com.env.StaticInfo;
-import com.shop.ShopInfo;
 import com.utils.C;
+import com.utils.L;
+import com.utils.LogLevel;
 import com.utils.U;
 
 /* 循环为每个网站生成rule */
@@ -16,8 +18,8 @@ public class AllRulesGenerator {
 		String[] keywords = {"新款","衬衫","乔布斯","诺基亚"
 				,"安全座椅","华硕","寶寶"};//,"运动","鞋","食品"
 		
-		Map<String, ShopInfo> shops = StaticInfo.getShops();
-		for(Entry<String, ShopInfo> shop : shops.entrySet()){
+		Map<String, ShopEntity> shops = StaticInfo.getShops();
+		for(Entry<String, ShopEntity> shop : shops.entrySet()){
 //			if(!shop.getValue().getShopName().equals(ShopNames.m18.toString())){	//只跑某个shop
 //				continue ;
 //			}
@@ -28,7 +30,7 @@ public class AllRulesGenerator {
 				File[] ruleFiles = rules.listFiles();
 				for(File ruleFile : ruleFiles){
 					if(ruleFile.getName().endsWith(".rule") 
-							&& ruleFile.getName().contains(shop.getValue().getShopName())){//如果找到商城的rule文件
+							&& ruleFile.getName().contains(shop.getValue().getShopNameEn())){//如果找到商城的rule文件
 						ruleFile.delete();
 					}
 				}
@@ -36,15 +38,16 @@ public class AllRulesGenerator {
 			
 			
 			for(String keyword : keywords){
-				new CommonRuleGenerator().generateRule(shop.getValue().getShopName(), keyword,keyword, basePath);
+				new CommonRuleGenerator().generateRule(shop.getValue().getShopNameEn(), keyword,keyword, basePath);
 			}
 		}
 	}
 	
 	public static void main(String[] args) {
+		L.level = LogLevel.log;
 		String basePath = new U().getRulePath()+"src/"; 
 		new AllRulesGenerator().generateRules(basePath);
-		//System.out.println("end..");
+		System.out.println("end..");
 	}
 	
 	

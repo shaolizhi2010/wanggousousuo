@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 public class Rule {
 
 	String requestEncodeCharset = "";
+	String contentEncodeCharset = "";
 	
 	/* 提取所有商品信息列表的 xpath，
 	 * 如 //ul/li[@class="prod"]， 
@@ -38,6 +39,16 @@ public class Rule {
 	public void setRequestEncodeCharset(String requestEncodeCharset) {
 		this.requestEncodeCharset = requestEncodeCharset;
 	}
+	
+	
+	public String getContentEncodeCharset() {
+		return contentEncodeCharset;
+	}
+
+	public void setContentEncodeCharset(String contentEncodeCharset) {
+		this.contentEncodeCharset = contentEncodeCharset;
+	}
+
 	public String getItemPath() {
 		return itemPath;
 	}
@@ -122,6 +133,7 @@ public class Rule {
 		Rule target = (Rule)obj;
 		
 		if(	target.getRequestEncodeCharset().trim().equalsIgnoreCase(this.getRequestEncodeCharset().trim())
+				&& target.getContentEncodeCharset().trim().equalsIgnoreCase(this.getContentEncodeCharset().trim())
 				&& target.getItemPath().trim().equalsIgnoreCase(this.getItemPath().trim())
 				&& target.getTitlePath().trim().equalsIgnoreCase(this.getTitlePath().trim())
 				&& target.getImgPath().trim().equalsIgnoreCase(this.getImgPath().trim())
@@ -147,6 +159,7 @@ public class Rule {
 	
 	public void fromObject(Rule rule){
 		this.requestEncodeCharset = rule.getRequestEncodeCharset();
+		this.contentEncodeCharset = rule.getContentEncodeCharset();
 		this.itemPath = rule.getItemPath();
 		this.titlePath = rule.getTitlePath();
 		this.imgPath = rule.getImgPath();

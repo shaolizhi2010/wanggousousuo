@@ -1,15 +1,19 @@
 package com.seeker.commodity.analyzer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.connect.Connecter;
 import com.connect.URLUtils;
+import com.html.Html;
 import com.seeker.util.XpathMap;
 import com.utils.L;
 
 public class CharsetAnalyzer {
 	
-	String[] charsetArray = {"GBK","UTF-8","ISO-8859-1"};
+	String[] charsetArray = {"UTF-8","GBK","ISO-8859-1"};
 	
 	/**
 	 * 判断规则 
@@ -31,19 +35,34 @@ public class CharsetAnalyzer {
 	 * @param keyword
 	 * @return
 	 */
-	public String analyzeCharset(String url, String keyword){
+	public Map<String, String> analyzeCharset(String url, String keyword){
 		
-		XpathMap cm = new XpathMap();
-		for(String charset : charsetArray){
+		XpathMap countMapForUrl = new XpathMap();
+		XpathMap countMapForContent = new XpathMap();
+		
+		for(String charsetForUrl : charsetArray){
 			
-			String buildedUrl = URLUtils.buildUrl(url, keyword, charset);
-			String responseString = Connecter.getPageSource(buildedUrl);
-			int matchCount = StringUtils.countMatches(responseString, keyword);
-//			L.always(this, "use charsert --- "+ charset +" --- contains keyword count --- " + matchCount);
-			cm.put(charset, charset, matchCount);
-//			//System.out.println(charset + " - " + responseString.length());
-//			//System.out.println("responseString " + responseString);
-		}
-		return (String)cm.getResultWithMaxScore().getXpath();
+				String buildedUrl = URLUtils.buildUrl(url, keyword, charsetForUrl);
+				Html html = Connecter.getHtml(buildedUrl);
+				String responseString = html.getPageSource();
+				int matchCount = StringUtils.countMatches(responseString, keyword);
+				String charsetForContent = html.charser();
+//				L.always(this, "use charsert --- "+ charset +" --- contains keyword count --- " + matchCount);
+				countMapForUrl.put(charsetForUrl, charsetForUrl, matchCount);
+				countMapForContent.put(charsetForContent, charsetForContent, matchCount);
+//				//System.out.println(charset + " - " + responseString.length());
+//				//System.out.println("responseString " + responseString);
+				if(matchCount>40){//够数 跳出 节省时间
+					break;
+				}
+			}
+
+		String charsetForUrl = countMapForUrl.getResultWithMaxScore().getXpath();
+		String charsetForContent = countMapForContent.getResultWithMaxScore().getXpath();
+		
+		Map<String, String> resultMap = new HashMap<String,String>();
+		resultMap.put("charsetForUrl", charsetForUrl);
+		resultMap.put("charsetForContent", charsetForContent);
+		return resultMap;
 	}
 }

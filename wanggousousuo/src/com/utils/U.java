@@ -55,7 +55,7 @@ public class U {
 	
 	public static String curTime(){
 		Calendar cal = Calendar.getInstance();
-    	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss SSS");
     	return  sdf.format(cal.getTime()) ;
 	}
 	
@@ -120,19 +120,19 @@ public class U {
 	
 	public static void printList(List list){
 		for(Object o : list){
-			//System.out.println(new Gson().toJson(o));
+			System.out.println(new Gson().toJson(o));
 		}
 	}
 	public static void printArray(Object[] arr){
 		for(Object o : arr){
-			//System.out.println(o.toString());
+			System.out.println(o.toString());
 		}
 	}
 	public static void printMap(Map map){
 		////L.trace("U.printMap : ", "print map begin");
 		for(Object o:  map.entrySet()){
 			Map.Entry entry = (Map.Entry) o;
-			//System.out.println(entry.getKey() +" - "+entry.getValue());
+			System.out.println(entry.getKey() +" - "+entry.getValue());
 		}
 		////L.trace("U.printMap : ", "print map end");
 	}
@@ -140,6 +140,18 @@ public class U {
 		String path = this.getClass().getClassLoader().getResource("").getPath();
 		path = StringUtils.substringBeforeLast(path, "target");
 		return path;
+	}
+	public static boolean validateCharset(String charset){
+		if("gbk".equalsIgnoreCase(charset)){
+			return true;
+		}
+		if("utf-8".equalsIgnoreCase(charset)){
+			return true;
+		}
+		if("iso-8859-1".equalsIgnoreCase(charset)){
+			return true;
+		}
+		return false;
 	}
 	
 	public static DBObject toDBObject(Object o){

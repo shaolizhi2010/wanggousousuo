@@ -29,7 +29,7 @@ public class AdvertisementService {
 		}
 		
 		String url = entity.getUrl();
-		Html html = Connecter.getHtmlInfo(url);
+		Html html = Connecter.getHtml(url);
 		
 		String title = html.title();
 		String description = html.description();

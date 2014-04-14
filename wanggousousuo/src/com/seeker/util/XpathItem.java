@@ -7,7 +7,7 @@ public class XpathItem {
 	
 	String key;
  
-	//xpath的得分，分数高低xpath 最终有效
+	//xpath的得分，分数高的xpath 最终有效
 	//一般 一次匹配计一分
 	Double score = 0.0;
 	Integer count = 0;

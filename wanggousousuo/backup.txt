@@ -1,5 +1,10 @@
 border: 1px solid red;
 
+
+long start = System.currentTimeMillis();
+L.trace(this,"Finesh, time is " +(System.currentTimeMillis()-start)); 
+
+ 
  绿 #ccebcf;
  青 #84AC30;
  

@@ -32,6 +32,11 @@ public class L {
 		}
 
 	}
+	public static void exception(Object c, Exception e) {
+		exception(c, e.getMessage());
+		e.printStackTrace();
+	}
+	
 	public static void error(Object c, String msg) {
 
 		if (LogLevel.error.compareTo(level) >= 0) {

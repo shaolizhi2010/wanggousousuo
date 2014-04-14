@@ -1,63 +1,44 @@
 package com.html;
 
-import java.io.IOException;
 import java.io.StringReader;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.htmlcleaner.CleanerProperties;
-import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.PrettyXmlSerializer;
-import org.htmlcleaner.TagNode;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 
 import com.connect.Connecter;
 import com.file.FileUtil;
-import com.html.vo.HtmlVo;
 import com.utils.L;
-import com.utils.U;
 import com.utils.X;
 
 public class Html {
 	
 	private String cleanedHtml = null;
-	private String rawHtml = null;
 	private Document doc = null;
 	
-	//是否成功init过，即是否有clean过的 html
-	//建议使用clean 过的 html 进行节点查找 提取等操作
-	private boolean isRaw = true;
-	
 	private String charset = "";
-	//html 的 head 部分
-	//Map<String, String> heads = new HashMap<String,String>();
+	private String title = "";
+	private String description = "";
 	
 	public Html(){
 		
 	}
 	
-	//如帶參數，則默認直接執行init
-	public Html(String rawHtml){
-		setRawPageSource(rawHtml);
-		init();
+	
+	public Html(String cleanedHtml){
+		this.cleanedHtml = cleanedHtml;
+		//init();
 	}
 	
-	public void init(){
+	//在需要使用doc时 调用，不在初始化时调用，避免无用的初始化doc， 节省初始化时间
+	public void initDoc(){
 		try {
-			long starttime = System.currentTimeMillis();
-			cleanedHtml = clean();
-			L.trace(this, "Html Cleaned, time is " + (System.currentTimeMillis()-starttime));
 			
-			starttime = System.currentTimeMillis();
+			long starttime = System.currentTimeMillis();
 			doc = new SAXBuilder().build(new StringReader(cleanedHtml));
 			L.trace(this, "Html finished build xml doc, time is " + (System.currentTimeMillis()-starttime));
 			
-			this.isRaw = false;//init 过了 israw 就是false
 		} catch (Exception e) {
 			L.exception("HtmlUtils", e.getMessage());
 			return;
@@ -69,20 +50,26 @@ public class Html {
 			return cleanedHtml;
 	}
 	
-	@Deprecated
-	public String getRawPageSource(){
-		return rawHtml;
-	}
-	
-	public void setRawPageSource(String rawHtml){
-		this.rawHtml = rawHtml;
+	public Document getDoc(){
+		if(doc == null){
+			initDoc();
+		}
+		return doc;
 	}
 	
 	public String head(String headname){
 		
 		String value = "";
 		
+		if(doc == null){
+			initDoc();
+		}
+		if(doc == null) return "";
+		
 		if("charset".equalsIgnoreCase(headname)){
+			if(StringUtils.isNotBlank(charset)){
+				return charset;
+			}
 			String key = "html/head/meta[contains(@http-equiv,'content-type')]/@content";
 			value = X.getAttrValue(doc, key);
 			value = StringUtils.substringAfterLast(value, "charset=");
@@ -106,10 +93,16 @@ public class Html {
 	}
 	
 	public String title(){
+		if(StringUtils.isNotBlank(title)){
+			return title;
+		}
 		return head("title");
 	}
 	
 	public String description(){
+		if(StringUtils.isNotBlank(description)){
+			return description;
+		}
 		return head("description");
 	}
 	
@@ -120,56 +113,24 @@ public class Html {
 		this.charset = charset;
 	}
 	
-	public String clean(){
-		HtmlCleaner hc = new HtmlCleaner();
-		TagNode node = hc.clean(this.rawHtml);
-		
-		CleanerProperties props = hc.getProperties();
-		props.setNamespacesAware(false);
-		PrettyXmlSerializer serializer = new PrettyXmlSerializer(props);
-		String cleanedHtml = "";
-			cleanedHtml = serializer.getAsString(node,"UTF-8");
-		this.cleanedHtml = U.clean(cleanedHtml);
-		return this.cleanedHtml;
-	}
-	
-	public boolean isRaw() {
-		return isRaw;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public void setRaw(boolean isRaw) {
-		this.isRaw = isRaw;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+
 
 	@Override
 	public String toString() {
 		return this.cleanedHtml;
 	}
 
-
-//	public void info(String html, HtmlVo vo){
-//		Document doc = null;
-//		try {
-//			doc = new org.jdom2.input.SAXBuilder().build(new StringReader(rawHtml));
-//		} catch (Exception e) {
-//			L.exception("HtmlUtils", e.getMessage());
-//			return;
-//		}
-//		info(doc, vo);
-//	}
-//	public void info(Document doc, HtmlVo vo){
-//		
-//		String title = "";
-//		Object o = X.selectSingleNode(doc, "html/head/title");
-//		Element e = (Element)o;
-//		title = X.getValue(e,null);
-//		vo.setTitle(title);
-//		//TODO other data
-//	}
 	
 	public static void main(String[] args) {
 		try {
-			Html html = Connecter.getHtmlInfo("http://jr.jd.com/?erpad_source=erpad");//getPageSource("z.cn").get("pageSource");
+			Html html = Connecter.getHtml("http://jr.jd.com/?erpad_source=erpad","GBK");//getPageSource("z.cn").get("pageSource");
 			FileUtil.saveFile(html.getPageSource(), "d:/test.txt");
 			
 			////System.out.println(html);
