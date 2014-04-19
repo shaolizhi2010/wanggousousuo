@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bson.types.ObjectId;
 
 import com.dao.CommodityDao;
 import com.digger.CommodityDigerThread;
@@ -18,20 +19,23 @@ import com.utils.L;
 import com.utils.ShopNames;
 
 public class CommodityService {
+	
+	private int minCommodityNumber = 16;
+	private int maxCommodityNumber = 100;
+	
 	CommodityDao commodityDao = new CommodityDao();
 
 	public void add(CommodityEntity entity) {
 		
-		//根据 url 判断 商品 是否已经存在 避免重复
-		String url = entity.getUrl();
-		if(StringUtils.isBlank(url)) {L.exception(this, "url is blank");return;}
+		//根据 url和price 判断 商品 是否已经存在 避免重复
 
 		CommodityEntity query = new CommodityEntity();
-		query.setUrl(url);
+		query.setUrl(entity.getUrl());
+		query.setPrice(entity.getPrice());
 		
 		List<CommodityEntity> list = commodityDao.list(query);
 		if(list !=null && list.size()>0){ //已经存在
-			L.debug(this, "url : " + url + " is already exsit");
+			L.debug(this, "url and price is already exsit");
 			return;
 		}
 		
@@ -47,70 +51,107 @@ public class CommodityService {
 	}
 
 	public List<CommodityEntity> list() {
-		return commodityDao.list();
+		return this.list(new CommodityEntity(), 0, maxCommodityNumber);
 		
 	}
 
-	public List<CommodityEntity> list(int start, int end) {
-		return commodityDao.list(start, end);
+	public List<CommodityEntity> list(int start, int limit) { 
+		return this.list(new CommodityEntity(),start, limit);
 	}
+	
+	public List<CommodityEntity> list(CommodityEntity entity) {
+		return this.list(entity, 0, maxCommodityNumber);
+	}
+	
 
-	public List<CommodityEntity> list(CommodityEntity entity) throws Exception {
+	public List<CommodityEntity> list(CommodityEntity entity,int start, int limit) {
 		
-		List<CommodityEntity> list = commodityDao.list(entity);
-		
-		
-		//inner comparor
-		Comparator<CommodityEntity> comparor = new Comparator<CommodityEntity>() {
+		List<CommodityEntity> list = commodityDao.list(entity, start, limit);
+
+		if(list.size()>minCommodityNumber){
+			//inner comparor
+			Comparator<CommodityEntity> comparor = new Comparator<CommodityEntity>() {
+				
+				@Override
+				public int compare(CommodityEntity e1, CommodityEntity e2) {
+					
+					int commentCount1 = 0;
+					int commentCount2 = 0;
+					
+					if(StringUtils.isNotBlank(e1.getCommentCount())){
+						try {
+							commentCount1 = Integer.parseInt(e1.getCommentCount());
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+					}
+					if(StringUtils.isNotBlank(e2.getCommentCount())){
+						try {
+							commentCount2 = Integer.parseInt(e2.getCommentCount());
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+					}
+					
+					return commentCount2 - commentCount1  ;
+					
+				}
+			};
 			
-			@Override
-			public int compare(CommodityEntity e1, CommodityEntity e2) {
-				
-				int commentCount1 = 0;
-				int commentCount2 = 0;
-				
-				if(StringUtils.isNotBlank(e1.getCommentCount())){
-					try {
-						commentCount1 = Integer.parseInt(e1.getCommentCount());
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-				if(StringUtils.isNotBlank(e2.getCommentCount())){
-					try {
-						commentCount2 = Integer.parseInt(e2.getCommentCount());
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-				
-				return commentCount1 - commentCount2;
-				
-			}
-		};
-		
-		Collections.sort(list, comparor);
-		if(list.size()>10){
-			return list.subList(0, 16);
+			Collections.sort(list, comparor);
+			
+			return list.subList(0, minCommodityNumber);
 		}
 		return list;
 	}
 	
 	public List<CommodityEntity> search(CommodityEntity entity) throws Exception {
 		
+		
+		
 		if(entity==null){
 			return list();
 		}
 		
+		String keyword = entity.getKeyword();
 		List<CommodityEntity> list = this.list(entity);
 		
-		if(list!= null && list.size()>=16){
+		
+		if(list!= null && list.size()>=minCommodityNumber){//找到结果
+			
+			//结果不够 新，暂时返回，同时异步更新
+			if(System.currentTimeMillis() > 24*60*60*1000 - new ObjectId( list.get(0).getId()).getTimestamp()){
+				dig(keyword);
+			}
+			
 			return list;
 		}
-		long starttime = System.currentTimeMillis();
-		//System.out.println("ending first list -- " + starttime);
-		String keyword = entity.getKeyword();
 		
+		//没找到结果,触发异步找结果
+		dig(keyword);
+		
+		int i = 0;
+		while(true){
+			
+			try {//不够 就等会再取
+				Thread.sleep(500);	//每次隔0.5秒
+			} catch (InterruptedException e) {
+				return list;
+			}
+			
+			list = this.list(entity);
+			
+			if(list.size()>=minCommodityNumber || i>99){//够数了就返回 
+				return list;
+			}
+			
+			i++;
+			
+		} 
+		
+	}
+	
+	public void dig(String keyword){
 		for(ShopNames shopName : ShopNames.values()){
 			//System.out.println(shopName.toString());
 			//System.out.println(keyword);
@@ -120,38 +161,6 @@ public class CommodityService {
 			t.start();
 			
 		}
-		//System.out.println("ending create all thread  -- " + (System.currentTimeMillis()- starttime));
-		
-		try {//不够 就等会再取
-			Thread.sleep(500);	//每次隔0.5秒
-		} catch (InterruptedException e) {
-		}
-		
-		int i = 0;
-//		while(true){
-//			
-//			//System.out.println("i = "+ i);
-//			//System.out.println("list.size() = "+ list.size());
-//			
-//			//如有历史数据 则返回历史数据 TODO 会造成数据不是最新，待改进
-//			//list = commodityDao.list(entity);
-//			
-//			if(list.size()>=16 || i>9){//够数了就返回 20,最多取10次
-//				return list;
-//			}
-//			
-//			try {//不够 就等会再取
-//				Thread.sleep(500);	//每次隔0.5秒
-//			} catch (InterruptedException e) {
-//				return list;
-//			}
-//			
-//			i++;
-//			
-//		} 
-		
-		return list;	//TODO
-	
 	}
 
 	public CommodityEntity get(String id) {

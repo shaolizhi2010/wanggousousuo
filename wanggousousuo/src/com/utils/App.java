@@ -65,11 +65,12 @@ public class App {
 
 		try {
 			if(mongo == null){
-				mongo = new MongoClient();
+				mongo = new MongoClient("115.29.44.92");
 				
 			}
 			if(db == null){
 				db = mongo.getDB("wanggousousuo");
+				db.authenticate("root", "cake4you".toCharArray());
 			}
 			
 		} catch (UnknownHostException e) {

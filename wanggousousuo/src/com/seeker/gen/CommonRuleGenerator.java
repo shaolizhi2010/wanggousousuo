@@ -77,8 +77,11 @@ public class CommonRuleGenerator {
 					}
 
 					boolean titleFinded = new TitleAnalyzer().analyze(t, keyword, tilteCountMap);
+					//L.trace(this, "titleFinded ");
 					boolean imgFinded = new ImgAnalyzer().analyze(t, imgCountMap);
+					//L.trace(this, "imgFinded ");
 					boolean priceFinded = new PriceAnalyzer().analyze(t, priceCountMap);
+					//L.trace(this, "priceFinded ");
 					
 					////L.trace(this, priceCountMap.toString());
 					
@@ -160,8 +163,11 @@ public class CommonRuleGenerator {
 		String keyword = "iphone";
 //		L.level = LogLevel.debug;
 		L.level = LogLevel.trace;
+		long start = System.currentTimeMillis();
+		
 		String basePath = new U().getRulePath()+"src/"; 
-		new CommonRuleGenerator().generateRule(ShopNames.jingdong.toString(), keyword,keyword, basePath);
+		new CommonRuleGenerator().generateRule(ShopNames.dangdang.toString(), keyword,keyword, basePath);
+		L.trace("", "finished time is " + (System.currentTimeMillis()-start) );
 		System.out.println("end");
 	}
 

@@ -17,8 +17,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.ContentType;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.PrettyHtmlSerializer;
 import org.htmlcleaner.PrettyXmlSerializer;
+import org.htmlcleaner.SimpleXmlSerializer;
 import org.htmlcleaner.TagNode;
 
 import com.html.Html;
@@ -170,9 +170,19 @@ public class Connecter {
 		HtmlCleaner hc = new HtmlCleaner();
 		CleanerProperties props = hc.getProperties();
 		props.setNamespacesAware(false);
-		PrettyXmlSerializer serializer = new PrettyXmlSerializer(props);
-		String pageSource = serializer.getAsString(node,"UTF-8");
-		pageSource = U.clean(pageSource);
+		props.setOmitCdataOutsideScriptAndStyle(true);
+		props.setOmitComments(true);
+		props.setOmitXmlDeclaration(true);
+		props.setOmitDoctypeDeclaration(true);
+		//PrettyXmlSerializer SimpleXmlSerializer
+		SimpleXmlSerializer serializer = new SimpleXmlSerializer(props);
+		String pageSource = "";
+		try {
+			pageSource = serializer.getAsString(node,"UTF-8");
+		} catch (Exception e) {
+			//no thing
+		}
+		//pageSource = U.clean(pageSource);
 		//L.trace("Connecter getPageSourceFromNode ", " finished, time is " + (System.currentTimeMillis() -start));
 		return pageSource;
 	}

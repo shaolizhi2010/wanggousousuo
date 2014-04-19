@@ -133,7 +133,7 @@ public class ActionGenerator extends AbstractGenerator{
 	public static void main(String[] args) {
 
 		try {
-			String moduleName = "resume";
+			String moduleName = "shop";
 			
 			new ActionGenerator().gen(moduleName);
 

@@ -75,10 +75,11 @@ public class TitleAnalyzer {
 		if(title == null){
 			return "";
 		}
-		if(title.length()>40){
-			title = title.substring(0, 40);
-			title = title+"..";
-		}
+		//页面瀑布流现实，不在限制标题长度
+//		if(title.length()>40){
+//			title = title.substring(0, 40);
+//			title = title+"..";
+//		}
 		
 		return title;
 		

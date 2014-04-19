@@ -10,13 +10,11 @@ import org.bson.types.ObjectId;
 import com.utils.App;
 import com.utils.L;
 import com.utils.U;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-
 import com.entity.CommodityEntity;
 
 public class CommodityDao {
@@ -70,25 +68,30 @@ public class CommodityDao {
     	return list();
 	}
 	
-	 public List<CommodityEntity> list(CommodityEntity entity) {
-			
-			List<CommodityEntity> entityList = new ArrayList<CommodityEntity>();
-			DBObject dbo = U.toDBObject(entity);;
+    //分页
+    public List<CommodityEntity> list(CommodityEntity entity, int start,int limit){
+		
+    	
+		List<CommodityEntity> entityList = new ArrayList<CommodityEntity>();
+		DBObject dbo = U.toDBObject(entity);;
 
-	
-			DBObject sortObj = new BasicDBObject();
-			sortObj.put("_id", -1);
-			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).limit(200).iterator();
+
+		DBObject sortObj = new BasicDBObject();
+		sortObj.put("_id", -1);
+		Iterator<DBObject> list = collection.find(dbo).sort(sortObj).skip(start).limit(limit).iterator();
+		
+		while(list.hasNext()){
 			
-			
-			while(list.hasNext()){
-				
-				DBObject dbo1 = list.next();
-				CommodityEntity e = U.toEntity(dbo1, CommodityEntity.class);
-				entityList.add(e);
-			}
-			return entityList;
-		 
+			DBObject dbo1 = list.next();
+			CommodityEntity e = U.toEntity(dbo1, CommodityEntity.class);
+			entityList.add(e);
+		}
+		
+		return entityList;
+	}
+    
+	 public List<CommodityEntity> list(CommodityEntity entity) {
+		 return list(entity, 0,100);
 	}
 	
 	public CommodityEntity get(String id){

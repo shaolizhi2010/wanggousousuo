@@ -1,5 +1,5 @@
 <%@page import="com.utils.ShopNames"%>
-<%@page import="com.shop.ShopEntity"%>
+<%@page import="com.entity.ShopEntity"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.env.StaticInfo"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
@@ -43,7 +43,7 @@ function searchAll(keywordVar) {
 	//searchOneShop('dangdang',keywordVar,1,'');
 	
 	<%for(Map.Entry<String,ShopEntity> shop : StaticInfo.getShops().entrySet()){
-			String shopname = shop.getValue().getShopName();
+			String shopname = shop.getValue().getShopNameEn();
 			if(shopname.equalsIgnoreCase(ShopNames.amazon.toString())
 					||shopname.equalsIgnoreCase(ShopNames.dangdang.toString())
 					){

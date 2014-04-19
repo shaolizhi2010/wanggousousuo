@@ -35,7 +35,7 @@ public class JspForCreateGenerator extends AbstractGenerator{
 			
 			//jsp 里边 的from
 			String formTemplateCode = getFileContent( srcPath
-					+ "com/scaffold/jsp/jsp.form.template");
+					+ "com/scaffold/jsp/jsp.create.form.template");
 
 			formTemplateCode = StringUtils.replace(formTemplateCode,
 					"$actionPath$", actionPath);
@@ -55,11 +55,11 @@ public class JspForCreateGenerator extends AbstractGenerator{
 						&& column.getName().indexOf("description")<0){	//input text
 					
 					 formPropertyCode = getFileContent( srcPath
-							+ "com/scaffold/jsp/jsp.form.property.template");
+							+ "com/scaffold/jsp/jsp.create.form.property.template");
 				}
 				else{	//textarea
 					 formPropertyCode = getFileContent( srcPath
-							+ "com/scaffold/jsp/jsp.form.textarea.template");
+							+ "com/scaffold/jsp/jsp.create.form.textarea.template");
 				}
 				formPropertyCode = StringUtils.replace(formPropertyCode,
 						"$propertyName$", column.getName());
@@ -91,7 +91,7 @@ public class JspForCreateGenerator extends AbstractGenerator{
 	public static void main(String[] args) {
 
 		try {
-			String moduleName = "resume";
+			String moduleName = "shop";
 			
 			new JspForCreateGenerator().gen(moduleName);
 

@@ -49,17 +49,17 @@ $( document ).ready(function() {
 							CommodityEntity e = (CommodityEntity)list.get(i);
 							%>
 								<div class="thumbnail">
-									<a><img alt="<%=e.getName() %>"  target="_blank" href="<%=e.getUrl()%>" src="<%=e.getImgUrl() %>" /></a>
+									<a  target="_blank" href="<%=e.getUrl()%>" ><img alt="<%=e.getName() %>"  src="<%=e.getImgUrl() %>" /></a>
 									<div class="caption">
  
-										<p><a class="c-title" target="_blank" href="<%=e.getUrl()%>"><%=e.getName() %></a></p>
+										<p><a class="pull-left c-title" style="color:#666;font-size:12px;margin-bottom: 15px;" target="_blank" href="<%=e.getUrl()%>"><%=e.getName() %></a></p>
 										<p>
 											<span class="c-price" >￥<%=e.getPrice() %></span>
 											<a  class="pull-right c-source" target="_blank" href="<%=e.getUrl()%>"><%=e.getSource() %></a>
 											<a  class="pull-right c-comment" target="_blank" href="<%=e.getUrl()%>">评论(<%=e.getCommentCount() %>)|</a> 
 											  
 										</p>
-									</div>
+									</div> 
 								</div>							
 							
 							<%
@@ -78,12 +78,15 @@ $( document ).ready(function() {
 
 							%>
 								<div class="thumbnail">
-									<img alt="300x200" src="<%=e.getImgUrl() %>" />
-								<div class="caption">
+									<a  target="_blank" href="<%=e.getUrl()%>" ><img alt="<%=e.getName() %>"  src="<%=e.getImgUrl() %>" /></a>
+										<div class="caption">
  
-										<p><%=e.getName() %></p>
+										<p><a class="pull-left c-title" style="color:#666;font-size:12px;margin-bottom: 15px;" target="_blank" href="<%=e.getUrl()%>"><%=e.getName() %></a></p>
 										<p>
-											<a class="btn" target="_blank" href="<%=e.getUrl()%>">详细信息</a> 
+											<span class="c-price" >￥<%=e.getPrice() %></span>
+											<a  class="pull-right c-source" target="_blank" href="<%=e.getUrl()%>"><%=e.getSource() %></a>
+											<a  class="pull-right c-comment" target="_blank" href="<%=e.getUrl()%>">评论(<%=e.getCommentCount() %>)|</a> 
+											  
 										</p>
 									</div>
 								</div>							
@@ -102,12 +105,15 @@ $( document ).ready(function() {
 
 							%>
 								<div class="thumbnail">
-									<img alt="300x200" src="<%=e.getImgUrl() %>" />
-									<div class="caption">
+									<a  target="_blank" href="<%=e.getUrl()%>" ><img alt="<%=e.getName() %>"  src="<%=e.getImgUrl() %>" /></a>
+										<div class="caption">
  
-										<p><%=e.getName() %></p>
+										<p><a class="pull-left c-title" style="color:#666;font-size:12px;margin-bottom: 15px;" target="_blank" href="<%=e.getUrl()%>"><%=e.getName() %></a></p>
 										<p>
-											<a  target="_blank" href="<%=e.getUrl()%>">详细信息</a> 
+											<span class="c-price" >￥<%=e.getPrice() %></span>
+											<a  class="pull-right c-source" target="_blank" href="<%=e.getUrl()%>"><%=e.getSource() %></a>
+											<a  class="pull-right c-comment" target="_blank" href="<%=e.getUrl()%>">评论(<%=e.getCommentCount() %>)|</a> 
+											  
 										</p>
 									</div>
 								</div>							
@@ -126,12 +132,15 @@ $( document ).ready(function() {
 
 							%>
 								<div class="thumbnail">
-									<img alt="300x200" src="<%=e.getImgUrl() %>" />
-									<div class="caption">
+									<a  target="_blank" href="<%=e.getUrl()%>" ><img alt="<%=e.getName() %>"  src="<%=e.getImgUrl() %>" /></a>
+										<div class="caption">
  
-										<p><%=e.getName() %></p>
+										<p><a class="pull-left c-title" style="color:#666; font-size:12px;margin-bottom: 15px;" target="_blank" href="<%=e.getUrl()%>"><%=e.getName() %></a></p>
 										<p>
-											<a  target="_blank" href="<%=e.getUrl()%>">详细信息</a> 
+											<span class="c-price" >￥<%=e.getPrice() %></span>
+											<a  class="pull-right c-source" target="_blank" href="<%=e.getUrl()%>"><%=e.getSource() %></a>
+											<a  class="pull-right c-comment" target="_blank" href="<%=e.getUrl()%>">评论(<%=e.getCommentCount() %>)|</a> 
+											  
 										</p>
 									</div>
 								</div>							

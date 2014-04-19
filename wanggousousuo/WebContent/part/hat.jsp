@@ -1,12 +1,25 @@
-﻿<%@ page language="java" pageEncoding="UTF-8"%>
+﻿<%@page import="java.util.ArrayList"%>
+<%@page import="com.service.CatalogService"%>
+<%@page import="com.entity.CatalogEntity"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 
+
+		<%
+			List<CatalogEntity> catalogList = new CatalogService().list(0,10);
+			if (catalogList == null) {
+				catalogList = new ArrayList<CatalogEntity>();
+			}
+
+
+		%>
 
 
 <div class="container c-head">
 	<!-- style="border-style:solid; border-width:2px; border-color:green;" -->
 	<div class="row clearfix ">
 		<!-- navbar-fixed-top -->
-		<div class="col-md-12 c-personal"> <!-- personal -->
+		<div class="col-md-12 c-personal hide" > <!-- personal -->
 			<!-- style="background-color: #ccc;" -->
 			<nav class="navbar navbar-default " role="navigation">
 				<div class="container-fluid">
@@ -30,16 +43,8 @@
 
 							<li><a href="dazhe.jsp">登录</a></li>
 							<li><a href="search.jsp">注册</a></li>
-							<li><a href="login.jsp">晒网购</a></li>
-							<li class="divider"></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">编辑打折信息 <b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="advertisement.create.jsp">发布打折信息</a></li>
-									<li><a href="advertisement!list.action">全部打折信息</a></li>
-									<li class="divider"></li>
-									<li><a href="#">历史</a></li>
-								</ul></li>
+							<li><a href="/fenxiang">晒网购</a></li>
+
 						</ul>
 
 
@@ -93,20 +98,23 @@
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-4">
 						<ul class="nav navbar-nav">
-							<li><a href="dazhe.jsp" style="color: #fff;">首页</a></li>
+							<li><a href="index.jsp" style="color: #fff;">首页</a></li>
 							<li><a href="dazhe.jsp" style="color: #fff;">打折促销</a></li>
-							<li><a href="search.jsp" style="color: #fff;">找网购</a></li>
-							<li><a href="dazhe.jsp" style="color: #fff;">热搜商品</a></li>
-
+		
 							
 							<li class="divider" style="color: #fff;"></li>
-							<li><a href="commodity!search.action?keyword=新款" style="color: #fff;">新款</a></li>
-							<li><a href="commodity!search.action?keyword=手机"  style="color: #fff;">手机</a></li>
-							<li><a href="commodity!search.action?keyword=衣服"  style="color: #fff;">衣服</a></li>
-							<li><a href="commodity!search.action?keyword=家居"  style="color: #fff;">家居</a></li>
-							<li><a href="commodity!search.action?keyword=图书"  style="color: #fff;">图书</a></li>
-							<li><a href="login.jsp" style="color: #fff;">商品分类</a></li>
-							<li><a href="login.jsp" style="color: #fff;">商城链接</a></li>
+							
+							<%
+							for (CatalogEntity e : catalogList) {
+								%>
+								
+								<li><a href="commodity!search.action?keyword=<%=e.getKeyword() %>" style="color: #fff;"><%=e.getName() %></a></li>
+								
+								<%
+							}
+							%>
+							
+							<li><a href="/fenxiang" style="color: #fff;">晒网购</a></li>
 
 						</ul>
 
@@ -124,6 +132,3 @@
 	</div>
 
 </div>
-<br>
-<br>
-<br>

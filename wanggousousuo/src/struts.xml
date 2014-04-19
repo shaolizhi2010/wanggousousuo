@@ -29,5 +29,29 @@
 		<result name="searchPage">commodity.search.jsp</result>
 		<result name="view">commodity.view.jsp</result>
 	</action>
+
+	<action name="shop" class="com.web.ShopAction">
+		<result name="create">shop.create.jsp</result>
+		<result name="update">shop.update.jsp</result>
+		<result name="list" type="redirect">shop!list.action</result>
+		<result name="listPage">shop.list.jsp</result>
+		<result name="view">shop.view.jsp</result>
+	</action>
+
+	<action name="blog" class="com.web.BlogAction">
+		<result name="create">blog.create.jsp</result>
+		<result name="list" type="redirect">blog!list.action</result>
+		<result name="listPage">blog.list.jsp</result>
+		<result name="view">blog.view.jsp</result>
+	</action>
+ 
+
+	<action name="catalog" class="com.web.CatalogAction">
+		<result name="create">catalog.create.jsp</result>
+		<result name="update">catalog.update.jsp</result>
+		<result name="list" type="redirect">catalog!list.action</result>
+		<result name="listPage">catalog.list.jsp</result>
+		<result name="view">catalog.view.jsp</result>
+	</action>
 </package>
 </struts>

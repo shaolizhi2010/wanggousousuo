@@ -45,8 +45,10 @@ public class AllRulesGenerator {
 	
 	public static void main(String[] args) {
 		L.level = LogLevel.log;
+		long start = System.currentTimeMillis();
 		String basePath = new U().getRulePath()+"src/"; 
 		new AllRulesGenerator().generateRules(basePath);
+		L.trace("", "finished time is " + (System.currentTimeMillis()-start) );
 		System.out.println("end..");
 	}
 	

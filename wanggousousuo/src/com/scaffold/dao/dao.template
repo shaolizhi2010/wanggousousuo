@@ -37,6 +37,19 @@ public class $daoName$ {
 		}
 	}
 	
+	public void update($entityName$ entity){
+		
+		DBObject dbo = U.toDBObject(entity);
+		
+		DBObject q = new BasicDBObject();
+		q.put("_id", new ObjectId(entity.getId()));
+		
+		collection.update(q, dbo);
+		
+		//entity.setName(U.toString( dbo.get("name") ));
+		
+	}
+	
     public void delete(String id) {  
     	try {
 			DBObject o = new BasicDBObject();
@@ -58,26 +71,30 @@ public class $daoName$ {
 	}
     
     public List<$entityName$> list(){
-		return list(new $entityName$());
+		return list(new $entityName$(),0,200);
 	}
+	
+	public List<$entityName$> list($entityName$ entity){
+		return list(entity,0,200);
+	}
+	
+	
 	
     //分页
-    public List<$entityName$> list(int start, int end){
+    public List<$entityName$> list(int start, int limit){
 		
-    	if(start == 0){
-    		return list();
-    	}
-    	return list();
+		return list(new $entityName$(),start,limit);
 	}
 	
-	 public List<$entityName$> list($entityName$ entity) {
+	 public List<$entityName$> list($entityName$ entity,int start, int limit) {
 			
 			List<$entityName$> entityList = new ArrayList<$entityName$>();
 			DBObject dbo = U.toDBObject(entity);;
 	
 			DBObject sortObj = new BasicDBObject();
+			sortObj.put("orderNumber", 1);
 			sortObj.put("_id", -1);
-			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).iterator();
+			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).skip(start).limit(limit).iterator();
 			
 			while(list.hasNext()){
 				
@@ -106,14 +123,5 @@ public class $daoName$ {
 		}
 	}
 	
-	public void update($entityName$ entity){
-		
-		DBObject o = new BasicDBObject();
-		
-		//DBObject dbo = collection.update(q, o)
-		
-		//entity.setName(U.toString( dbo.get("name") ));
-		
-	}
  
 }

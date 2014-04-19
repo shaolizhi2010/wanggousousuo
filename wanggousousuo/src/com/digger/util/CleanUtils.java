@@ -19,7 +19,10 @@ public class CleanUtils {
 		CleanerProperties props = hc.getProperties();
 		props.setNamespacesAware(false);
 		PrettyXmlSerializer serializer = new PrettyXmlSerializer(props);
-		xmlString = serializer.getAsString(node, charset);
+		try {
+			xmlString = serializer.getAsString(node, charset);
+		} catch (Exception e) {
+		}
 		 //TODO
 		xmlString = U.clean(xmlString);
 		

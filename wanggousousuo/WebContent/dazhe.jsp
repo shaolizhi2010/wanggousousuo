@@ -1,11 +1,12 @@
-﻿<%@page import="com.dao.AdvertisementDao"%>
+﻿<%@page import="com.service.AdvertisementService"%>
+<%@page import="com.dao.AdvertisementDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.entity.AdvertisementEntity"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
 <%
-	List<AdvertisementEntity> list = new AdvertisementDao().list();
+	List<AdvertisementEntity> list = new AdvertisementService().list();
 	if(list == null){
 		list = new ArrayList<AdvertisementEntity>();		
 	}

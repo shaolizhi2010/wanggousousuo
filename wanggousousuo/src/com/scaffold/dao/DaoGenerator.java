@@ -102,7 +102,7 @@ public class DaoGenerator extends AbstractGenerator{
 	public static void main(String[] args) {
 
 		try {
-			String moduleName = "resume";
+			String moduleName = "shop";
 			////System.out.println( new DaoGenerator().getBasePath() ); 
 			new DaoGenerator().gen(moduleName);
 

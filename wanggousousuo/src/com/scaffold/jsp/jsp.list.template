@@ -41,7 +41,7 @@
 			%>
 				<tr>
 					$row$
-					<td><a href='$moduleName$!update.action?id=<%=e.getId()%>'>修改</a></td>
+					<td><a href='$moduleName$!preUpdate.action?id=<%=e.getId()%>'>修改</a></td>
 					<td><a href='$moduleName$!delete.action?id=<%=e.getId()%>'>删除</a></td>
 					
 				</tr>

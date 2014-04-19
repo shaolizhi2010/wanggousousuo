@@ -1,5 +1,7 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
-  
+  <br>
+<br>
+<br>
 <div class="container"">   
     <div class="row clearfix "  ><!-- navbar-fixed-top --> 
         <div class="col-md-12" ><!-- style="background-color: #ccc;" -->
@@ -33,6 +35,3 @@
     </div>
 
 </div>
-<br>
-<br>
-<br>

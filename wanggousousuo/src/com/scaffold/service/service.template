@@ -11,7 +11,9 @@ public class $serviceName$ {
 	public void add($entityName$ entity) {
 		$moduleName$Dao.add(entity);
 	}
-
+	public void update($entityName$ entity) {
+		$moduleName$Dao.update(entity);
+	}
 	public void delete(String id)  {
 		$moduleName$Dao.delete(id);
 	}

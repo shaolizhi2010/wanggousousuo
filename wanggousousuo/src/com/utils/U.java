@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
+import org.jdom2.Document;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -168,7 +169,7 @@ public class U {
 					if(value.length()>0){	//do not save empty value
 						
 						if(fieldName.equalsIgnoreCase("id")){
-							dbo.put(fieldName, new ObjectId(value));
+							dbo.put("_id", new ObjectId(value));
 						}
 						else{
 							dbo.put(fieldName, value);
@@ -231,5 +232,6 @@ public class U {
 		}
 		return fieldName;
 	}
+ 
  
 }

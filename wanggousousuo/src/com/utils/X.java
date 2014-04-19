@@ -130,6 +130,7 @@ public class X {
 		try {
 			if(Env.isProd == false){
 				IOUtils.write(toString(xml), new FileOutputStream(Env.basePath+"out.txt"));
+				L.log("XML util", "xml is save to " + Env.basePath+"out.txt");
 			}
 			
 		

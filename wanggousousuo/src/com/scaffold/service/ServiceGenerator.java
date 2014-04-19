@@ -73,7 +73,7 @@ public class ServiceGenerator extends AbstractGenerator{
 	public static void main(String[] args) {
 
 		try {
-			String moduleName = "advertisement";
+			String moduleName = "shop";
 			
 			new ServiceGenerator().gen(moduleName);
 

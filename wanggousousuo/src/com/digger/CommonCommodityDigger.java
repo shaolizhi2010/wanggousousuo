@@ -24,6 +24,7 @@ import com.seeker.commodity.analyzer.CommentAnalyzer;
 import com.seeker.commodity.analyzer.TitleAnalyzer;
 import com.seeker.commodity.analyzer.price.util.PriceUtil;
 import com.seeker.rule.Rule;
+import com.service.CommodityService;
 import com.utils.App;
 import com.utils.C;
 import com.utils.L;
@@ -36,6 +37,7 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 	String basePath; //rule 文件夹位置
 	String shopName;
 	String keyword;
+	CommodityService commodityService = new CommodityService();
 	
 	public CommonCommodityDigger(String shopName,  String keyword) {
 		this.shopName = shopName;
@@ -53,21 +55,20 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 	
 	public List<CommodityEntity> digAll(){
 		L.trace(this,"Start digall" ); 
-		basePath = new U().getRulePath()+ "src/" ; 
+		basePath = new U().getRulePath() ;//不加 src 
 		//System.out.println("basePath = " + basePath);
 		File rules = new File(basePath + C.rulesDir);
 		if(rules.listFiles()==null){
 			L.exception(this, "path have no rule file, path is --- " + basePath + C.rulesDir);
 			return new ArrayList<CommodityEntity>() ;
 		}
-		DB db = App.getInstance().getDBContext();
-		DBCollection commoditys = db.getCollection("commodity");
+
 		
 		File[] ruleFiles = rules.listFiles();
 		for(File ruleFile : ruleFiles){//遍历rule file 知道找到结果
 			if(ruleFile.getName().contains(shopName)){//如果找到商城的rule文件
 				List<CommodityEntity> productList = new ArrayList<CommodityEntity>(); 
-				dig(keyword, ruleFile, productList, commoditys);
+				dig(keyword, ruleFile, productList);
 				
 				if(productList !=null && productList.size()>0){
 					L.trace(this, "match ruleFile --- " + ruleFile.getName());
@@ -80,7 +81,7 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 		return new ArrayList<CommodityEntity>();
 	}
 	
-	public void dig(String keyword,File ruleFile, List<CommodityEntity> listDeprecated, DBCollection commoditys){
+	public void dig(String keyword,File ruleFile, List<CommodityEntity> listDeprecated){
 		
 		L.trace(this,"Start dig " ); 
 		//listDeprecated = null;//@Deprecated
@@ -185,20 +186,7 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 				
 				
 				if(p.useful()){
-					//listDeprecated.add(p);
-					DBObject commodityItem = U.toDBObject(p);
-					
-//					commodityItem.put("name", name);
-//					commodityItem.put("productHref", productHref);
-//					commodityItem.put("imgUrl", imgUrl);
-//					commodityItem.put("comment", comment);
-//					commodityItem.put("source", source);
-//					commodityItem.put("commentHref", commentHref);
-//					commodityItem.put("keyword", keyword);
-					
-					//TODO
-					////System.out.println("shop name is "+ shopName + "inserting : " + U.toJson(p));
-					commoditys.insert(commodityItem);
+					commodityService.add(p);
 					listDeprecated.add(p);
 					
 				}

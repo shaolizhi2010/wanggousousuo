@@ -58,12 +58,12 @@
 			</div>
 			<div class="cm-f-i-input">
 				<select name="s-f-shopname" id="s-f-shopname">
-					<option value="<%=ShopNames.taobao%>"><%=StaticInfo.getShopbyName(ShopNames.taobao.toString()).getCnName()%></option>
-					<option value="<%=ShopNames.tmall%>"><%=StaticInfo.getShopbyName(ShopNames.tmall.toString()).getCnName()%></option>
-					<option value="<%=ShopNames.amazon%>"><%=StaticInfo.getShopbyName(ShopNames.amazon.toString()).getCnName()%></option>
-					<option value="<%=ShopNames.dangdang%>"><%=StaticInfo.getShopbyName(ShopNames.dangdang.toString()).getCnName()%></option>
-					<option value="<%=ShopNames.yihaodian%>"><%=StaticInfo.getShopbyName(ShopNames.yihaodian.toString()).getCnName()%></option>
-					<option value="<%=ShopNames.fanke%>"><%=StaticInfo.getShopbyName(ShopNames.fanke.toString()).getCnName()%></option>
+					<option value="<%=ShopNames.taobao%>"><%=StaticInfo.getShopbyName(ShopNames.taobao.toString()).getShopNameCn()%></option>
+					<option value="<%=ShopNames.tmall%>"><%=StaticInfo.getShopbyName(ShopNames.tmall.toString()).getShopNameCn()%></option>
+					<option value="<%=ShopNames.amazon%>"><%=StaticInfo.getShopbyName(ShopNames.amazon.toString()).getShopNameCn()%></option>
+					<option value="<%=ShopNames.dangdang%>"><%=StaticInfo.getShopbyName(ShopNames.dangdang.toString()).getShopNameCn()%></option>
+					<option value="<%=ShopNames.yihaodian%>"><%=StaticInfo.getShopbyName(ShopNames.yihaodian.toString()).getShopNameCn()%></option>
+					<option value="<%=ShopNames.fanke%>"><%=StaticInfo.getShopbyName(ShopNames.fanke.toString()).getShopNameCn()%></option>
 				</select>
 			</div>
 		</div>

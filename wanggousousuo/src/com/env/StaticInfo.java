@@ -24,8 +24,7 @@ public class StaticInfo {
 					.setDomainName("taobao.com")
 					.setShopNameCn("淘宝网")
 					.setSearchUrl("http://s.taobao.com/search?q=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
 					);
 			//天猫
 			shops.put(ShopNames.tmall.toString(), new ShopEntity().
@@ -33,8 +32,6 @@ public class StaticInfo {
 					.setDomainName("tmall.com")
 					.setShopNameCn("天猫商城")
 					.setSearchUrl("http://list.tmall.com/search_product.htm?q=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
 					);
 			//京东
 			shops.put(ShopNames.jingdong.toString(), new ShopEntity().
@@ -42,8 +39,6 @@ public class StaticInfo {
 					.setDomainName("jd.com")
 					.setShopNameCn("京东商城")
 					.setSearchUrl("http://search.jd.com/Search?keyword=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
 					);
 			//当当
 			shops.put(ShopNames.dangdang.toString(), new ShopEntity().
@@ -51,8 +46,6 @@ public class StaticInfo {
 					.setDomainName("dangdang.com")
 					.setShopNameCn("当当网")
 					.setSearchUrl("http://search.dangdang.com/?key=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
 					);
 			//亚马逊
 			shops.put(ShopNames.amazon.toString(), new ShopEntity().
@@ -60,19 +53,16 @@ public class StaticInfo {
 					.setDomainName("amazon.cn")
 					.setShopNameCn("亚马逊中国")
 					.setSearchUrl("http://www.amazon.cn/s/ref=nb_sb_noss_1?__mk_zh_CN=亚马逊网站&url=search-alias%3Daps&field-keywords=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
 					);
 			
-			/*
+			
 			//蔚蓝书店
 			shops.put(ShopNames.wl.toString(), new ShopEntity().
 					setShopNameEn(ShopNames.wl.toString())
 					.setDomainName("wl.cn")
 					.setShopNameCn("蔚蓝网")
 					.setSearchUrl("http://search.wl.cn/search.aspx?index=1&q=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
 					);
 			//qq易迅
 			shops.put(ShopNames.yixun.toString(), new ShopEntity().
@@ -80,8 +70,7 @@ public class StaticInfo {
 					.setDomainName("yixun.com")
 					.setShopNameCn("易迅网")
 					.setSearchUrl("http://searchex.yixun.com/html?charset=utf-8&key=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
 					);	
 			//凡客
 			shops.put(ShopNames.fanke.toString(), new ShopEntity().
@@ -89,8 +78,7 @@ public class StaticInfo {
 					.setDomainName("vancl.com")
 					.setShopNameCn("凡客诚品")
 					.setSearchUrl("http://s.vancl.com/search?k=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
 					);
 			//okbuy TODO 价格延迟加载
 //			shops.put(ShopNames.okbuy.toString(), new ShopInfo().
@@ -99,8 +87,8 @@ public class StaticInfo {
 //					.setShopNameCn("好乐买")
 //					.setSearchUrl("http://www.okbuy.com/search?top_key=")
 //					.setActivityUrl("http://www.okbuy.com")
-//					.setMoneyStr("")
-//					.setMaxResultNumber("40")
+//					
+//					
 //					);
 			//newegg
 			shops.put(ShopNames.newegg.toString(), new ShopEntity().
@@ -108,8 +96,7 @@ public class StaticInfo {
 					.setDomainName("newegg.com.cn")
 					.setShopNameCn("新蛋中国")
 					.setSearchUrl("http://www.newegg.com.cn/Search.aspx?keyword=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
 					);	
 			//handuyishe
 			shops.put(ShopNames.handuyishe.toString(), new ShopEntity().
@@ -117,8 +104,6 @@ public class StaticInfo {
 					.setDomainName("handuyishe.com")
 					.setShopNameCn("韩都衣舍")
 					.setSearchUrl("http://www.handuyishe.com/search.php?keywords=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
 					);	
 			//coo8
 			shops.put(ShopNames.coo8.toString(), new ShopEntity().
@@ -126,8 +111,7 @@ public class StaticInfo {
 					.setDomainName("coo8.com")
 					.setShopNameCn("库巴网")
 					.setSearchUrl("http://www.coo8.com/coo8/ec/atgsearch/coo8SearchResults.jsp?question=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
 					);	
 			//亲亲宝贝
 			shops.put(ShopNames.qinqinbaby.toString(), new ShopEntity().
@@ -135,8 +119,7 @@ public class StaticInfo {
 					.setDomainName("qinqinbaby.com")
 					.setShopNameCn("亲亲宝贝")
 					.setSearchUrl("http://www.qinqinbaby.com/product/search.aspx?keyword=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
 					);
 			//一号店
 			shops.put(ShopNames.yihaodian.toString(), new ShopEntity().
@@ -144,8 +127,8 @@ public class StaticInfo {
 					.setDomainName("yihaodian.com")
 					.setShopNameCn("一号店")
 					.setSearchUrl("http://search.yihaodian.com/s2/c0-0/k")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
+					
 					);
 			//麦考林
 //			shops.put(ShopNames.m18.toString(), new ShopInfo().
@@ -153,8 +136,8 @@ public class StaticInfo {
 //					.setDomainName("m18.com")
 //					.setShopNameCn("麦考林")
 //					.setSearchUrl("http://list.m18.com/gmkt.inc/M18/List/Search.aspx?keyword=")
-//					.setMoneyStr("")
-//					.setMaxResultNumber("40")
+//					
+//					
 //					);
 			//聚美优品
 			shops.put(ShopNames.jumei.toString(), new ShopEntity().
@@ -162,8 +145,8 @@ public class StaticInfo {
 					.setDomainName("jumei.com")
 					.setShopNameCn("聚美优品")
 					.setSearchUrl("http://search.jumei.com/?filter=0-0-0-0-11-1&search=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
+					
 					);
 			//v+
 			shops.put(ShopNames.vjia.toString(), new ShopEntity().
@@ -171,8 +154,8 @@ public class StaticInfo {
 					.setDomainName("vjia.com")
 					.setShopNameCn("V+")
 					.setSearchUrl("http://s.vjia.com/?k=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
+					
 					);	
 			//乐蜂
 			shops.put(ShopNames.lefeng.toString(), new ShopEntity().
@@ -180,8 +163,8 @@ public class StaticInfo {
 					.setDomainName("lefeng.com")
 					.setShopNameCn("乐蜂网")
 					.setSearchUrl("http://search.lefeng.com/search/search?key=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
+					
 					);
 			//国美
 			shops.put(ShopNames.gome.toString(), new ShopEntity().
@@ -189,8 +172,8 @@ public class StaticInfo {
 					.setDomainName("gome.com.cn")
 					.setShopNameCn("国美在线")
 					.setSearchUrl("http://www.gome.com.cn/ec/homeus/n/search/gomeSearchResults.jsp?question=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
+					
 					);	
 //			//苏宁易购 TODO  价格是图片
 //			shops.put(ShopNames.suning.toString(), new ShopInfo().
@@ -198,8 +181,8 @@ public class StaticInfo {
 //					.setDomainName("suning.com")
 //					.setShopNameCn("苏宁易购")
 //					.setSearchUrl("http://search.suning.com/emall/search.do?keyword=")
-//					.setMoneyStr("")
-//					.setMaxResultNumber("40")
+//					
+//					
 //					);	
 			//麦包包
 			shops.put(ShopNames.mbaobao.toString(), new ShopEntity().
@@ -207,8 +190,8 @@ public class StaticInfo {
 					.setDomainName("mbaobao.com")
 					.setShopNameCn("麦包包")
 					.setSearchUrl("http://search.mbaobao.com/search/search?o=1&q=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
+					
 					);	
 			//银泰网
 			shops.put(ShopNames.yintai.toString(), new ShopEntity().
@@ -216,8 +199,8 @@ public class StaticInfo {
 					.setDomainName("yintai.com")
 					.setShopNameCn("银泰网")
 					.setSearchUrl("http://www.yintai.com/product/search.aspx?keyword=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
+					
 					);	
 			//走秀网
 			shops.put(ShopNames.xiu.toString(), new ShopEntity().
@@ -225,8 +208,8 @@ public class StaticInfo {
 					.setDomainName("xiu.com")
 					.setShopNameCn("走秀网")
 					.setSearchUrl("http://search.xiu.com/s?kw=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
+					
 					);	
 			//校园时尚
 			shops.put(ShopNames.xyss.toString(), new ShopEntity().
@@ -234,8 +217,8 @@ public class StaticInfo {
 					.setDomainName("xyss.org")
 					.setShopNameCn("校园时尚")
 					.setSearchUrl("http://www.xyss.org/?gallery--n,"+C.keywordVar+"-grid.html")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
+					
 					);	
 			//梦芭莎
 			shops.put(ShopNames.moonbasa.toString(), new ShopEntity().
@@ -243,8 +226,8 @@ public class StaticInfo {
 					.setDomainName("moonbasa.com")
 					.setShopNameCn("梦芭莎")
 					.setSearchUrl("http://s.moonbasa.com/?enc=utf-8&keyword=")
-					.setMoneyStr("")
-					.setMaxResultNumber("40")
+					
+					
 					);	
 			//拍鞋网
 			shops.put(ShopNames.paixie.toString(), new ShopEntity().
@@ -252,8 +235,8 @@ public class StaticInfo {
 					.setDomainName("paixie.net")
 					.setShopNameCn("拍鞋网")
 					.setSearchUrl("http://www.paixie.net/shoes/list/______"+C.keywordVar+"_-1.html")
-					.setMoneyStr("") 
-					.setMaxResultNumber("40")
+					 
+					
 					);
 			//优购网
 			shops.put(ShopNames.yougou.toString(), new ShopEntity().
@@ -261,8 +244,8 @@ public class StaticInfo {
 					.setDomainName("yougou.com")
 					.setShopNameCn("优购网")
 					.setSearchUrl("http://www.yougou.com/k-"+C.keywordVar+".html")
-					.setMoneyStr("") 
-					.setMaxResultNumber("40")
+					 
+					
 					);		
 			//奥特莱斯
 			shops.put(ShopNames.outlets.toString(), new ShopEntity().
@@ -270,10 +253,10 @@ public class StaticInfo {
 					.setDomainName("www.outlets365.com")
 					.setShopNameCn("奥特莱斯")
 					.setSearchUrl("http://www.outlets365.com/Search-"+C.keywordVar+"-0-0-0-3-1.html")
-					.setMoneyStr("") 
-					.setMaxResultNumber("40")
+					 
+					
 					);	
-			*/
+			
 		}
 	}
 	

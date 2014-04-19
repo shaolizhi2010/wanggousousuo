@@ -9,9 +9,16 @@ import org.jdom2.Element;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 
+import com.connect.Connecter;
+import com.html.Html;
+import com.seeker.gen.CommonRuleGenerator;
 import com.seeker.util.AnalyzeResult;
 import com.seeker.util.XpathItem;
 import com.seeker.util.XpathMap;
+import com.utils.L;
+import com.utils.LogLevel;
+import com.utils.ShopNames;
+import com.utils.U;
 import com.utils.X;
 
 public class ProductsAnalyzer {
@@ -27,11 +34,16 @@ public class ProductsAnalyzer {
 	public ProductsAnalyzer(){
 		
 		pathList.add( "//*[ " +
-				"count( .//*[string-length(normalize-space(.))>10]  ) >1  " +
-//				"and count( .//*[string-length(normalize-space(.))>10]  ) < 10 " +	//去掉包括所有商品信息的大块父节点
-				"and count( .//img ) > 0 " + //[ contains(@*,'/') and contains(@*,'.') ]
+				"count( .//*[string-length(normalize-space(.))>10]  ) >1  "
+				+
+				"and count( .//*[string-length(normalize-space(.))>10]  ) < 10 "
+				+
+				"and count( .//img ) > 0 " 
+				+
+				
 				"and count( .//img ) < 20 " +	//去掉包括所有商品信息的大块父节点
-				"]" );
+				
+				 "]" );
 		
 //		pathList.add("//*[ " +
 //				"count( ./*[local-name()='li'])>10 " + //[local-name()= preceding-sibling::*/local-name() ] 
@@ -45,6 +57,8 @@ public class ProductsAnalyzer {
 	
 	public Boolean analyze(Document doc, XpathMap rootElementCountMap){
 		
+		//X.saveXml(doc);
+		
 		for(String path : pathList){
 			/*
 			 * 取出所有可能包含商品信息list的element
@@ -52,6 +66,8 @@ public class ProductsAnalyzer {
 			 * 不能用 //div/div 的形式，容易造成节点定位不准，如//div/div，可能对应很多个节点
 			 * */
 			List<Element> rootElementlist = X.getSubElementList(doc, path);	
+			
+			L.trace(this, "product element list size is " + rootElementlist.size());
 			
 			for(Element e: rootElementlist){
 				//String xpath = X.getPath(e);//全路径
@@ -62,6 +78,18 @@ public class ProductsAnalyzer {
 		}
 	 
 		return true;
+	}
+	
+	public static void main(String[] args) {
+		L.level = LogLevel.trace;
+		long start = System.currentTimeMillis();
+		Html html = Connecter.getHtml("http://search.dangdang.com/?key=iphone", "GBK");
+		Document doc = html.getDoc();
+		
+		new ProductsAnalyzer().analyze(doc, new XpathMap());
+		
+		L.trace("", "finished time is " + (System.currentTimeMillis()-start) );
+		System.out.println("end");
 	}
 	
 }

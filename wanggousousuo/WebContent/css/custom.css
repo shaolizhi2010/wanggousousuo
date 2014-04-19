@@ -22,7 +22,7 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family:  Aria
 }
 
 .c-imgbar{
-	margin-top: -30px;
+	<!-- margin-top: -30px; -->
 }
 
 .c-search{
@@ -68,12 +68,11 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family:  Aria
 	color: #666;
 	font-size : 12px;
 }
-.c-title a{
-	color: #666;
+ 
+.c-title :hover {
+	color: green;
 }
-.c-title :link{
-	color: #666;
-}
+ 
 .c-comment{
 	color: #6699CC;
 	font-size:12px;
@@ -91,5 +90,7 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family:  Aria
 }
 
 <!-- bootstrap custom -->
+
+// Mixins
  
  

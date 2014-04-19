@@ -26,6 +26,26 @@ public class $actionName$Action extends BaseAction {
 		return "list";
 	}
 	
+	public String preUpdate(){
+		$serviceName$ service = new $serviceName$();
+		$entityName$ entity = service.get(id);
+		HttpServletRequest request = ServletActionContext.getRequest ();
+		request.setAttribute("entity", entity);
+		return "update";
+	}
+	
+	public String update() {
+		
+		$entityName$ entity = new $entityName$();
+
+		$entityInit$
+
+		$serviceName$ service = new $serviceName$();
+		service.update(entity);
+		
+		return "list";
+	}	
+	
 	public String list() {
 		$entityName$ entity = new $entityName$();
 
