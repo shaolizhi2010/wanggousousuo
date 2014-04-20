@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.entity.CommodityEntity;
+import com.entity.ShopEntity;
+import com.utils.C;
 import com.utils.L;
 import com.utils.ShopNames;
 
@@ -113,6 +115,8 @@ public class UrlBuilder {
 		}
 		
 	}
+	
+
 
 	/**
 	 * @param args

@@ -15,7 +15,7 @@ public interface C {
 	String status_done = "已完成";
 	String status_failed = "失败";
 	//------------------------------------------------------------business var ---
-	String keywordVar = "~keyword~";
+	String keywordVar = "$keyword$";
 	String md5_random_token = "this is a md5 random token";
 	
 	//------------------------------------------------------------ business control ---

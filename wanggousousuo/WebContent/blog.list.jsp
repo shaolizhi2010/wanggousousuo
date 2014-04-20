@@ -7,6 +7,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
+<%@ include file="part/auth.jsp"  %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,8 +37,6 @@
 				for(BlogEntity e : list){
 					
 			%>
-
- 
  
 				<div class="row" style="margin-bottom: 20px;5">
 	 				<div class="col-md-6 col-md-push-1 highlight text-left">

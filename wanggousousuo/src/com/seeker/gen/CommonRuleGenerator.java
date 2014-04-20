@@ -12,6 +12,7 @@ import org.jdom2.Element;
 
 import com.connect.Connecter;
 import com.connect.URLUtils;
+import com.entity.ShopEntity;
 import com.env.StaticInfo;
 import com.seeker.commodity.analyzer.CharsetAnalyzer;
 import com.seeker.commodity.analyzer.CommentAnalyzer;
@@ -43,8 +44,9 @@ public class CommonRuleGenerator {
 			String contentEncodeCharset = chasetMap.get("charsetForContent");
 			L.trace("CommonRuleGenerator", "requestEncodeCharset --- " + requestEncodeCharset);
 			
-			
-			String url = URLUtils.buildUrl(preSearchUrl, keyword, requestEncodeCharset);
+			ShopEntity shop = new ShopEntity();
+			shop.setSearchUrl(preSearchUrl);
+			String url = URLUtils.buildUrl(shop, keyword, requestEncodeCharset);
 			String responseString = Connecter.getPageSource(url,contentEncodeCharset);
 			
 			//L.debug("CommonRuleGenerator","CommonRuleGenerator", "responseString size --- " + responseString.length());

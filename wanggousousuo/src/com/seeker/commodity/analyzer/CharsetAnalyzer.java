@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.connect.Connecter;
 import com.connect.URLUtils;
+import com.entity.ShopEntity;
 import com.html.Html;
 import com.seeker.util.XpathMap;
 import com.utils.L;
@@ -41,8 +42,9 @@ public class CharsetAnalyzer {
 		XpathMap countMapForContent = new XpathMap();
 		
 		for(String charsetForUrl : charsetArray){
-			
-				String buildedUrl = URLUtils.buildUrl(url, keyword, charsetForUrl);
+				ShopEntity shop = new ShopEntity();
+				shop.setSearchUrl(url);
+				String buildedUrl = URLUtils.buildUrl(shop, keyword, charsetForUrl);
 				Html html = Connecter.getHtml(buildedUrl);
 				String responseString = html.getPageSource();
 				int matchCount = StringUtils.countMatches(responseString, keyword);

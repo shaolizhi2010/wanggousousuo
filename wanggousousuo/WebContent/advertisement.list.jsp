@@ -35,11 +35,13 @@
 				</thead>
 				<tbody>
 			<%
+				List<AdvertisementEntity> list = new ArrayList<AdvertisementEntity>();
+				if(request.getAttribute("list")!=null){
+					 list = (List<AdvertisementEntity>)request.getAttribute("list");
+				}
 				AdvertisementEntity entity = new AdvertisementEntity();
-				
-				List<AdvertisementEntity> list = (List<AdvertisementEntity>)request.getAttribute("list");
-				if(list==null){
-					list = new ArrayList<AdvertisementEntity>();
+				if( request.getAttribute("entity")!=null ){
+					 entity = (AdvertisementEntity)request.getAttribute("entity");
 				}
 				
 				for(AdvertisementEntity e : list){
@@ -63,7 +65,7 @@
 							
 						</td>
 
-					<td><a href='advertisement!update.action?id=<%=e.getId()%>'>修改</a></td>
+					<td><a href='advertisement!preUpdate.action?id=<%=e.getId()%>'>修改</a></td>
 					<td><a href='advertisement!delete.action?id=<%=e.getId()%>'>删除</a></td>
 					
 				</tr>

@@ -3,6 +3,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
+<%@ include file="part/auth.jsp"  %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,8 +73,8 @@
 							
 						</td>
 
-					<td><a href='catalog!preUpdate.action?id=<%=e.getId()%>'>修改</a></td>
-					<td><a href='catalog!delete.action?id=<%=e.getId()%>'>删除</a></td>
+					<td><a href='catalog!preUpdate.action?id=<%=e.getId()%>&p=cake4you'>修改</a></td>
+					<td><a href='catalog!delete.action?id=<%=e.getId()%>&p=cake4you'>删除</a></td>
 					
 				</tr>
 			<%		

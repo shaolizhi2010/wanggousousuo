@@ -2,15 +2,15 @@ package com.entity;
 
 public class ShopEntity {
 
-	String id = "";
-	String shopNameEn = ""; /* 商城名，一般是英文简称，如 jingdong, amazon */
-	String shopNameCn = ""; /* 网购商城的中文名，显示在页面上给用户看，如 淘宝网 京东商城 */
-	String domainName = ""; /* 商城的域名，如 jd.com */
-	String shopAvailable = "";
-	String searchUrl = "";
-	String searchAvailable = "";
-	String charsetForUrl = "";
-	String charsetForContent = "";
+	String id ;
+	String shopNameEn ; /* 商城名，一般是英文简称，如 jingdong, amazon */
+	String shopNameCn ; /* 网购商城的中文名，显示在页面上给用户看，如 淘宝网 京东商城 */
+	String domainName ; /* 商城的域名，如 jd.com */
+	String shopAvailable ;
+	String searchUrl ;
+	String searchAvailable ;
+	String charsetForUrl ;
+	String charsetForContent ;
 	
 	
 
@@ -20,10 +20,10 @@ public class ShopEntity {
 	
 	
 
-	String index = ""; // 一般式域名首字母，商城拼音名首字母等，为了快速查找，比如 amazon亚马逊，index 是 a
+	String index ; // 一般式域名首字母，商城拼音名首字母等，为了快速查找，比如 amazon亚马逊，index 是 a
 						// 和y(拼音首字母)
-	String logoImg = "";
-	String orderNumber = "1000";
+	String logoImg ;
+	String orderNumber;
 
 	public String getIndex() {
 		return index;

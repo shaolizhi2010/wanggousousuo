@@ -1,6 +1,8 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
 <%@page import="com.entity.CatalogEntity"%>
 
+<%@ include file="part/auth.jsp"  %>
+
 <!DOCTYPE html>
 <html>
 <head>

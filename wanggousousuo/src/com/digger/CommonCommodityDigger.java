@@ -109,7 +109,10 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 			String pricePath = rule.getPricePath();
 			String commentPath = rule.getCommentPath();
 			
-			String url = URLUtils.buildUrl(preSearchUrl, keyword, charsetForUrl);
+			ShopEntity shop = new ShopEntity();
+			shop.setSearchUrl(preSearchUrl);
+			
+			String url = URLUtils.buildUrl(shop, keyword, charsetForUrl);
 			//这个charset 是url 所用的charset 一般网站url和内容所使用的charset相同，暂时用一个进行解析
 			Html html = Connecter.getHtml(url,charsetForContent);
 			L.trace(this,"Finished get html" ); 

@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.entity.ShopEntity;
 import com.utils.C;
 import com.utils.L;
 
@@ -59,36 +60,35 @@ public class URLUtils {
 		return StringUtils.substringBetween(url, "http://", "/");
 	}
 	
-public static String buildUrl(String url, String keyword,String encodeCharset) {
+public static String buildUrl(ShopEntity shop, String keyword,String encodeCharset) {
 		
-		if(keyword == null) keyword="";
+		if(shop == null)return "";
+		String url = shop.getSearchUrl();
+		if(StringUtils.isBlank(url)) return "http://"+shop.getDomainName();
+		if(StringUtils.isBlank(keyword)) return "http://"+shop.getDomainName();
+		if(StringUtils.isBlank(encodeCharset))encodeCharset="utf-8";
+		
 		//init keyword
-		String encodedKeyword = keyword;
-		
-		if(!StringUtils.isBlank(encodeCharset)){ //need encoding
-			try {
-				encodedKeyword = URLEncoder.encode(keyword, encodeCharset);
-			} catch (UnsupportedEncodingException e) {
-				L.exception("Connecter", "method buildUrl, keyword --- " + keyword
-						+ " --- can not encoding to " + encodeCharset);
-			}
+		try {
+			keyword = URLEncoder.encode(keyword, encodeCharset);
+		} catch (UnsupportedEncodingException e) {
+			L.exception("Connecter", "method buildUrl, keyword --- " + keyword
+					+ " --- can not encoding to " + encodeCharset);
 		}
 		
 		//init url
-		String searchUrl = url;
-		
-		/* keyword 在url中间 */
-		if(searchUrl.contains(C.keywordVar)){
-			searchUrl = searchUrl.replaceAll(C.keywordVar, encodedKeyword);
+		if(StringUtils.contains(url, C.keywordVar)){	/* keyword 在url中间 */
+			url = StringUtils.replace(url, C.keywordVar, keyword);
 		}
 		else{	/* keyword 在url末尾 */
-			if(!StringUtils.isBlank(encodedKeyword)){
-				searchUrl = searchUrl + encodedKeyword;
+			if(!StringUtils.isBlank(keyword)){
+				url = url + keyword;
 			}
 		}
-		return searchUrl;
+		return url;
 		
 	}
+ 
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

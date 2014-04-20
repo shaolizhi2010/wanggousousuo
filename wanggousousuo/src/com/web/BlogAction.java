@@ -3,10 +3,13 @@ package com.web;
 import com.web.base.BaseAction;
 
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts2.ServletActionContext;
-import com.utils.L;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.ServletActionContext;
+
+import com.utils.L;
 import com.service.BlogService;
 import com.entity.BlogEntity;
 
@@ -87,6 +90,16 @@ entity.setContent(content);
 	}
  	
  	public String delete(){
+ 		
+ 		HttpServletRequest request = ServletActionContext.getRequest ();
+ 		String password = request.getParameter("p");
+ 	 	if(StringUtils.isBlank(password)){
+ 	 		return "list"; //无密码
+ 	 	}
+ 	 	if(!"cake4you".equals(password)){
+ 	 		return "list"; // 密码错
+ 	 	}
+ 		
 		BlogService service = new BlogService();
 		try{
 			service.delete(id+"");

@@ -5,8 +5,17 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<%@ include file="part/auth.jsp"  %>
-
+ <%
+ 
+	String password = request.getParameter("p");
+ 	if(StringUtils.isBlank(password)){
+ 		return; //无密码
+ 	}
+ 	if(!"cake4you".equals(password)){
+ 		return; // 密码错
+ 	}
+ 
+ %>
 
 <div class="container c-head">
 	<!-- style="border-style:solid; border-width:2px; border-color:green;" -->
@@ -38,29 +47,29 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">advertisement <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="advertisement.create.jsp?p=cake4you">create</a></li>
-									<li><a href="advertisement!list.action?p=cake4you">list</a></li>
+									<li><a href="advertisement.create.jsp">create</a></li>
+									<li><a href="advertisement!list.action">list</a></li>
 									<li class="divider"></li>
 								</ul></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">shop <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="shop.create.jsp?p=cake4you">create</a></li>
-									<li><a href="shop!list.action?p=cake4you">list</a></li>
+									<li><a href="shop.create.jsp">create</a></li>
+									<li><a href="shop!list.action">list</a></li>
 									<li class="divider"></li>
 								</ul></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">BLog <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="blog.create.jsp?p=cake4you">create</a></li>
-									<li><a href="blog!list.action?p=cake4you">list</a></li>
+									<li><a href="blog.create.jsp">create</a></li>
+									<li><a href="blog!list.action">list</a></li>
 									<li class="divider"></li>
 								</ul></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">catalog <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="catalog.create.jsp?p=cake4you">create</a></li>
-									<li><a href="catalog!list.action?p=cake4you">list</a></li>
+									<li><a href="catalog.create.jsp">create</a></li>
+									<li><a href="catalog!list.action">list</a></li>
 									<li class="divider"></li>
 								</ul></li>
 						</ul>

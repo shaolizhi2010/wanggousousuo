@@ -47,6 +47,12 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family:  Aria
 	color:#ffffff;
 }
 
+#quick-search-btn{
+	width: 100px;
+	color: #22b14c;
+	font-size : 18px;
+}
+
 .c-menu{
 	
 	font-size: 14px;

@@ -53,15 +53,13 @@ $(function(){
 							AdvertisementEntity entity = (AdvertisementEntity)list.get(i);
 							%>
 								<div class="thumbnail">
-									<img alt="300x200" src="<%=entity.getImgUrl() %>" />
+									<a href="<%=entity.getUrl() %>" target="_blank"><img alt="300x200" src="<%=entity.getImgUrl() %>" /></a>
 									<div class="caption">
 										<h3>
-											<%=entity.getName() %>
+											<a href="<%=entity.getUrl() %>" target="_blank" style="color: #666;"><%=entity.getName() %></a>
 										</h3>
-										 <p><%=entity.getDescription() %></p>
-										<p>
-											<a class="btn btn-success" target="_blank" href="<%=entity.getUrl()%>">详细信息</a> 
-										</p>
+										  <p><%=entity.getDescription() %></p> 
+ 
 									</div>
 								</div>							
 							
@@ -81,15 +79,13 @@ $(function(){
 
 							%>
 								<div class="thumbnail">
-									<img alt="300x200" src="<%=entity.getImgUrl() %>" />
+									<a href="<%=entity.getUrl() %>" target="_blank"><img alt="300x200" src="<%=entity.getImgUrl() %>" /></a>
 									<div class="caption">
 										<h3>
-											<%=entity.getName() %>
+											<a href="<%=entity.getUrl() %>" target="_blank" style="color: #666;"><%=entity.getName() %></a>
 										</h3>
-										 <p><%=entity.getDescription() %></p>
-										<p>
-											<a class="btn btn-success" target="_blank" href="<%=entity.getUrl()%>">详细信息</a> 
-										</p>
+										  <p><%=entity.getDescription() %></p> 
+ 
 									</div>
 								</div>							
 							
@@ -107,17 +103,15 @@ $(function(){
 
 							%>
 								<div class="thumbnail">
-									<img alt="300x200" src="<%=entity.getImgUrl() %>" />
+									<a href="<%=entity.getUrl() %>" target="_blank"><img alt="300x200" src="<%=entity.getImgUrl() %>" /></a>
 									<div class="caption">
 										<h3>
-											<%=entity.getName() %>
+											<a href="<%=entity.getUrl() %>" target="_blank" style="color: #666;"><%=entity.getName() %></a>
 										</h3>
-										 <p><%=entity.getDescription() %></p>
-										<p>
-											<a class="btn btn-success" target="_blank" href="<%=entity.getUrl()%>">详细信息</a> 
-										</p>
+										  <p><%=entity.getDescription() %></p> 
+ 
 									</div>
-								</div>							
+								</div>						
 							
 							<%
 						}

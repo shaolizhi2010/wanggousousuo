@@ -29,6 +29,7 @@ public class CommodityDao {
 			DBObject dbo = U.toDBObject(entity);
 			
 			collection.insert(dbo);
+			
 
 		} catch (Exception e) {
 			L.exception(this, e.getMessage());
@@ -48,8 +49,10 @@ public class CommodityDao {
     
 	public void delete(CommodityEntity entity) {
 		try {
-			String id = entity.getId();
-			delete(id);
+			//String id = entity.getId();
+			DBObject dbo = U.toDBObject(entity);
+			collection.remove(dbo);
+			
 		} catch (Exception e) {
 			L.exception(this, e.getMessage());
 		}
@@ -93,6 +96,11 @@ public class CommodityDao {
 	 public List<CommodityEntity> list(CommodityEntity entity) {
 		 return list(entity, 0,100);
 	}
+	 
+	//取最新的entity
+	public CommodityEntity newestEntity(CommodityEntity entity){
+		return this.list(entity, 0, 1).get(0);
+	}
 	
 	public CommodityEntity get(String id){
 		try {
@@ -113,12 +121,18 @@ public class CommodityDao {
 	
 	public void update(CommodityEntity entity){
 		
-		DBObject o = new BasicDBObject();
+		DBObject dbo = U.toDBObject(entity);
 		
-		//DBObject dbo = collection.update(q, o)
+		DBObject q = new BasicDBObject();
+		q.put("price", entity.getPrice());
+		q.put("url", entity.getUrl());
 		
-		//entity.setName(U.toString( dbo.get("name") ));
+		collection.update(q, dbo);
 		
 	}
+	
+//	public void update(String objectId){
+//		
+//	}
  
 }

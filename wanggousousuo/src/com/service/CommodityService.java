@@ -18,6 +18,15 @@ import com.mongodb.DBObject;
 import com.utils.L;
 import com.utils.ShopNames;
 
+/*
+ * list 方法会默认取最新的100条数据(dao 实现)，然后对这100条数据 按评论数排序(service实现)
+ * 
+ * 这样可以保证
+ * 1 取出的数据较新，不会把很久以前的数据也取出来
+ * 2 对数据按评论数排序
+ * 3 避免频繁删除历史数据，以后统计分析需要大量数据.
+ * 
+ * */
 public class CommodityService {
 	
 	private int minCommodityNumber = 16;
@@ -35,7 +44,8 @@ public class CommodityService {
 		
 		List<CommodityEntity> list = commodityDao.list(query);
 		if(list !=null && list.size()>0){ //已经存在
-			L.debug(this, "url and price is already exsit");
+			update(entity);
+			//L.debug(this, "url and price is already exsit");
 			return;
 		}
 		
@@ -107,8 +117,6 @@ public class CommodityService {
 	
 	public List<CommodityEntity> search(CommodityEntity entity) throws Exception {
 		
-		
-		
 		if(entity==null){
 			return list();
 		}
@@ -116,13 +124,12 @@ public class CommodityService {
 		String keyword = entity.getKeyword();
 		List<CommodityEntity> list = this.list(entity);
 		
-		
 		if(list!= null && list.size()>=minCommodityNumber){//找到结果
 			
 			//结果不够 新，暂时返回，同时异步更新
-			if(System.currentTimeMillis() > 24*60*60*1000 - new ObjectId( list.get(0).getId()).getTimestamp()){
+			if(System.currentTimeMillis()/1000 - new ObjectId( commodityDao.newestEntity(entity).getId()).getTimestamp() > 24*60*60 ){
 				dig(keyword);
-			}
+			} 
 			
 			return list;
 		}
@@ -151,7 +158,15 @@ public class CommodityService {
 		
 	}
 	
+
+	
 	public void dig(String keyword){
+		
+		//delete
+//		CommodityEntity entity = new CommodityEntity();
+//		entity.setKeyword(keyword);
+//		delete(entity);
+		
 		for(ShopNames shopName : ShopNames.values()){
 			//System.out.println(shopName.toString());
 			//System.out.println(keyword);
@@ -162,11 +177,13 @@ public class CommodityService {
 			
 		}
 	}
-
+	
 	public CommodityEntity get(String id) {
 		return commodityDao.get(id);
 	}
  
-	
+	public void update(CommodityEntity entity){
+		commodityDao.update(entity);
+	}
 	
 }

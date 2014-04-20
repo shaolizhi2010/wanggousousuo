@@ -37,6 +37,19 @@ public class AdvertisementDao {
 		}
 	}
 	
+	public void update(AdvertisementEntity entity){
+		
+		DBObject dbo = U.toDBObject(entity);
+		
+		DBObject q = new BasicDBObject();
+		q.put("_id", new ObjectId(entity.getId()));
+		
+		collection.update(q, dbo);
+		
+		//entity.setName(U.toString( dbo.get("name") ));
+		
+	}
+	
     public void delete(String id) {  
     	try {
 			DBObject o = new BasicDBObject();
@@ -58,26 +71,30 @@ public class AdvertisementDao {
 	}
     
     public List<AdvertisementEntity> list(){
-		return list(new AdvertisementEntity());
+		return list(new AdvertisementEntity(),0,200);
 	}
+	
+	public List<AdvertisementEntity> list(AdvertisementEntity entity){
+		return list(entity,0,200);
+	}
+	
+	
 	
     //分页
-    public List<AdvertisementEntity> list(int start, int end){
+    public List<AdvertisementEntity> list(int start, int limit){
 		
-    	if(start == 0){
-    		return list();
-    	}
-    	return list();
+		return list(new AdvertisementEntity(),start,limit);
 	}
 	
-	 public List<AdvertisementEntity> list(AdvertisementEntity entity) {
+	 public List<AdvertisementEntity> list(AdvertisementEntity entity,int start, int limit) {
 			
 			List<AdvertisementEntity> entityList = new ArrayList<AdvertisementEntity>();
 			DBObject dbo = U.toDBObject(entity);;
 	
 			DBObject sortObj = new BasicDBObject();
+			sortObj.put("orderNumber", 1);
 			sortObj.put("_id", -1);
-			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).iterator();
+			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).skip(start).limit(limit).iterator();
 			
 			while(list.hasNext()){
 				
@@ -106,14 +123,5 @@ public class AdvertisementDao {
 		}
 	}
 	
-	public void update(AdvertisementEntity entity){
-		
-		DBObject o = new BasicDBObject();
-		
-		//DBObject dbo = collection.update(q, o)
-		
-		//entity.setName(U.toString( dbo.get("name") ));
-		
-	}
  
 }

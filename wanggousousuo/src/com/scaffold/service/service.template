@@ -23,15 +23,19 @@ public class $serviceName$ {
 	}
 
 	public List<$entityName$> list() {
-		return $moduleName$Dao.list();
+		return this.list(new $entityName$(),0,100);
 	}
 
-	public List<$entityName$> list(int start, int end) {
-		return $moduleName$Dao.list(start, end);
+	public List<$entityName$> list(int start, int limit) {
+		return this.list(new $entityName$(),start, limit);
 	}
 
-	public List<$entityName$> list($entityName$ entity) throws Exception {
-		return $moduleName$Dao.list(entity);
+	public List<$entityName$> list($entityName$ entity) {
+		return this.list(entity,0,100);
+	}
+	
+	public List<$entityName$> list($entityName$ entity,int start, int limit) {
+		return $moduleName$Dao.list(entity,0,100);
 	}
 
 	public $entityName$ get(String id) {

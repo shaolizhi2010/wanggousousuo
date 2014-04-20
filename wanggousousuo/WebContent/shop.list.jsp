@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,9 @@
 
     <div class="container">
         <div class="row clearfix">
+            <div class="col-md-12 column">
+            	<a href="shop.create.jsp?p=cake4you"> create </a>
+            </div>
             <div class="col-md-12 column">
 				<table class="table">
 				<thead>
@@ -107,8 +111,8 @@
 							
 						</td>
 
-					<td><a href='shop!update.action?id=<%=e.getId()%>'>修改</a></td>
-					<td><a href='shop!delete.action?id=<%=e.getId()%>'>删除</a></td>
+					<td><a href='shop!preUpdate.action?id=<%=e.getId()%>&p=cake4you'>修改</a></td>
+					<td><a href='shop!delete.action?id=<%=e.getId()%>&p=cake4you'>删除</a></td>
 					
 				</tr>
 			<%		

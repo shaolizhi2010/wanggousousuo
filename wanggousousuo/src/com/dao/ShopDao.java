@@ -71,26 +71,30 @@ public class ShopDao {
 	}
     
     public List<ShopEntity> list(){
-		return list(new ShopEntity());
+		return list(new ShopEntity(),0,200);
 	}
+	
+	public List<ShopEntity> list(ShopEntity entity){
+		return list(entity,0,200);
+	}
+	
+	
 	
     //分页
-    public List<ShopEntity> list(int start, int end){
+    public List<ShopEntity> list(int start, int limit){
 		
-    	if(start == 0){
-    		return list();
-    	}
-    	return list();
+		return list(new ShopEntity(),start,limit);
 	}
 	
-	 public List<ShopEntity> list(ShopEntity entity) {
+	 public List<ShopEntity> list(ShopEntity entity,int start, int limit) {
 			
 			List<ShopEntity> entityList = new ArrayList<ShopEntity>();
 			DBObject dbo = U.toDBObject(entity);;
 	
 			DBObject sortObj = new BasicDBObject();
+			sortObj.put("orderNumber", 1);
 			sortObj.put("_id", -1);
-			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).iterator();
+			Iterator<DBObject> list = collection.find(dbo).sort(sortObj).skip(start).limit(limit).iterator();
 			
 			while(list.hasNext()){
 				

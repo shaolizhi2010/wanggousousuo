@@ -14,13 +14,6 @@
 			</result>
 		</action>
 		
-	<action name="advertisement" class="com.web.AdvertisementAction">
-		<result name="create">advertisement.create.jsp</result>
-		<result name="list" type="redirect">advertisement!list.action</result>
-		<result name="listPage">advertisement.list.jsp</result>
-		<result name="view">advertisement.view.jsp</result>
-	</action>
-
 	<action name="commodity" class="com.web.CommodityAction">
 		<result name="create">commodity.create.jsp</result>
 		<result name="list" type="redirect">commodity!list.action</result>
@@ -52,6 +45,14 @@
 		<result name="list" type="redirect">catalog!list.action</result>
 		<result name="listPage">catalog.list.jsp</result>
 		<result name="view">catalog.view.jsp</result>
+	</action>
+
+	<action name="advertisement" class="com.web.AdvertisementAction">
+		<result name="create">advertisement.create.jsp</result>
+		<result name="update">advertisement.update.jsp</result>
+		<result name="list" type="redirect">advertisement!list.action</result>
+		<result name="listPage">advertisement.list.jsp</result>
+		<result name="view">advertisement.view.jsp</result>
 	</action>
 </package>
 </struts>

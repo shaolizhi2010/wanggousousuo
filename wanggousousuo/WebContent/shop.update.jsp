@@ -1,6 +1,8 @@
 ﻿<%@page import="com.entity.ShopEntity"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
+<%@ include file="part/auth.jsp"  %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,8 +45,16 @@ if( request.getAttribute("entity")!=null ){
 					 <input class="form-control" name="domainName" id="domainName" type="text" value="<%=entity.getDomainName()%>" />
 				</div>
 				<div class="form-group">
+					 <label for="shopAvailable">shopAvailable</label>
+					 <input class="form-control" name="shopAvailable" id="shopAvailable" type="text" value="<%=entity.getShopAvailable()%>" />
+				</div>
+				<div class="form-group">
 					 <label for="searchUrl">searchUrl</label>
 					 <input class="form-control" name="searchUrl" id="searchUrl" type="text" value="<%=entity.getSearchUrl()%>" />
+				</div>
+				<div class="form-group">
+					 <label for="searchAvailable">searchAvailable</label>
+					 <input class="form-control" name="searchAvailable" id="searchAvailable" type="text" value="<%=entity.getSearchAvailable()%>" />
 				</div>
 				<div class="form-group">
 					 <label for="charsetForUrl">charsetForUrl</label>
@@ -54,8 +64,6 @@ if( request.getAttribute("entity")!=null ){
 					 <label for="charsetForContent">charsetForContent</label>
 					 <input class="form-control" name="charsetForContent" id="charsetForContent" type="text" value="<%=entity.getCharsetForContent()%>" />
 				</div>
- 
- 
 				<div class="form-group">
 					 <label for="index">index</label>
 					 <input class="form-control" name="index" id="index" type="text" value="<%=entity.getIndex()%>" />

@@ -1,7 +1,5 @@
-﻿<%@page import="com.entity.CatalogEntity"%>
+﻿<%@page import="com.entity.AdvertisementEntity"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
-
-<%@ include file="part/auth.jsp"  %>
 
 <!DOCTYPE html>
 <html>
@@ -15,9 +13,9 @@
     <jsp:include page="part/hat.jsp" />
 <%
 
-CatalogEntity entity = new CatalogEntity();
+AdvertisementEntity entity = new AdvertisementEntity();
 if( request.getAttribute("entity")!=null ){
-	 entity = (CatalogEntity)request.getAttribute("entity");
+	 entity = (AdvertisementEntity)request.getAttribute("entity");
 }
 
 %>
@@ -25,28 +23,24 @@ if( request.getAttribute("entity")!=null ){
         <div class="row clearfix">
             <div class="col-md-12 column">
 
-                				<h3> catalog </h3> 
-               <form role="form" action="catalog!update.action" method="POST">
+                				<h3> advertisement </h3> 
+               <form role="form" action="advertisement!update.action" method="POST">
 				
 								<div class="form-group">
-					 <label for="name">name</label>
-					 <input class="form-control" name="name" id="name" type="text" value="<%=entity.getName()%>" />
-				</div>
-				<div class="form-group">
-					 <label for="keyword">keyword</label>
-					 <input class="form-control" name="keyword" id="keyword" type="text" value="<%=entity.getKeyword()%>" />
-				</div>
-				<div class="form-group">
 					 <label for="id">id</label>
 					 <input class="form-control" name="id" id="id" type="text" value="<%=entity.getId()%>" />
 				</div>
 				<div class="form-group">
-					 <label for="orderNumber">orderNumber</label>
-					 <input class="form-control" name="orderNumber" id="orderNumber" type="text" value="<%=entity.getOrderNumber()%>" />
+					 <label for="url">url</label>
+					 <input class="form-control" name="url" id="url" type="text" value="<%=entity.getUrl()%>" />
 				</div>
 				<div class="form-group">
-					 <label for="useful">useful</label>
-					 <input class="form-control" name="useful" id="useful" type="text" value="<%=entity.getUseful()%>" />
+					 <label for="imgUrl">imgUrl</label>
+					 <input class="form-control" name="imgUrl" id="imgUrl" type="text" value="<%=entity.getImgUrl()%>" />
+				</div>
+				<div class="form-group">
+					 <label for="name">name</label>
+					 <input class="form-control" name="name" id="name" type="text" value="<%=entity.getName()%>" />
 				</div>
 				<div class="form-group">
 					 <label for="description">description</label>

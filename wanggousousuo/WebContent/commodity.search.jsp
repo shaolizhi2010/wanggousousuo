@@ -1,3 +1,5 @@
+<%@page import="com.entity.ShopEntity"%>
+<%@page import="com.service.ShopService"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.entity.CommodityEntity"%>
 <%@page import="java.util.List"%>
@@ -9,24 +11,14 @@
 <jsp:include page="part/head.jsp" />
 
 <%
-CommodityEntity entity = new CommodityEntity();
-if(entity!=null){
-	entity = (CommodityEntity)request.getAttribute("entity");
-}
 
-List<CommodityEntity> list = (List<CommodityEntity>)request.getAttribute("list");
-if(list==null){
-	list = new ArrayList<CommodityEntity>();
+List<CommodityEntity> list = new ArrayList<CommodityEntity>();
+if(request.getAttribute("list")!=null){
+	list = (List<CommodityEntity>)request.getAttribute("list");
 }
 %>
 
-<script>
 
-$( document ).ready(function() {
-	$("#keyword").val("<%=entity.getKeyword()%>");
-	
-});
-</script>
 </head>
 
 
@@ -36,6 +28,7 @@ $( document ).ready(function() {
     <jsp:include page="part/hat.jsp" />
 
     <div class="container">
+    
         <div class="row clearfix">
              
 

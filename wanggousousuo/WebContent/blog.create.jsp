@@ -1,5 +1,7 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
 
+<%@ include file="part/auth.jsp"  %>
+
 <!DOCTYPE html>
 <html>
 <head>

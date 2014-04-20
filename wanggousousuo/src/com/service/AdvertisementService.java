@@ -38,7 +38,10 @@ public class AdvertisementService {
 		
 		advertisementDao.add(entity);
 	}
-
+	
+	public void update(AdvertisementEntity entity) {
+		advertisementDao.update(entity);
+	}
 	public void delete(String id)  {
 		advertisementDao.delete(id);
 	}
