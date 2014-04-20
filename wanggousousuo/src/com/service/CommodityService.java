@@ -78,7 +78,7 @@ public class CommodityService {
 		
 		List<CommodityEntity> list = commodityDao.list(entity, start, limit);
 
-		if(list.size()>minCommodityNumber){
+		if(list.size()> limit ){
 			//inner comparor
 			Comparator<CommodityEntity> comparor = new Comparator<CommodityEntity>() {
 				
@@ -115,14 +115,18 @@ public class CommodityService {
 		return list;
 	}
 	
-	public List<CommodityEntity> search(CommodityEntity entity) throws Exception {
+	public List<CommodityEntity> search(CommodityEntity entity)  {
+		return search(entity,0,maxCommodityNumber);
+	}
+	
+	public List<CommodityEntity> search(CommodityEntity entity,int start, int limit)  {
 		
 		if(entity==null){
 			return list();
 		}
 		
 		String keyword = entity.getKeyword();
-		List<CommodityEntity> list = this.list(entity);
+		List<CommodityEntity> list = this.list(entity,start,limit);
 		
 		if(list!= null && list.size()>=minCommodityNumber){//找到结果
 			
@@ -146,7 +150,7 @@ public class CommodityService {
 				return list;
 			}
 			
-			list = this.list(entity);
+			list = this.list(entity,start,limit);
 			
 			if(list.size()>=minCommodityNumber || i>99){//够数了就返回 
 				return list;

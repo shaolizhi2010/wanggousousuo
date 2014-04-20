@@ -101,7 +101,7 @@
 				CommodityEntity query = new CommodityEntity();
 					query.setKeyword(e.getKeyword());
 					List<CommodityEntity> commodityList = new CommodityService()
-							.list(query, 0,6);
+							.list(query, 0,6); 
 					if (commodityList == null) {
 						commodityList = new ArrayList<CommodityEntity>();
 					}

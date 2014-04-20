@@ -57,21 +57,21 @@ public class StaticInfo {
 			
 			
 			//蔚蓝书店
-			shops.put(ShopNames.wl.toString(), new ShopEntity().
-					setShopNameEn(ShopNames.wl.toString())
-					.setDomainName("wl.cn")
-					.setShopNameCn("蔚蓝网")
-					.setSearchUrl("http://search.wl.cn/search.aspx?index=1&q=")
-					
-					);
+//			shops.put(ShopNames.wl.toString(), new ShopEntity().
+//					setShopNameEn(ShopNames.wl.toString())
+//					.setDomainName("wl.cn")
+//					.setShopNameCn("蔚蓝网")
+//					.setSearchUrl("http://search.wl.cn/search.aspx?index=1&q=")
+//					
+//					);
 			//qq易迅
-			shops.put(ShopNames.yixun.toString(), new ShopEntity().
-					setShopNameEn(ShopNames.yixun.toString())
-					.setDomainName("yixun.com")
-					.setShopNameCn("易迅网")
-					.setSearchUrl("http://searchex.yixun.com/html?charset=utf-8&key=")
-					
-					);	
+//			shops.put(ShopNames.yixun.toString(), new ShopEntity().
+//					setShopNameEn(ShopNames.yixun.toString())
+//					.setDomainName("yixun.com")
+//					.setShopNameCn("易迅网")
+//					.setSearchUrl("http://searchex.yixun.com/html?charset=utf-8&key=")
+//					
+//					);	
 			//凡客
 			shops.put(ShopNames.fanke.toString(), new ShopEntity().
 					setShopNameEn(ShopNames.fanke.toString())
@@ -185,14 +185,14 @@ public class StaticInfo {
 //					
 //					);	
 			//麦包包
-			shops.put(ShopNames.mbaobao.toString(), new ShopEntity().
-					setShopNameEn(ShopNames.mbaobao.toString())
-					.setDomainName("mbaobao.com")
-					.setShopNameCn("麦包包")
-					.setSearchUrl("http://search.mbaobao.com/search/search?o=1&q=")
-					
-					
-					);	
+//			shops.put(ShopNames.mbaobao.toString(), new ShopEntity().
+//					setShopNameEn(ShopNames.mbaobao.toString())
+//					.setDomainName("mbaobao.com")
+//					.setShopNameCn("麦包包")
+//					.setSearchUrl("http://search.mbaobao.com/search/search?o=1&q=")
+//					
+//					
+//					);	
 			//银泰网
 			shops.put(ShopNames.yintai.toString(), new ShopEntity().
 					setShopNameEn(ShopNames.yintai.toString())
@@ -203,59 +203,59 @@ public class StaticInfo {
 					
 					);	
 			//走秀网
-			shops.put(ShopNames.xiu.toString(), new ShopEntity().
-					setShopNameEn(ShopNames.xiu.toString())
-					.setDomainName("xiu.com")
-					.setShopNameCn("走秀网")
-					.setSearchUrl("http://search.xiu.com/s?kw=")
-					
-					
-					);	
+//			shops.put(ShopNames.xiu.toString(), new ShopEntity().
+//					setShopNameEn(ShopNames.xiu.toString())
+//					.setDomainName("xiu.com")
+//					.setShopNameCn("走秀网")
+//					.setSearchUrl("http://search.xiu.com/s?kw=")
+//					
+//					
+//					);	
 			//校园时尚
-			shops.put(ShopNames.xyss.toString(), new ShopEntity().
-					setShopNameEn(ShopNames.xyss.toString())
-					.setDomainName("xyss.org")
-					.setShopNameCn("校园时尚")
-					.setSearchUrl("http://www.xyss.org/?gallery--n,"+C.keywordVar+"-grid.html")
-					
-					
-					);	
+//			shops.put(ShopNames.xyss.toString(), new ShopEntity().
+//					setShopNameEn(ShopNames.xyss.toString())
+//					.setDomainName("xyss.org")
+//					.setShopNameCn("校园时尚")
+//					.setSearchUrl("http://www.xyss.org/?gallery--n,"+C.keywordVar+"-grid.html")
+//					
+//					
+//					);	
 			//梦芭莎
-			shops.put(ShopNames.moonbasa.toString(), new ShopEntity().
-					setShopNameEn(ShopNames.moonbasa.toString())
-					.setDomainName("moonbasa.com")
-					.setShopNameCn("梦芭莎")
-					.setSearchUrl("http://s.moonbasa.com/?enc=utf-8&keyword=")
-					
-					
-					);	
+//			shops.put(ShopNames.moonbasa.toString(), new ShopEntity().
+//					setShopNameEn(ShopNames.moonbasa.toString())
+//					.setDomainName("moonbasa.com")
+//					.setShopNameCn("梦芭莎")
+//					.setSearchUrl("http://s.moonbasa.com/?enc=utf-8&keyword=")
+//					
+//					
+//					);	
 			//拍鞋网
-			shops.put(ShopNames.paixie.toString(), new ShopEntity().
-					setShopNameEn(ShopNames.paixie.toString())
-					.setDomainName("paixie.net")
-					.setShopNameCn("拍鞋网")
-					.setSearchUrl("http://www.paixie.net/shoes/list/______"+C.keywordVar+"_-1.html")
-					 
-					
-					);
+//			shops.put(ShopNames.paixie.toString(), new ShopEntity().
+//					setShopNameEn(ShopNames.paixie.toString())
+//					.setDomainName("paixie.net")
+//					.setShopNameCn("拍鞋网")
+//					.setSearchUrl("http://www.paixie.net/shoes/list/______"+C.keywordVar+"_-1.html")
+//					 
+//					
+//					);
 			//优购网
-			shops.put(ShopNames.yougou.toString(), new ShopEntity().
-					setShopNameEn(ShopNames.yougou.toString())
-					.setDomainName("yougou.com")
-					.setShopNameCn("优购网")
-					.setSearchUrl("http://www.yougou.com/k-"+C.keywordVar+".html")
-					 
-					
-					);		
+//			shops.put(ShopNames.yougou.toString(), new ShopEntity().
+//					setShopNameEn(ShopNames.yougou.toString())
+//					.setDomainName("yougou.com")
+//					.setShopNameCn("优购网")
+//					.setSearchUrl("http://www.yougou.com/k-"+C.keywordVar+".html")
+//					 
+//					
+//					);		
 			//奥特莱斯
-			shops.put(ShopNames.outlets.toString(), new ShopEntity().
-					setShopNameEn(ShopNames.outlets.toString())
-					.setDomainName("www.outlets365.com")
-					.setShopNameCn("奥特莱斯")
-					.setSearchUrl("http://www.outlets365.com/Search-"+C.keywordVar+"-0-0-0-3-1.html")
-					 
-					
-					);	
+//			shops.put(ShopNames.outlets.toString(), new ShopEntity().
+//					setShopNameEn(ShopNames.outlets.toString())
+//					.setDomainName("www.outlets365.com")
+//					.setShopNameCn("奥特莱斯")
+//					.setSearchUrl("http://www.outlets365.com/Search-"+C.keywordVar+"-0-0-0-3-1.html")
+//					 
+//					
+//					);	
 			
 		}
 	}
