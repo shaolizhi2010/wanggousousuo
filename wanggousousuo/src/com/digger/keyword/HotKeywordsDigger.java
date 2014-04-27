@@ -43,12 +43,14 @@ public class HotKeywordsDigger {
 		pages.add("http://top.etao.com/zongbang.php?spm=0.0.0.0.SPKyM6&zb_type=week&offset=70");
 		pages.add("http://top.etao.com/zongbang.php?spm=0.0.0.0.SPKyM6&zb_type=week&offset=120");
 		
+		int i =0;
 		for(String page : pages){
 			Html html = Connecter.getHtml(page);
 			Document doc = html.getDoc();
 			List<Element> linkElementlist = X.getSubElementList(doc,"//a");
 			
 			KeywordService s = new KeywordService();
+			
 			for (Element link : linkElementlist) {
 				
 				String href = link.getAttributeValue("href");
@@ -59,11 +61,13 @@ public class HotKeywordsDigger {
 					keyword = keyword.trim();
 					keywordEntity.setKeyword(keyword);
 					s.add(keywordEntity);
+					i++;
 				}
 				
 			}
-		}
-		
+			
+		}//end for 
+		L.log(this, "add "+i+" new hot keyword ");
 
 		
 	}

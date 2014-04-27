@@ -35,8 +35,14 @@ public class $serviceName$ {
 	}
 	
 	public List<$entityName$> list($entityName$ entity,int start, int limit) {
-		return $moduleName$Dao.list(entity,0,100);
+		return $moduleName$Dao.list(entity,start,limit);
 	}
+	
+		 public long count(){
+		 return count(null);
+	 }
+	 
+ 
 
 	public $entityName$ get(String id) {
 		return $moduleName$Dao.get(id);

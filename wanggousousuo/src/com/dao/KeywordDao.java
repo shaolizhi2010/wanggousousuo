@@ -106,6 +106,21 @@ public class KeywordDao {
 			return entityList;
 		 
 	}
+	 
+	 public long count(){
+		 return count(null);
+	 }
+	 
+	 public long count(KeywordEntity entity){
+		 
+		 if(entity == null){
+			 return collection.count();
+		 }
+		 
+		 DBObject dbo = U.toDBObject(entity);
+		 
+		 return collection.count(dbo);
+	 }
 	
 	public KeywordEntity get(String id){
 		try {

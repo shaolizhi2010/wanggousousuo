@@ -15,11 +15,11 @@ import com.utils.L;
 public class AdvertisementService {
 	AdvertisementDao advertisementDao = new AdvertisementDao();
 
-	public void add(AdvertisementEntity entity) {
+	public boolean add(AdvertisementEntity entity) {
 		
 		//根据 img url 判断 ad 是否已经存在 避免重复
 		String imgUrl = entity.getImgUrl();
-		if(StringUtils.isBlank(imgUrl)) {L.exception(this, "img url is blank");return;}
+		if(StringUtils.isBlank(imgUrl)) {L.exception(this, "img url is blank");return false;}
 		
 		//DBObject query = new BasicDBObject();
 		//query.put("imgUrl", imgUrl);
@@ -30,7 +30,7 @@ public class AdvertisementService {
 		List<AdvertisementEntity> list = advertisementDao.list(query);
 		if(list !=null && list.size()>0){ //已经存在
 			L.debug(this, "img url : " + imgUrl + " is already exsit");
-			return;
+			return false;
 		}
 		
 		String url = entity.getUrl();
@@ -43,6 +43,7 @@ public class AdvertisementService {
 		
 		advertisementDao.add(entity);
 		L.trace(this, "advertisement : "+ entity.getImgUrl() + "is adding to db");
+		return true;
 	}
 	
 	public void update(AdvertisementEntity entity) {

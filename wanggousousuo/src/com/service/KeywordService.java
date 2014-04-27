@@ -55,7 +55,15 @@ public class KeywordService {
 	}
 	
 	public List<KeywordEntity> list(KeywordEntity entity,int start, int limit) {
-		return keywordDao.list(entity,0,100);
+		return keywordDao.list(entity,start,limit);
+	}
+	
+	public long count( ){
+		return keywordDao.count();
+	}
+	
+	public long count(KeywordEntity entity){
+		return keywordDao.count(entity);
 	}
 
 	public KeywordEntity get(String id) {
