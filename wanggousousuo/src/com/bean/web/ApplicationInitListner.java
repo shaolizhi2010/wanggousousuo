@@ -1,5 +1,7 @@
 package com.bean.web;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 
 import javax.servlet.ServletContextEvent;
@@ -47,10 +49,11 @@ public class ApplicationInitListner implements ServletContextListener {
 		
 		 //每天执行一次 time task
 		 DailyTask dailyTask = new DailyTask();
-		 //Calendar calendar = Calendar.getInstance();
-		 //calendar.set(Calendar.HOUR, 1);//每天凌晨一点执行
-		 //calendar.set(Calendar.MINUTE, 1);//每天凌晨一点一分执行
-		 timer4.schedule(dailyTask, 30*1000, 24*60*60*1000);	//24小时执行一次
+		 Calendar calendar = Calendar.getInstance();
+		 calendar.set(Calendar.HOUR, 23);//每天凌晨一点执行
+		 calendar.set(Calendar.MINUTE, 59);//每天凌晨一点一分执行
+		 timer4.schedule(dailyTask, calendar.getTime(),24*60*60*1000);	//24小时执行一次
+		 //timer4.schedule(dailyTask, 30*1000, 24*60*60*1000);	//24小时执行一次
 	}
 
 }

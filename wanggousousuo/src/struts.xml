@@ -54,5 +54,13 @@
 		<result name="listPage">advertisement.list.jsp</result>
 		<result name="view">advertisement.view.jsp</result>
 	</action>
+
+	<action name="keyword" class="com.web.KeywordAction">
+		<result name="create">keyword.create.jsp</result>
+		<result name="update">keyword.update.jsp</result>
+		<result name="list" type="redirect">keyword!list.action</result>
+		<result name="listPage">keyword.list.jsp</result>
+		<result name="view">keyword.view.jsp</result>
+	</action>
 </package>
 </struts>

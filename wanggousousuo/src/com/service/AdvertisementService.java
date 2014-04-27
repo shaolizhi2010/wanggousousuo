@@ -20,9 +20,14 @@ public class AdvertisementService {
 		//根据 img url 判断 ad 是否已经存在 避免重复
 		String imgUrl = entity.getImgUrl();
 		if(StringUtils.isBlank(imgUrl)) {L.exception(this, "img url is blank");return;}
-		DBObject query = new BasicDBObject();
-		query.put("imgUrl", imgUrl);
-		List<AdvertisementEntity> list = advertisementDao.list(entity);
+		
+		//DBObject query = new BasicDBObject();
+		//query.put("imgUrl", imgUrl);
+		AdvertisementEntity query = new AdvertisementEntity();
+		query.setImgUrl(imgUrl);
+		
+		
+		List<AdvertisementEntity> list = advertisementDao.list(query);
 		if(list !=null && list.size()>0){ //已经存在
 			L.debug(this, "img url : " + imgUrl + " is already exsit");
 			return;

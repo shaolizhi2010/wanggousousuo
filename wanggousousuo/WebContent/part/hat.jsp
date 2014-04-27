@@ -132,7 +132,8 @@ $( document ).ready(function() {
 						<ul class="nav navbar-nav">
 							<li><a href="index.jsp" style="color: #fff;">首页</a></li>
 							<li><a href="dazhe.jsp" style="color: #fff;">打折促销</a></li>
-		
+							<li><a href="/fenxiang" style="color: #fff;">晒网购</a></li>
+							<li><a href="keyword.list.hot.jsp" style="color: #fff;">热搜网购</a></li>		
 							
 							<li class="divider" style="color: #fff;"></li>
 							
@@ -146,7 +147,6 @@ $( document ).ready(function() {
 							}
 							%>
 							
-							<li><a href="/fenxiang" style="color: #fff;">晒网购</a></li>
 
 						</ul>
 

@@ -63,6 +63,13 @@
 									<li><a href="catalog!list.action?p=cake4you">list</a></li>
 									<li class="divider"></li>
 								</ul></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">keyword <b class="caret"></b></a>
+								<ul class="dropdown-menu"> 
+									<li><a href="keyword.create.jsp?p=cake4you">create</a></li>
+									<li><a href="keyword!list.action?p=cake4you">list</a></li>
+									<li class="divider"></li>
+								</ul></li>
 						</ul>
 
 
