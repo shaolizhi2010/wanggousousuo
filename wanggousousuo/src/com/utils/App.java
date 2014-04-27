@@ -29,6 +29,18 @@ public class App {
 	private MongoClient mongo = null;
 	private DB db = null;
 	
+	public  int threadCount = 0;
+	
+	public synchronized void threadCountPlus(){
+		threadCount++;
+	}
+	public synchronized void threadCountSubtrac(){
+		threadCount--;
+	} 
+	public synchronized int getThreadCount(){
+		return threadCount;
+	}
+	
 	
 	public static App getInstance(){
 		return app;

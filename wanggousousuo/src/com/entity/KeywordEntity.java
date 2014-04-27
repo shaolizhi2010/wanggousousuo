@@ -1,5 +1,7 @@
 package com.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class KeywordEntity {
 	
 	String keyword;
@@ -23,6 +25,21 @@ public class KeywordEntity {
 	public void setLasttime(String lasttime) {
 		this.lasttime = lasttime;
 	}
+	public void timesPlus(){
+		if(StringUtils.isBlank(times)){
+			times = "1";
+			return;
+		}
+		try {
+			int timesInt = Integer.parseInt(times);
+			timesInt++;
+			times = timesInt+"";
+		} catch (Exception e) {
+			return;
+		}
+		
+	}
+	
 	
 	
 	String id;

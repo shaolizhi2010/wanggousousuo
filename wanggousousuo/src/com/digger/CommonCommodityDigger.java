@@ -14,6 +14,7 @@ import com.connect.Connecter;
 import com.connect.URLUtils;
 import com.digger.util.DiggerUtil;
 import com.entity.CommodityEntity;
+import com.entity.KeywordEntity;
 import com.entity.ShopEntity;
 import com.env.StaticInfo;
 import com.html.Html;
@@ -25,6 +26,7 @@ import com.seeker.commodity.analyzer.TitleAnalyzer;
 import com.seeker.commodity.analyzer.price.util.PriceUtil;
 import com.seeker.rule.Rule;
 import com.service.CommodityService;
+import com.service.KeywordService;
 import com.utils.App;
 import com.utils.C;
 import com.utils.L;
@@ -54,6 +56,9 @@ public class CommonCommodityDigger extends WebBaseDigger implements Digger{
 	}
 	
 	public List<CommodityEntity> digAll(){
+		
+
+		
 		L.trace(this,"Start digall" ); 
 		basePath = new U().getRulePath() ;//不加 src 
 		//System.out.println("basePath = " + basePath);

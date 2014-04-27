@@ -1,4 +1,5 @@
-﻿<%@page import="org.apache.commons.lang3.StringUtils"%>
+﻿<%@page import="com.utils.App"%>
+<%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.service.CatalogService"%>
 <%@page import="com.entity.CatalogEntity"%>
@@ -9,6 +10,13 @@
 
 
 <div class="container c-head">
+
+<div class="row clearfix ">
+<div class="col-md-12 c-personal">  
+thread count is <%=App.getInstance().getThreadCount() %>
+</div>
+</div>
+
 	<!-- style="border-style:solid; border-width:2px; border-color:green;" -->
 	<div class="row clearfix ">
 		<!-- navbar-fixed-top -->

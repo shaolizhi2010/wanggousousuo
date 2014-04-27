@@ -13,8 +13,11 @@ import com.dao.CommodityDao;
 import com.digger.CommodityDigerThread;
 import com.entity.AdvertisementEntity;
 import com.entity.CommodityEntity;
+import com.entity.KeywordEntity;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import com.sun.org.apache.xpath.internal.compiler.Keywords;
+import com.trace.KeywordTrace;
 import com.utils.L;
 import com.utils.ShopNames;
 
@@ -31,8 +34,10 @@ public class CommodityService {
 	
 	private int minCommodityNumber = 16;
 	private int maxCommodityNumber = 100;
+	private int freshTimeStamp = 3*24*60*60*1000; //commodity 信息保质期 3天
 	
 	CommodityDao commodityDao = new CommodityDao();
+	KeywordService keywordService = new KeywordService();
 
 	public void add(CommodityEntity entity) {
 		
@@ -119,6 +124,7 @@ public class CommodityService {
 		return search(entity,0,maxCommodityNumber);
 	}
 	
+	//查找keyword 相关的commodity信息，如果数据库中没有足够结果，则从新dig
 	public List<CommodityEntity> search(CommodityEntity entity,int start, int limit)  {
 		
 		if(entity==null){
@@ -126,20 +132,22 @@ public class CommodityService {
 		}
 		
 		String keyword = entity.getKeyword();
+		
+		//keyword search time++
+		new KeywordTrace().timePlus(keyword);
+		
+		
+		//查找commodity list
 		List<CommodityEntity> list = this.list(entity,start,limit);
 		
-		if(list!= null && list.size()>=minCommodityNumber){//找到结果
-			
-			//结果不够 新，暂时返回，同时异步更新
-			if(System.currentTimeMillis()/1000 - new ObjectId( commodityDao.newestEntity(entity).getId()).getTimestamp() > 24*60*60 ){
-				dig(keyword);
-			} 
-			
+		//找到足够结果,返回
+		if(list!= null && list.size() >= minCommodityNumber){
 			return list;
 		}
 		
-		//没找到结果,触发异步找结果
-		dig(keyword);
+		//没找到足够结果,触发dig
+		//有足够结果则不需重新出发dig，每天后台会自动dig， 更新commodity信息
+		refresh(keyword);
 		
 		int i = 0;
 		while(true){
@@ -152,25 +160,52 @@ public class CommodityService {
 			
 			list = this.list(entity,start,limit);
 			
-			if(list.size()>=minCommodityNumber || i>99){//够数了就返回 
+			if(list.size()>=minCommodityNumber || i> 30){//够数了就返回 
 				return list;
 			}
-			
 			i++;
-			
 		} 
-		
 	}
 	
-
-	
-	public void dig(String keyword){
+	//重新抓取更新商品信息
+	public void refresh(String keyword){
 		
-		//delete
-//		CommodityEntity entity = new CommodityEntity();
-//		entity.setKeyword(keyword);
-//		delete(entity);
+		KeywordService keywordService = new KeywordService();
 		
+		KeywordEntity keywordEntity = new KeywordEntity();
+		keywordEntity.setKeyword(keyword);
+		
+		 //keyword 已存在
+		List<KeywordEntity> keywordList = keywordService.list(keywordEntity);
+		if(keywordList != null && keywordList.size()>0){
+			
+			//取最新时间
+			keywordEntity = keywordList.get(0);
+			long lasttimeLong = 0L;
+			try {
+				lasttimeLong = Long.parseLong(keywordEntity.getLasttime()) ;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			//判断是否够新
+			//足够新,则不需更新keyword，也不需要dig
+			if(System.currentTimeMillis() - lasttimeLong < freshTimeStamp){	
+				return ;
+			}
+			//已过期，更新 到当前时间
+			else{
+				keywordEntity.setLasttime(System.currentTimeMillis()+"");	//设置最新更新时间
+				keywordService.update(keywordEntity);
+			}
+		}
+		//新的keyword, insert
+		else{
+			keywordEntity.setLasttime(System.currentTimeMillis()+"");	//设置最新更新时间
+			keywordService.add(keywordEntity);
+		}
+		
+		//重新 dig 
 		for(ShopNames shopName : ShopNames.values()){
 			//System.out.println(shopName.toString());
 			//System.out.println(keyword);

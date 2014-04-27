@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.IOUtils;
@@ -20,6 +22,8 @@ import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.SimpleXmlSerializer;
 import org.htmlcleaner.TagNode;
+
+import sun.rmi.transport.Connection;
 
 import com.html.Html;
 import com.utils.App;
@@ -185,6 +189,34 @@ public class Connecter {
 		//pageSource = U.clean(pageSource);
 		//L.trace("Connecter getPageSourceFromNode ", " finished, time is " + (System.currentTimeMillis() -start));
 		return pageSource;
+	}
+	
+	/**
+	 * 向url 发送链接请求，但不抓取页面
+	 * 
+	 * 用于 遍历keyword表中所有keyword，提前缓存
+	 * 
+	 * @param url
+	 */
+	public static String connect(String url,String charset){
+		
+		StringBuffer result = new StringBuffer();  
+	        try {  
+	            URL httpurl = new URL(url);  
+	            HttpURLConnection httpConn = (HttpURLConnection) httpurl  
+	                    .openConnection();  
+	            httpConn.setDoInput(true);  
+	              
+	                    httpConn.getInputStream();  
+//	            String line;  
+//	            while ((line = in.readLine()) != null) {  
+//	            	result.append(line) ;  
+//	            }  
+	           // in.close();  
+	        } catch (Exception e) {  
+	             L.exception("SimpleConnecter", e.getMessage());
+	        }  
+	        return result.toString();  
 	}
 	 
 }

@@ -1,16 +1,13 @@
 package com.digger;
 
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.entity.CommodityEntity;
+import com.utils.App;
+import com.utils.L;
 
 public class CommodityDigerThread implements Runnable {
 	
-	private String guid;
 	private String shopName;
 	private String keyword;
 	
@@ -18,17 +15,27 @@ public class CommodityDigerThread implements Runnable {
 	public CommodityDigerThread(String shopName, String keyword){
 		this.shopName = shopName;
 		this.keyword = keyword;
+		App.getInstance().threadCountPlus();
 	}
 	
 	@Override
 	public void run() {
-		guid = UUID.randomUUID().toString();
+		//guid = UUID.randomUUID().toString();
 		long starttime = System.currentTimeMillis();
-		//System.out.println("Thread-"+ guid+" is start, time is "+ System.currentTimeMillis());
 		
-		List<CommodityEntity>  list = new CommonCommodityDigger(shopName, keyword).digAll();
+		CommonCommodityDigger digger = new CommonCommodityDigger(shopName, keyword);
+		
+		List<CommodityEntity>  list = digger.digAll();
 		//new CommonCommodityDigger(shopName, basePath).dig(keyword, ruleFile);
-		//System.out.println("Thread-"+ guid+" is finished, shop name is " + shopName +" time is "+ (System.currentTimeMillis()-starttime) + " fetch count : " + list.size());
+		L.trace(this, "Digger finished, shop name is " + shopName + "keyword is "+ keyword+" time is "+ (System.currentTimeMillis()-starttime) + " fetch count is " + list.size());
+		App.getInstance().threadCountSubtrac();
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		super.finalize();
+	}
+	
+	
 
 }

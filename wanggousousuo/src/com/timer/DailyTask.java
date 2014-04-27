@@ -6,7 +6,11 @@ import java.util.List;
 import com.digger.advertisement.JingDongAdvertisementDigger;
 import com.digger.keyword.HotKeywordsDigger;
 import com.entity.AdvertisementEntity;
+import com.entity.CommodityEntity;
+import com.entity.KeywordEntity;
 import com.service.AdvertisementService;
+import com.service.CommodityService;
+import com.service.KeywordService;
 import com.utils.L;
 
 public class DailyTask extends java.util.TimerTask {
@@ -15,7 +19,8 @@ public class DailyTask extends java.util.TimerTask {
 	public void run() {
 		L.trace(this, "start");
 		
-		
+		/*
+		//advertise
 		String url = "http://www.jd.com/";	//京东广告页 moreSubject.aspx
 		List<AdvertisementEntity> list = new ArrayList<AdvertisementEntity>();
 		new JingDongAdvertisementDigger().dig(url, list);
@@ -30,8 +35,16 @@ public class DailyTask extends java.util.TimerTask {
 		}
 		L.trace(this, newAdCount + " new advertisement added");
 		
-		
+		//dig new keyword
 		new HotKeywordsDigger().dig();
+		
+		*/
+		//fresh keyword cache
+		new KeywordService().fresh();
+		 
+		
+
+		
 		
 		
 		

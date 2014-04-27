@@ -9,9 +9,13 @@ import com.entity.AdvertisementEntity;
 import com.entity.KeywordEntity;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import com.utils.App;
 import com.utils.L;
 
 public class KeywordService {
+	
+	int waittime = 5000;
+	
 	KeywordDao keywordDao = new KeywordDao();
 
 	public void add(KeywordEntity entity) {
@@ -69,7 +73,29 @@ public class KeywordService {
 	public KeywordEntity get(String id) {
 		return keywordDao.get(id);
 	}
- 
-	
+
+	public void fresh(){
+		List<KeywordEntity> keywordList = list();
+		CommodityService commodityService = new CommodityService();
+		
+		int i = 0;
+		for(KeywordEntity entity : keywordList){
+			
+			while(App.getInstance().getThreadCount()>100){
+				try {
+					Thread.sleep(waittime); //每 ?秒fresh 一个keyword
+				} catch (InterruptedException e) {
+				}			
+			}
+
+			
+			
+			String keyword = entity.getKeyword();
+			commodityService.refresh(keyword);
+			i++;
+		}
+		L.trace(this, "freshed "+ i + " keywords");
+		
+	}
 	
 }
