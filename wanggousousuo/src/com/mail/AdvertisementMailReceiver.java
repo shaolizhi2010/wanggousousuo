@@ -11,7 +11,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 
-import com.digger.AdvertisementDigger;
+import com.digger.advertisement.AdvertisementDigger;
 import com.entity.AdvertisementEntity;
 import com.sun.mail.imap.IMAPMessage;
 import com.utils.L;
@@ -73,8 +73,9 @@ public class AdvertisementMailReceiver {
 				// MailUtils.saveAttachment(msg, "d:/mmm/");
 
 				// 提取广告信息
-
-				AdvertisementDigger.dig(content.toString(), list);
+				
+				//TODO
+				//AdvertisementDigger.dig(content.toString(), list);
 				// //System.out.println("list size : "+list.size());
 				// U.printList(list);
 

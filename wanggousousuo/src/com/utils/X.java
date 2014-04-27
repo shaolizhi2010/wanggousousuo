@@ -2,6 +2,7 @@ package com.utils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -229,9 +230,17 @@ public class X {
 	}
 	
 	public static List<Element> getSubElementList(Object root, String xpath){
+		if(root == null){
+			return new ArrayList<Element>();
+		}
+		
 		XPathFactory xpfac = XPathFactory.instance();
-		XPathExpression xp = xpfac.compile(xpath);
-		List<Element> elist =  (List<Element>)xp.evaluate(root);
-		return elist;
+		XPathExpression  xp = xpfac.compile(xpath);
+		List list = xp.evaluate(root);
+		if(list != null){
+			return  (List<Element>)list;
+		}
+		
+		return new ArrayList<Element>();
 	}
 }

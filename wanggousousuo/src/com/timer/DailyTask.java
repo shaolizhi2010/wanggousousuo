@@ -1,36 +1,34 @@
 package com.timer;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
-import com.env.Env;
-import com.utils.C;
+import com.digger.advertisement.JingDongAdvertisementDigger;
+import com.entity.AdvertisementEntity;
+import com.service.AdvertisementService;
 import com.utils.L;
-import com.utils.P;
 
 public class DailyTask extends java.util.TimerTask {
 
 	@Override
 	public void run() {
-		L.trace(this, " is running");
+		L.trace(this, "start");
+		
+		L.trace(this, "start dig jing dong advertisement");
+		String url = "http://www.jd.com/";	//京东广告页 moreSubject.aspx
+		List<AdvertisementEntity> list = new ArrayList<AdvertisementEntity>();
+		new JingDongAdvertisementDigger().dig(url, list);
+		
+		AdvertisementService advertisementService = new AdvertisementService();
+		for(AdvertisementEntity ad : list){
+			advertisementService.add(ad);
+		}
+		
+		L.trace(this, "end");
 		
 	}// end run
 
-//	public List<String> getkeywordsFromDB() {
-//		List<String> keywords = new ArrayList<String>();
-//		KeywordService ks = new KeywordService();
-//		List<Map> keywordmaplist = ks.getKeywordList();
-//		for (Map m : keywordmaplist) {
-//			keywords.add((String) m.get("keyword"));
-//		}
-//
-//		return keywords;
-//	}
-//	
+ 
 	
 
 }

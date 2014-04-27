@@ -13,6 +13,7 @@ import org.jdom2.Attribute;
 import org.jdom2.Element;
 
 import com.utils.L;
+import com.vo.ImageVO;
 
 public class ImgUtil {
 	
@@ -24,8 +25,15 @@ public class ImgUtil {
 		}
 		return true;
 	}
-
-	public static int size(String src) {
+	
+	/**
+	 * 
+	 * input 图片地址
+	 * output 如符合规则，返回图片 长乘以宽，否则返回-1
+	 * @param src
+	 * @return
+	 */
+	public static ImageVO get(String src) {
 		int imgSize = 0;
 
 		DataInputStream dis = null;
@@ -36,55 +44,81 @@ public class ImgUtil {
 			URL imgurl = new URL(src);
 			dis = new DataInputStream(imgurl.openStream());
 			buff = ImageIO.read(dis);
+			
+			//check buff
+			if (buff == null) {
+				return new ImageVO();
+			}
+			
+			//get img size
+			ImageVO vo = new ImageVO();
+			
+			vo.setWidth(buff.getWidth() );
+			vo.setHeight(buff.getHeight());
+			vo.setSize(buff.getWidth()*buff.getHeight());
+			return vo;
 
 		} catch (Exception e) {
-			return -1;
-		}
-		
-		//check buff
-		if (buff == null) {
-			return -1;
-		}
-		
-		//get img size
-		imgSize = buff.getWidth() * buff.getHeight();
-		
-		//close io
-		if (dis != null) {// 关闭流
-			try {
-				dis.close();
-			} catch (IOException e) {
-				dis = null;
+			return new ImageVO();
+		} finally{
+			//close io
+			if (dis != null) {// 关闭流
+				try {
+					dis.close();
+				} catch (IOException e) {
+					dis = null;
+				}
 			}
 		}
-		return imgSize;
 		
 	}
 	
-	public static int size(Element imgElement,int imgSize){
+	/**
+	 * input img element
+	 * output img 在网页中如果有长宽限制，返回限制的长和 宽
+	 * 
+	 * @param imgElement
+	 * @return
+	 */
+	public static ImageVO get(Element imgElement){
 		
 		if(imgElement == null){
-			return imgSize;
+			return new ImageVO();
 		}
 		
 		
 		String imgWidth = imgElement.getAttributeValue("width");
+		
 		String imgHeight = imgElement.getAttributeValue("height");
 		
 		try {
 	            if (StringUtils.isNotBlank(imgWidth)
 	                    && StringUtils.isNotBlank(imgHeight)) {
-	                imgSize = Integer.parseInt(imgWidth)
-	                        * Integer.parseInt(imgHeight);
+	            	
+	            	ImageVO vo = new ImageVO();
+	            	
+	            	imgWidth = imgWidth.replaceAll("px", "");
+	            	imgHeight = imgHeight.replaceAll("px", "");
+	            	
+	            	int imgWidthInt = Integer.parseInt(imgWidth);
+	            	int imgHeightInt = Integer.parseInt(imgHeight);
+	            	
+	            	
+	                vo.setWidthInPage(imgWidthInt);
+	                vo.setHeightInPage(imgHeightInt);
+	                vo.setSizeInPage(imgHeightInt*imgHeightInt);
+	                return vo;
 	            }
         } catch (Exception e) {
             L.exception("ImgUtil", "计算img size 出错 ");
             L.exception("ImgUtil", e.getMessage());
-        	return imgSize;
+        	return new ImageVO();
         }
 		
-		return imgSize;
+		return new ImageVO();
 	}
+	
+	
 	
 	/**
 	 * 有时 img 的地址 并不在src属性里

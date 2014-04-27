@@ -37,6 +37,7 @@ public class AdvertisementService {
 		entity.setDescription(description);
 		
 		advertisementDao.add(entity);
+		L.trace(this, "advertisement : "+ entity.getImgUrl() + "is adding to db");
 	}
 	
 	public void update(AdvertisementEntity entity) {
