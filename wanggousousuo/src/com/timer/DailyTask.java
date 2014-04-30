@@ -19,7 +19,7 @@ public class DailyTask extends java.util.TimerTask {
 	public void run() {
 		L.trace(this, "start");
 		
-		/*
+		
 		//advertise
 		String url = "http://www.jd.com/";	//京东广告页 moreSubject.aspx
 		List<AdvertisementEntity> list = new ArrayList<AdvertisementEntity>();
@@ -38,7 +38,7 @@ public class DailyTask extends java.util.TimerTask {
 		//dig new keyword
 		new HotKeywordsDigger().dig();
 		
-		*/
+		
 		//fresh keyword cache
 		new KeywordService().fresh();
 		 

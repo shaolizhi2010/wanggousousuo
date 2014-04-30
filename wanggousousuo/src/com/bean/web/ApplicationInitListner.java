@@ -51,9 +51,9 @@ public class ApplicationInitListner implements ServletContextListener {
 		 DailyTask dailyTask = new DailyTask();
 		 Calendar calendar = Calendar.getInstance();
 		 calendar.set(Calendar.HOUR, 1);//每天凌晨一点执行
-		 calendar.set(Calendar.MINUTE, 59);//每天凌晨一点一分执行
-		// timer4.schedule(dailyTask, calendar.getTime(),24*60*60*1000);	//24小时执行一次
-		 timer4.schedule(dailyTask, 3*1000, 24*60*60*1000);	//24小时执行一次
+		 calendar.set(Calendar.MINUTE, 1);//每天凌晨一点一分执行
+		 timer4.schedule(dailyTask, calendar.getTime(),24*60*60*1000);	//24小时执行一次
+		 //timer4.schedule(dailyTask, 3*1000, 24*60*60*1000);	//24小时执行一次
 	}
 
 }

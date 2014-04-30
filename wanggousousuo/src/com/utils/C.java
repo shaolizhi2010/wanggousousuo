@@ -28,6 +28,11 @@ public interface C {
 	long max_delay_time = 15*1000; //最大延迟，15秒，用于检测url是否可用
 	int maxNewKeywordCount = 200;
 	
+	//-------------
+	//每天自动更新关键字 的 商品信息，多线程
+	int maxThreadCount = 30;
+	int waitTime = 5000;
+	
 	//------------------------------------------------------------------ keys -----
 	
 	String baseURL = "baseURL";

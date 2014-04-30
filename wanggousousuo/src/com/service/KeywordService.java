@@ -10,11 +10,11 @@ import com.entity.KeywordEntity;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.utils.App;
+import com.utils.C;
 import com.utils.L;
 
 public class KeywordService {
 	
-	int waittime = 5000;
 	
 	KeywordDao keywordDao = new KeywordDao();
 
@@ -81,14 +81,12 @@ public class KeywordService {
 		int i = 0;
 		for(KeywordEntity entity : keywordList){
 			
-			while(App.getInstance().getThreadCount()>100){
+			while(App.getInstance().getThreadCount()> C.maxThreadCount){
 				try {
-					Thread.sleep(waittime); //每 ?秒fresh 一个keyword
+					Thread.sleep(C.waitTime); //每 ?秒fresh 一个keyword
 				} catch (InterruptedException e) {
 				}			
 			}
-
-			
 			
 			String keyword = entity.getKeyword();
 			commodityService.refresh(keyword);
